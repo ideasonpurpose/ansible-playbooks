@@ -1,0 +1,27 @@
+---
+
+
+- name: Generate UUID
+  command: uuidgen
+  register: uuid
+
+- set_fact: 'uuid="{{ uuid.stdout }}"'
+
+- set_fact: 'plistbuddy=/usr/libexec/PlistBuddy'
+
+- set_fact: 'sig_plist={{ user_lib }}/Mail/V2/MailData/Signatures/AllSignatures.plist'
+
+- name: 'Mail: Create placeholder in signature plist'
+  command: '{{ plistbuddy }} -c "add :0 dict" {{ sig_plist }}'
+  
+- name: 'Mail: Add signature - SignatureIsRich '
+  command: '{{ plistbuddy }} -c "add :0:SignatureIsRich bool No" {{ sig_plist }}'
+  
+- name: 'Mail: Add signature - SignatureName '
+  command: '{{ plistbuddy }} -c "add :0:SignatureName string IOP" {{ sig_plist }}'
+
+- name: 'Mail: Add signature - SignatureUniqueId '
+  command: '{{ plistbuddy }} -c "add :0:SignatureUniqueId string {{ uuid }}" {{ sig_plist }}'
+  
+- name: 'Mail: Generate signature'
+  template: 'src=signature.j2 dest={{ user_lib }}/Mail/V2/MailData/Signatures/{{ uuid }}.mailsignature'
