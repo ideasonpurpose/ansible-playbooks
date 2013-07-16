@@ -1,0 +1,4 @@
+---
+
+- name: Open Safari
+  command: open /Applications/Safari.app

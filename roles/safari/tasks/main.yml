@@ -1,0 +1,17 @@
+---
+
+# - name: Kill Safari
+#   command: killall Safari
+#   ignore_errors: yes
+
+- include: "{{ item }}.yml"
+  when: user_lib is defined
+  when: user_lib_prefs is defined
+  with_items:
+    - kill
+    - reset
+    - settings
+    - open
+
+# - name: Open Safari
+#   command: open /Applications/Safari.app
