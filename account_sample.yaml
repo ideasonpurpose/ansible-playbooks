@@ -1,4 +1,6 @@
 ---
+# Duplicate this file as 'account.yml' and enter account info
+
 
 fullname: Full User Name
 title:    title as appears in email signature
@@ -7,5 +9,5 @@ username: iop
 password: password
 
 
-# Extra stuff that I don't want in the git repository:
+# Extra stuff that we don't want in the git repository:
 wifi_password: password
