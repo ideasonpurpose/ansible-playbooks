@@ -1,0 +1,7 @@
+---
+
+# this has to be run as {{ username }} or the process won't be able to run
+# correctly due to permissions
+- name: Open Safari
+  command: su - {{ username }} -c "open /Applications/Safari.app"
+  ignore_errors: yes

@@ -1,0 +1,33 @@
+---
+
+# - name: Check if user exists
+#   shell: "[ -d /Users/{{ username }} ] && echo 'True' || echo 'False'"
+#   register: user_exists
+
+- name: Get next available User ID
+  shell: "echo $(dscl . -list /Users uid | awk '{print $2}' | sort -ug  | tail -1) + 1 | bc"
+  register: uid
+
+- name: Create User icons directory
+  file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
+
+# user images must exists before creating the user account or they won't work
+# not thrilled about the location, but it makes sense...
+- name: move icon files to target machine
+  copy: src={{ item }} dest=/Library/User\ Pictures/IOP/{{ item }} mode=0644
+  with_items: account_icons
+
+- name: Use a uuid for the script name
+  shell: "date | shasum -a 384 | awk '{print $1}'" 
+  register: script_name
+
+- set_fact: 'newuser_sh={{ script_name.stdout }}.sh'
+
+- name: Create user script
+  template: src=newuser.j2 dest=/tmp/{{ newuser_sh }} mode=0755
+
+- name: Make a user!
+  shell: /tmp/{{ newuser_sh }} creates=/Users/{{ username }}
+
+- name: Remove the newuser script
+  file: path=/tmp/{{ newuser_sh }} state=absent
