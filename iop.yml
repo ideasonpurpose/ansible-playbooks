@@ -1,0 +1,50 @@
+---
+# playbook for creating new users at IOP
+# this only sets up the user, configuration is handled by another playbook.
+- hosts: imac22
+  user: iop
+  sudo: yes
+
+# This file contains login/password info, recreate it for specific runs
+  vars_files:
+    - account.yml
+
+
+
+  pre_tasks:
+    - name: Check if user exists
+      shell: "[ -d /Users/{{ username }} ] && echo 'True' || echo 'False'"
+      register: user_exists
+
+    # test this when 1.3 is released
+    # - name: Try stat'ing user too
+    #   stat: path=/Users/{{ username }}
+    #   register: st
+
+    - set_fact: user_exists={{ user_exists.stdout }}
+    - set_fact: user_lib=/Users/{{ username }}/Library
+    - set_fact: user_lib_prefs={{ user_lib }}/Preferences
+
+    - debug: msg="we're in... {{ user_exists }}"
+      when: user_exists == "True"
+
+  roles:
+    - ssh-keys
+    - global-prefs
+    - new-user
+    - safari
+    - finder
+    - mail
+
+  post_tasks:
+    - name: Generate Welcome message
+      template: src=templates/welcome.j2 dest=/tmp/welcome.rtf
+
+    - name: Retrieve the welcome message
+      fetch: src=/tmp/welcome.rtf dest=Welcome-to-IOP_{{ username }}.rtf flat=yes
+
+  vars:
+    account_icons:
+      - IOP-logo-for-accounts-blue.png
+      - IOP-logo-for-accounts-brown.png
+      - IOP-logo-for-accounts-green.png

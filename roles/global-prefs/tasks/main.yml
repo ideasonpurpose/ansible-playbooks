@@ -1,0 +1,4 @@
+---
+- name: Click login screen clock to show IP address, hostname, OS version, etc.
+  shell: defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+

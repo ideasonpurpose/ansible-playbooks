@@ -11,6 +11,12 @@
 
 - set_fact: 'sig_plist={{ user_lib }}/Mail/V2/MailData/Signatures/AllSignatures.plist'
 
+- name: 'Mail: Make sure prefs directory exists'
+  file: path={{ user_lib }}/Mail/V2/MailData/Signatures state=directory owner={{ username }} group=staff
+
+- name: "Mail: Create empty plist if one doesn't exist"
+  copy: src=empty_array.plist dest={{ user_lib }}/Mail/V2/MailData/Signatures/AllSignatures.plist force=no owner={{ username }} group=staff
+
 - name: 'Mail: Generate signature plist'
   command: '{{ plistbuddy }} -c "{{ item }}" {{ sig_plist }}'
   with_items: 
@@ -19,8 +25,8 @@
     - "add :0:SignatureName string IOP"
     - "add :0:SignatureUniqueId string {{ uuid }}"
 
-- name: 'Mail: Make sure prefs directory exists'
-  file: path={{ user_lib }}/Mail/V2/MailData/Signatures state=directory
-
 - name: 'Mail: Generate signature'
   template: src=signature.j2 dest={{ user_lib }}/Mail/V2/MailData/Signatures/{{ uuid }}.mailsignature owner={{ username }} group=staff
+
+- name: Repair Permissions
+  command: "chown -R {{ username }}:staff {{ user_lib }}/Mail"

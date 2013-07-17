@@ -1,0 +1,13 @@
+---
+
+- include: create-user.yml
+  when: user_exists == "False"
+  # when: 'is_set("{{user_lib}}") and is_set("{{user_lib_prefs}}") and "{{user_exists}}" == "False"'
+    # when: 'is_set(${user_lib}) and is_set(${user_lib_prefs}) and ${user_exists} == "False'
+
+  # when: user_lib is defined
+  # when: user_lib_prefs is defined
+
+
+# TODO: Conditionals are not ANDing\
+

@@ -8,8 +8,9 @@
     - ShowStatusBar -bool true
     - AutoOpenSafeDownloads -bool false
     - HomePage -string "http://ideasonpurpose.com"
-    - NewWindowBehavior -int 2
-    - NewWindowBehavior -integer 1
+    - NewWindowBehavior -int 1
+    - ShowFavoritesBar -bool no
+    - ConvertedNewWindowBehaviorForTopSites -bool true
 
 - name: Repair Permissions
   command: "chown -R {{ username }}:staff {{ user_lib_prefs }}"
