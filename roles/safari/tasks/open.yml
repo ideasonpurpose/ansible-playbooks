@@ -1,4 +1,6 @@
 ---
 
+# this has to be run as {{ username }} or the process won't be able to run
+# correctly due to permissions
 - name: Open Safari
-  command: open /Applications/Safari.app
+  command: su - {{ username }} -c "open /Applications/Safari.app"

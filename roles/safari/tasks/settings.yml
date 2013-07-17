@@ -1,22 +1,15 @@
 ---
 
-- name: "Safari: Enable Develop menu (IncludeDevelopMenu)"
-  shell: defaults write {{ user_lib_prefs }}/com.apple.Safari IncludeDevelopMenu -bool true
-
-- name: "Safari: Enable Develop menu (WebKitDeveloperExtrasEnabledPreferenceKey)"
-  shell: defaults write {{ user_lib_prefs }}/com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-
-- name: "Safari: Show status bar"
-  shell: defaults write {{ user_lib_prefs }}/com.apple.Safari ShowStatusBar -bool true
-
-- name: "Safari: New Windows open empty"
-  shell: defaults write {{ user_lib_prefs }}/com.apple.Safari NewWindowBehavior -int 1
-
-- name: "Safari: Don't auto-open downloads"
-  shell: defaults write {{ user_lib_prefs }}/com.apple.Safari AutoOpenSafeDownloads -bool false
-
-- name: "Safari: Set default home page"
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.Safari HomePage -string "http://ideasonpurpose.com"'
+- name: Safari preferences
+  command: defaults write {{ user_lib_prefs }}/com.apple.Safari {{ item }}
+  with_items: 
+    - IncludeDevelopMenu -bool true
+    - WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+    - ShowStatusBar -bool true
+    - AutoOpenSafeDownloads -bool false
+    - HomePage -string "http://ideasonpurpose.com"
+    - NewWindowBehavior -int 2
+    - NewWindowBehavior -integer 1
 
 - name: Repair Permissions
   command: "chown -R {{ username }}:staff {{ user_lib_prefs }}"
