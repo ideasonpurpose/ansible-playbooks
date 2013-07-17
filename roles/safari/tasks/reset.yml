@@ -1,0 +1,13 @@
+---
+
+- name: "Safari: Remove existing plist"
+  file: path={{ user_lib_prefs }}/com.apple.Safari.plist state=absent
+
+- name: "Safari: Delete Cache"
+  file: path={{ user_lib }}/Caches/com.apple.Safari state=absent
+
+- name: "Safari: Delete Metadata Cache"
+  file: path={{ user_lib }}/Caches/Metadata/Safari state=absent
+
+- name: "Safari: Remove Signed Configurations plist"
+  file: path={{ user_lib }}/Safari/Configurations.plist.signed state=absent

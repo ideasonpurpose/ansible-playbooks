@@ -1,0 +1,16 @@
+---
+
+- name: Safari preferences
+  command: defaults write {{ user_lib_prefs }}/com.apple.Safari {{ item }}
+  with_items: 
+    - IncludeDevelopMenu -bool true
+    - WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+    - ShowStatusBar -bool true
+    - AutoOpenSafeDownloads -bool false
+    - HomePage -string "http://ideasonpurpose.com"
+    - NewWindowBehavior -int 1
+    - ShowFavoritesBar -bool no
+    - ConvertedNewWindowBehaviorForTopSites -bool true
+
+- name: Repair Permissions
+  command: "chown -R {{ username }}:staff {{ user_lib_prefs }}"

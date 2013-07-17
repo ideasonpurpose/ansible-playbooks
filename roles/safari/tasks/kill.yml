@@ -1,0 +1,6 @@
+---
+
+- name: Kill Safari
+  command: killall Safari
+  ignore_errors: yes
+
