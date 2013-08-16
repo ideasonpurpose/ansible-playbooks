@@ -29,7 +29,6 @@
       when: user_exists == "True"
 
   roles:
-    - ssh-keys
     - global-prefs
     - new-user
     - safari

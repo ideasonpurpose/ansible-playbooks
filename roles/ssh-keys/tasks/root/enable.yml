@@ -1,5 +1,0 @@
----
-
-- name: Enable Root User
-  command: /usr/sbin/dsenableroot -u {{ ansible_ssh_user }}  -p {{ enable_root_pw }} -r {{ item }}
-  with_password: /tmp/root_password length=12
