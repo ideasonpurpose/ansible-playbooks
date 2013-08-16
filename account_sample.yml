@@ -5,9 +5,9 @@
 fullname: Full User Name
 title:    title as appears in email signature
 
-username: iop
-password: password
+username: user_short_name
+password: user_password
 
 
 # Extra stuff that we don't want in the git repository:
-wifi_password: password
+wifi_password: wifi_password
