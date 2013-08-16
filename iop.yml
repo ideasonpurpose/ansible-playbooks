@@ -1,7 +1,7 @@
 ---
 # playbook for creating new users at IOP
 # this only sets up the user, configuration is handled by another playbook.
-- hosts: imac22
+- hosts: '{{ target }}'
   user: iop
   sudo: yes
 
@@ -9,24 +9,15 @@
   vars_files:
     - account.yml
 
-
-
   pre_tasks:
     - name: Check if user exists
-      shell: "[ -d /Users/{{ username }} ] && echo 'True' || echo 'False'"
-      register: user_exists
+      stat: path=/Users/{{ username }}
+      register: user_stat
 
-    # test this when 1.3 is released
-    # - name: Try stat'ing user too
-    #   stat: path=/Users/{{ username }}
-    #   register: st
+    - set_fact: user_exists={{ user_stat.stat.exists }}
 
-    - set_fact: user_exists={{ user_exists.stdout }}
     - set_fact: user_lib=/Users/{{ username }}/Library
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
-
-    - debug: msg="we're in... {{ user_exists }}"
-      when: user_exists == "True"
 
   roles:
     - global-prefs
