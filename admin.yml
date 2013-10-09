@@ -13,11 +13,10 @@
         - user_lib=/Users/{{ ansible_ssh_user }}/Library
         - user_lib_prefs={{ user_lib }}/Preferences
 
-
-
+  roles:
+    - global-prefs
 
   tasks: 
-
   - name: Make sure User icons directory exists
     file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
     sudo: yes
@@ -69,6 +68,7 @@
 
   - name: Kill Dock
     command: killall Dock
+    ignore_errors: yes
     sudo: yes
 
   - name: Repair permissions

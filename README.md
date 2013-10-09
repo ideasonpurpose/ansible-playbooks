@@ -8,6 +8,8 @@ This started out as a basic recipe to eliminate some of the repetitive drudgery 
 
 The managing computer should have Ansible 1.3 installed. This is newer than what is currently available via Pip. Here are instructions for [installing Ansible](http://www.ansibleworks.com/docs/gettingstarted.html#getting-ansible). To keep my computer clean, I keep Ansible in a like-named virtualenv which can be activated through virtualenvwrapper.
 
+For Homebrew, Xcode must be installed. 
+
 ### Running the playbooks
 
 Here are some excessively complete instructions for running these playbooks. Mostly in case I forget.
@@ -46,7 +48,7 @@ The group could be just as easily targeted with `--extra-vars "target=imacs"`.
 
 The `bootstrap.yml` playbook is meant to be run once, on a clean system. The bootstrap playbook sets up ssh authorized_keys and adds the playbook's user to the remote sudoers with no `password`. This must be run with `-K` for the sudo password and it will fail the second time if the password is sent:
 
-    ansible-playbook bootstrap.yml -K --extra-vars "target=imac-1.local"
+    ansible-playbook bootstrap.yml -K --extra-vars="target=imac-1.local"
 
 
 #### Playbooks
