@@ -16,7 +16,7 @@ Here are some excessively complete instructions for running these playbooks. Mos
 
 1. symlink .ansible.cfg into home: `ln -s $PWD/.ansible.cfg ~/`
 2. Add target machines to the `hosts` file in the playbook directory
-3. Copy `account_sample.yml` to `accounts.yml` and update the user credentials
+3. Copy `account_sample.yml` to `account.yml` and update the user credentials
 4. If the target is clean, bootstrap it first:  
     `ansible-playbook bootstrap.yml -K --extra-vars "target=imac-2.local"`
 5. Run `ansible-playbook iop.yml --extra-vars "target=imac-2.local"`
@@ -55,9 +55,9 @@ The `bootstrap.yml` playbook is meant to be run once, on a clean system. The boo
 There are three main playbooks:
 
 * **bootstrap.yml**  
-  Sets up passwordless sudo for the calling user and transfers ssh-keys so the target can be quickly provisioned.
+    Sets up passwordless sudo for the calling user and transfers ssh-keys so the target can be quickly provisioned.
 * **iop.yml**  
-    (needs to be renamed...) This sets up the new user account and a bunhc of default settings
+    Sets up the new user account and a bunch of default settings (rename this)
 * **admin.yml**  
     Sets up the admin account with some of my preferred settings and tools.
 
