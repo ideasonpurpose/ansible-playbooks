@@ -51,6 +51,9 @@ The `bootstrap.yml` playbook is meant to be run once, on a clean system. The boo
     ansible-playbook bootstrap.yml -K --extra-vars="target=imac-1.local"
 
 
+### Running Locally
+The playbooks can also be run locally by adding `--connection=local` and switching the target to localhost.
+
 #### Playbooks
 There are three main playbooks:
 
