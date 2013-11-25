@@ -27,11 +27,10 @@
     - mail
 
   post_tasks:
-    - name: Generate Welcome message
-      template: src=templates/welcome.j2 dest=/tmp/welcome.rtf
-
-    - name: Retrieve the welcome message
-      fetch: src=/tmp/welcome.rtf dest=Welcome-to-IOP_{{ username }}.rtf flat=yes
+    - name: Generate Welcome message on controller
+      template: src=templates/welcome.j2 dest=./Welcome-to-IOP_{{ username }}.rtf
+      connection: local
+      sudo: no
 
   vars:
     account_icons:
