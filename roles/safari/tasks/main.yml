@@ -1,11 +1,13 @@
 ---
 
-- include: "{{ item }}.yml"
+- include: kill.yml
+
+- include: reset.yml
   when: user_lib is defined
   when: user_lib_prefs is defined
-  with_items:
-    - kill
-    - reset
-    - settings
-    - open
 
+- include: settings.yml
+  when: user_lib is defined
+  when: user_lib_prefs is defined
+
+- include: open.yml
