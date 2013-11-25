@@ -6,7 +6,7 @@ This started out as a basic recipe to eliminate some of the repetitive drudgery 
 
 ### Requirements
 
-The managing computer should have Ansible 1.3 installed. This is newer than what is currently available via Pip. Here are instructions for [installing Ansible](http://www.ansibleworks.com/docs/gettingstarted.html#getting-ansible). To keep my computer clean, I keep Ansible in a like-named virtualenv which can be activated through virtualenvwrapper.
+The managing computer should have Ansible 1.4 installed. To keep my computer clean, I keep Ansible in a like-named virtualenv which can be activated through virtualenvwrapper.
 
 For Homebrew, Xcode must be installed. 
 
@@ -14,14 +14,15 @@ For Homebrew, Xcode must be installed.
 
 Here are some excessively complete instructions for running these playbooks. Mostly in case I forget.
 
-1. symlink .ansible.cfg into home: `ln -s $PWD/.ansible.cfg ~/`
 2. Add target machines to the `hosts` file in the playbook directory
+3. Enable SSH (Remote Login) on target, transfer ssh keys from controller to target and add keys to target's `~/.ssh/authorized_keys` file. Authorized_keys should be chmod'd to 0600.
 3. Copy `account_sample.yml` to `account.yml` and update the user credentials
 4. If the target is clean, bootstrap it first:  
     `ansible-playbook bootstrap.yml -K --extra-vars "target=imac-2.local"`
 5. Run `ansible-playbook iop.yml --extra-vars "target=imac-2.local"`
 6. If there's an admin account, set that up too:  
     `ansible-playbook admin.yml --extra-vars "target=imac-2.local"`
+
 
 
 ### Creating the hosts file
@@ -58,7 +59,7 @@ The playbooks can also be run locally by adding `--connection=local` and switchi
 There are three main playbooks:
 
 * **bootstrap.yml**  
-    Sets up passwordless sudo for the calling user and transfers ssh-keys so the target can be quickly provisioned.
+    Sets up passwordless sudo for the calling user
 * **iop.yml**  
     Sets up the new user account and a bunch of default settings (rename this)
 * **admin.yml**  
@@ -71,7 +72,6 @@ I'm going to assume that if you've gone so far as to get Ansible running and hav
 ### Tasks
 Here are a few of the things these playbooks accomplish:
 
-* Setup ssh keys
 * Modify sudoers for passwordless sudo from the admin account
 * Create an admin user account (from credentials in account.yml)
 * Set a default Dock (using a stripped down template plist)
