@@ -7,7 +7,7 @@
 
 # This file contains login/password info, recreate it for specific runs
   vars_files:
-    - account.yml
+    - vars/user.yml
 
   pre_tasks:
     - name: Check if user exists
