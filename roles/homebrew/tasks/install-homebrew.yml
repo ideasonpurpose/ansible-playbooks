@@ -8,9 +8,22 @@
   when: not brew_installed.stat.exists
 
 - name: Make sure /usr/local exists
-  file: path=/usr/local/ state=directory mode=0755 owner=iop group=admin
+  file: path=/usr/local/ state=directory mode=0775 owner=iop group=staff recurse=yes
   sudo: yes
-  when: not brew_installed.stat.exists
+
+- name: Set group to staff 
+  command: chgrp -R staff {{ item }}
+  sudo: yes
+  with_items: 
+    - /usr/local 
+    - /Library/Caches/Homebrew
+
+- name: Set permissions for multiple users
+  command: chmod -R g+w {{ item }}
+  sudo: yes
+  with_items:
+    - /usr/local 
+    - /Library/Caches/Homebrew
 
 - name: Install Homebrew
   command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'

@@ -6,17 +6,22 @@
 - hosts: '{{ target }}'
   user: iop
 
-  pre_tasks:
-    - set_fact: '{{ item }}'
+  # pre_tasks:
+  # - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
+  # - set_fact: user_lib_prefs={{ user_lib }}/Preferences
       # tags: bg
-      with_items:
-        - user_lib=/Users/{{ ansible_ssh_user }}/Library
-        - user_lib_prefs={{ user_lib }}/Preferences
+      # with_items:
+      #   - user_lib=/Users/{{ ansible_ssh_user }}/Library
+      #   - user_lib_prefs={{ user_lib }}/Preferences
 
   roles:
     - global-prefs
+    - homebrew
 
-  tasks: 
+  pre_tasks: 
+  - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
+  - set_fact: user_lib_prefs={{ user_lib }}/Preferences
+
   - name: Make sure User icons directory exists
     file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
     sudo: yes
@@ -75,43 +80,45 @@
     shell: "chown -R {{ ansible_ssh_user }}:staff {{ user_lib_prefs }}/"
     sudo: yes
 
-  - name: Check for Homebrew
-    stat: path=/usr/local/bin/brew
-    register: brew_installed
+  # - name: Check for Homebrew
+  #   stat: path=/usr/local/bin/brew
+  #   register: brew_installed
 
-  - name: Download Homebrew
-    get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
-    when: not brew_installed.stat.exists
+  # - name: Download Homebrew
+  #   get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
+  #   when: not brew_installed.stat.exists
 
-  - name: Make sure /usr/local exists
-    file: path=/usr/local/ state=directory mode=0755 owner=iop group=admin
-    sudo: yes
-    when: not brew_installed.stat.exists
+  # - name: Make sure /usr/local exists
+  #   file: path=/usr/local/ state=directory mode=0755 owner=iop group=admin
+  #   sudo: yes
+  #   when: not brew_installed.stat.exists
 
-  - name: Install Homebrew
-    command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'
-    sudo: yes
-    when: not brew_installed.stat.exists
+  # - name: Install Homebrew
+  #   command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'
+  #   sudo: yes
+  #   when: not brew_installed.stat.exists
 
-  - name: chown homebrew stuff
-    shell: "chown -R {{ ansible_ssh_user }}:admin /usr/local/"
-    sudo: yes
-    when: not brew_installed.stat.exists
+  # - name: chown homebrew stuff
+  #   shell: "chown -R {{ ansible_ssh_user }}:admin /usr/local/"
+  #   sudo: yes
+  #   when: not brew_installed.stat.exists
 
-  - name: Update Homebrew
-    homebrew: name=null state=absent update_homebrew=yes
+  # - name: Update Homebrew
+  #   homebrew: name=null state=absent update_homebrew=yes
 
-  - name: Install stuff via Homebrew
-    homebrew: name={{ item }} state=present
-    with_items: 
-      - git
-      - python
-      # - python3
+  # - name: Install stuff via Homebrew
+  #   homebrew: name={{ item }} state=present
+  #   with_items: 
+  #     - git
+  #     - python
+  #     - nodejs
 
+  post_tasks:
   - name: Install virtualenvwrapper
     pip: name=virtualenvwrapper
     environment:
-      PATH: /usr/local/bin
+      PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
+    sudo: yes
     tags: pip
 
   - name: Copy terminal settings file
