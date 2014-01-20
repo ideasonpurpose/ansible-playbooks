@@ -51,7 +51,7 @@ The pre-run steps are annoying. I've tried mightily to get around these, but it 
 1. Copy `vars/user_sample.yml` to `vars/user.yml` and update the user credentials
 4. If the target is clean, bootstrap it first otherwise `sudo` will hang (note the `-K` flag):  
     `ansible-playbook bootstrap.yml -K --extra-vars "target=imac-2.local"`
-5. Run `ansible-playbook iop.yml --extra-vars "target=imac-2.local"`
+5. Run `ansible-playbook account.yml --extra-vars "target=imac-2.local"`
 6. If there's an admin account, set that up too:  
     `ansible-playbook admin.yml --extra-vars "target=imac-2.local"`
 
