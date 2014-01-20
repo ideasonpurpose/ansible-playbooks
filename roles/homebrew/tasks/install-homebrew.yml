@@ -7,9 +7,12 @@
   get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
   when: not brew_installed.stat.exists
 
-- name: Make sure /usr/local exists
-  file: path=/usr/local/ state=directory mode=0775 owner=iop group=staff recurse=yes
+- name: Make sure Homebrew directories exist
+  file: path={{ item }} state=directory mode=0775 owner=iop group=staff recurse=yes
   sudo: yes
+  with_items: 
+    - /usr/local 
+    - /Library/Caches/Homebrew
 
 - name: Set group to staff 
   command: chgrp -R staff {{ item }}
