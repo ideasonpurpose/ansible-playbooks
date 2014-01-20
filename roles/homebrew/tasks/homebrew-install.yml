@@ -1,0 +1,26 @@
+---
+- name: Check for Homebrew
+  stat: path=/usr/local/bin/brew
+  register: brew_installed
+
+- name: Download Homebrew
+  get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
+  when: not brew_installed.stat.exists
+
+- name: Make sure /usr/local exists
+  file: path=/usr/local/ state=directory mode=0755 owner=iop group=admin
+  sudo: yes
+  when: not brew_installed.stat.exists
+
+- name: Install Homebrew
+  command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'
+  sudo: yes
+  when: not brew_installed.stat.exists
+
+- name: chown homebrew stuff
+  shell: "chown -R {{ ansible_ssh_user }}:admin /usr/local/"
+  sudo: yes
+  when: not brew_installed.stat.exists
+
+- name: Update Homebrew
+  homebrew: name=null state=absent update_homebrew=yes

@@ -1,0 +1,6 @@
+---
+- name: tap cask
+  command: '/usr/local/bin/brew tap phinze/cask'
+
+- name: Install Homebrew-Cask
+  homebrew: name=brew-cask state=present

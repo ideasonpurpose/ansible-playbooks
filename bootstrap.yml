@@ -11,8 +11,6 @@
 
 
   tasks: 
-    - name: Authorized key to remote
-      authorized_key: user={{ ansible_ssh_user }} key="{{ lookup('file', '~/.ssh/id_dsa.pub') }}"
 
     - name: Add {{ ansible_ssh_user }} to sudoers with no password
       lineinfile: 'dest=/etc/sudoers state=present regexp="^{{ ansible_ssh_user }}\s+ALL=\(ALL\) NOPASSWD: ALL" insertbefore="^#\s+Samples"  line="{{ ansible_ssh_user }}  ALL=(ALL) NOPASSWD: ALL" backup=yes'
