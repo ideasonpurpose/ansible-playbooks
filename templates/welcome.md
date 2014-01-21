@@ -1,40 +1,43 @@
-### Your Account
-The shared user account login for your computer is:
+<!-- This file is used to generate the HTML template used by the playbooks --> 
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
 
-> **username:** `{{ username }}`  
-> **password:** `{{ password }}`
 
-Please keep this password private.
+### Your IOP Accounts
 
-Send me a note if you need to install any additional applications or utilities.   
+The account login for your computer is:
+
+> **Username:**  `{{ username }}`  
+> **Password:**  `{{ password }}`
+
+Most all IOP services can be accessed using this password and username. Please keep your password private. 
 
 
 ### IOP Fileserver
-IOP Fileserver access is the same as your computer login above. The server should be visible in the sidebar of Finder windows under Shared.
+IOP Fileserver and Photo Bank can be accessed with the above login. To connect to the server, choose **Connect to Server...** from the Finder's **Go** menu. The server's address is: <a href="{{ fileserver_address }}">{{ fileserver_address }}</a>
 
 Please see the *IOP Server and File Name Conventions* document for more information about where to put files on the server and how they should be named.
 
 
-### IOP Email
-Your email is already configured, if you'd like to set up your IOP email account on other devices these are the settings you'll need:
+### Email
+Your email is already set up on your computer. Below are the settings you'll need to access your IOP email account from other devices. Our email uses Exchange and should auto-configure with these settings:
 
-> **Email address & username:**  {{ username }}@ideasonpurpose.com  
-> **Password:**  (same as above)  
-> Microsoft Exchange accounts will auto-configure based on your email/username and password. 
+> **Address & Username:**  `{{ username }}@ideasonpurpose.com`  
+> **Password:**  `{{ password }}`  
 
-We also have webmail at http://webmail.ideasonpurpose.com  The webmail login is your full email address and password. 
+IOP's webmail can be accessed at <a href="{{ webmail_url }}">{{ webmail_url }}</a>, login with your full email address and password. 
 
 
 ### Wi-Fi
-The password for the Ideas On Purpose wireless networks is:  `iopkoakoa`
+The Ideas On Purpose wireless network password is:  `{{ wifi_password }}`
 
 
 ### Google Apps
-IOP's private Google Apps URL is below, use your email address and password to login. 
-
-http://docs.ideasonpurpose.com
+IOP's Google Apps URL is <a href="{{ google_apps_url }}">{{ google_apps_url }}</a>. Login with your email address and password. 
 
 
 ### Fonts
-There is an "IOP Font Library" folder at the top level of your computer's hard drive containing an extensive library of fonts.  Please use OpenType format fonts whenever possible. IOP uses Linotype Font Explorer to manage fonts.
+An "IOP Font Library" folder containing an extensive library of fonts can be found at the top level of your hard drive. Use OpenType format fonts. Legacy formats (Truetype, PostScript) should only be used as a last resort.
 
+IOP recommends Font Book for font management, but we're open to other solutions. 
+
+Please talk to Joe Maller if you need to install any additional applications or utilities.   

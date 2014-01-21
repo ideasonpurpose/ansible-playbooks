@@ -28,7 +28,7 @@
 
   post_tasks:
     - name: Generate Welcome message on controller
-      template: src=templates/welcome.j2 dest=./Welcome-to-IOP_{{ username }}.rtf
+      template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
       connection: local
       sudo: no
 

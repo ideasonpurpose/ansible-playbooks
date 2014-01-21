@@ -11,3 +11,6 @@ password: user_password
 
 # Extra stuff that we don't want in the git repository:
 wifi_password: wifi_password
+fileserver_address: afp://fileserver_address
+webmail_url: http://webmail_url
+google_apps_url: http://google_apps_url

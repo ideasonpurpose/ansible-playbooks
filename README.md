@@ -19,7 +19,7 @@ The pre-run steps are annoying. I've tried mightily to get around these, but it 
 #### Pre-run on the Target
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account. 
 2. Install XCode, be sure to open it and agree to the license agreement (is this necessary or does the next step take care of this?)
-3. Open a terminal and run `xcode-select --install`. 
+3. Open a terminal and run `xcode-select --install`. (this must be done locally, it won't work over ssh)
 
 #### Pre-run on the controller
 1. [Install Virtualenvwrapper][venvw install]
@@ -111,14 +111,12 @@ Here are a few of the things these playbooks accomplish:
 * Reset Safari
 * Reset admin account picture and desktop pattern
 * Install [Homebrew][] and several packages from Homebrew
-* Install [Homebrew Cask][cask] and several applications via Cask. <sup>1</sup>
+* <strike>Install [Homebrew Cask][cask] and several applications via Cask.</strike> <small>*might be too soon, will revisit*</small>
 * Install modules with pip (from homebrew's /usr/local/bin)
 * Modify default terminal settings
 * Generate a pre-formatted email signature
 * Generate a custom RTF welcome document
 
-
-<sup>1</sup> Cask is experimental, not sure the convenience outweighs the quirks.
 
 [iop]: http://ideasonpurpose.com
 [dotfiles]: https://github.com/mathiasbynens/dotfiles/blob/master/.osx

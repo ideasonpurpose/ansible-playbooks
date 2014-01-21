@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="creator" content="Marked.app"/>
+</head>
+<body>
+<!-- This file is used to generate the HTML template used by the playbooks -->
+
+<p><link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css"> </p>
+
+<h3 id="youriopaccounts">Your IOP Accounts</h3>
+
+<p>The account login for your computer is:</p>
+
+<blockquote>
+<p><strong>Username:</strong> <code>{{ username }}</code><br/>
+<strong>Password:</strong> <code>{{ password }}</code></p>
+</blockquote>
+
+<p>Most all IOP services can be accessed using this password and username. Please keep your password private. </p>
+
+<h3 id="iopfileserver">IOP Fileserver</h3>
+
+<p>IOP Fileserver and Photo Bank can be accessed with the above login. To connect to the server, choose <strong>Connect to Server&#8230;</strong> from the Finder&#8217;s <strong>Go</strong> menu. The server&#8217;s address is: <a href="{{ fileserver_address }}">{{ fileserver_address }}</a></p>
+
+<p>Please see the <em>IOP Server and File Name Conventions</em> document for more information about where to put files on the server and how they should be named.</p>
+
+<h3 id="email">Email</h3>
+
+<p>Your email is already set up on your computer. Below are the settings you&#8217;ll need to access your IOP email account from other devices. Our email uses Exchange and should auto-configure with these settings:</p>
+
+<blockquote>
+<p><strong>Address &amp; Username:</strong> <code>{{ username }}@ideasonpurpose.com</code><br/>
+<strong>Password:</strong> <code>{{ password }}</code> </p>
+</blockquote>
+
+<p>IOP&#8217;s webmail can be accessed at <a href="{{ webmail_url }}">{{ webmail_url }}</a>, login with your full email address and password. </p>
+
+<h3 id="wi-fi">Wi-Fi</h3>
+
+<p>The Ideas On Purpose wireless network password is: <code>{{ wifi_password }}</code></p>
+
+<h3 id="googleapps">Google Apps</h3>
+
+<p>IOP&#8217;s Google Apps URL is <a href="{{ google_apps_url }}">{{ google_apps_url }}</a>. Login with your email address and password. </p>
+
+<h3 id="fonts">Fonts</h3>
+
+<p>An &#8220;IOP Font Library&#8221; folder containing an extensive library of fonts can be found at the top level of your hard drive. Use OpenType format fonts. Legacy formats (Truetype, PostScript) should only be used as a last resort.</p>
+
+<p>IOP recommends Font Book for font management, but we&#8217;re open to other solutions. </p>
+
+<p>Please talk to Joe Maller if you need to install any additional applications or utilities. </p>
+</body>
+</html>
