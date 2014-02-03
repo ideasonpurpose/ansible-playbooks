@@ -6,7 +6,7 @@ This started out as a basic recipe to eliminate some of the repetitive drudgery 
 
 ### Requirements
 
-The managing computer should have Ansible 1.4.x installed. To keep my computer clean, I keep Ansible in a like-named virtualenv which can be activated through [virtualenvwrapper][venvw].
+The managing computer should have Ansible >1.4 installed. To keep my computer clean, I keep Ansible in a like-named virtualenv which is activated through [virtualenvwrapper][venvw].
 
 For Homebrew, Xcode must be installed. 
 
@@ -30,22 +30,12 @@ The pre-run steps are annoying. I've tried mightily to get around these, but it 
 
 #### First run
 1. Add target machines to the `hosts` file in the playbook directory
-2. Enable SSH (Remote Login) on target, transfer ssh keys from controller to target and add keys to target's `~/.ssh/authorized_keys` file. Authorized_keys should be chmod'd to 0600:
-    
-        # 1. Transfer local public key to target
-        scp ~/.ssh/id_dsa.pub admin@imac-1.local:
-
-        # 2. connect to target
-        ssh admin@imac-1.local
-        password:
-
-        # create ssh directories and setup keys on target
-        imac-1$ mkdir -p ~/.ssh
-        imac-1$ chmod 0700 ~/.ssh
-        imac-1$ cat id_dsa.pub >> .ssh/authorized_keys
-        imac-1$ rm id_dsa.pub
-        imac-1$ chmod 0600 .ssh/authorized_keys
-        imac-1$ logout
+2. scp your ssh public key and the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to allow passwordless ssh connections and to configure the target's sudoers file. 
+        
+        $ scp ~/.ssh/id_dsa.pub admin@imac-1.local:
+        $ scp bootstrap.sh admin@imac-1.local:
+        $ ssh admin@imac-1.local
+        imac-1.local$ sudo ruby bootstrap.rb
 
 #### Account setup
 1. Copy `vars/user_sample.yml` to `vars/user.yml` and update the user credentials
