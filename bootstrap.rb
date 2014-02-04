@@ -23,7 +23,7 @@ if !File.file?(dsa_key_file)
 end
 
 # Create the .ssh directory if it doesn't exist
-ssh_path = "#{Dir.home}/.ssh"
+ssh_path = "#{File.expand_path('~')}/.ssh"
 mkdir_p ssh_path
 chmod(0700, ssh_path)
 chown_R(ssh_user, ssh_group, ssh_path)
@@ -36,13 +36,13 @@ authorized_keys = File.open "#{ssh_path}/authorized_keys", 'a+'
 if !authorized_keys.readlines.include? dsa_key
     authorized_keys.puts dsa_key
     authorized_keys.chmod 0600
-    authorized_keys.chown(ssh_user, ssh_group)
+    authorized_keys.chown(home_stat.uid, home_stat.gid)
 end
 
 sudoers = File.read('/etc/sudoers')
 #
 sudoers_cmd = "#{ssh_user} ALL=(ALL) NOPASSWD: ALL\n"
-sudoers_regexp=/^{ssh_user}\s+ALL=\(ALL\) NOPASSWD: ALL/
+sudoers_regexp=/^#{ssh_user}\s+ALL=\(ALL\) NOPASSWD: ALL/
 
 if !sudoers_regexp.match(sudoers)
     cp('/etc/sudoers', "/etc/sudoers.#{DateTime.now.strftime('%F@%H%M%S')}")
