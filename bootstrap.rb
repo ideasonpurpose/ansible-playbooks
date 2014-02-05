@@ -30,7 +30,6 @@ chown_R(ssh_user, ssh_group, ssh_path)
 
 # Append the transferred public key to authorized_keys (or create the file with the key)
 dsa_key = File.read(dsa_key_file)
-rm dsa_key_file
 
 authorized_keys = File.open "#{ssh_path}/authorized_keys", 'a+'
 if !authorized_keys.readlines.include? dsa_key
@@ -50,3 +49,7 @@ if !sudoers_regexp.match(sudoers)
         |f| f.puts(sudoers_cmd)
     }
 end
+
+# Remove Yo Self
+rm dsa_key_file
+rm __FILE__
