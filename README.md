@@ -34,7 +34,7 @@ The pre-run steps are annoying. I've tried mightily to get around these, but it 
 2. Copy your ssh public key and the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to allow passwordless ssh connections and to configure the target's sudoers file. 
         
         $ scp ~/.ssh/id_dsa.pub admin@imac-1.local:
-        $ scp bootstrap.sh admin@imac-1.local:
+        $ scp bootstrap.rb admin@imac-1.local:
         $ ssh admin@imac-1.local
         imac-1.local$ sudo ruby bootstrap.rb
         imac-1.local$ logout
