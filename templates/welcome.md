@@ -13,7 +13,7 @@ Most all IOP services can be accessed using this password and username. Please k
 
 
 ### IOP Fileserver
-IOP Fileserver and Photo Bank can be accessed with the above login. To connect to the server, choose **Connect to Server...** from the Finder's **Go** menu. The server's address is: <a href="{{ fileserver_address }}">{{ fileserver_address }}</a>
+IOP Fileserver, Photo Bank and Archive can be accessed with the above login. To connect to the server, choose **Connect to Server...** from the Finder's **Go** menu. The server's address is: <a href="{{ fileserver_address }}">{{ fileserver_address }}</a>
 
 Please see the *IOP Server and File Name Conventions* document for more information about where to put files on the server and how they should be named.
 
