@@ -27,8 +27,18 @@
     - mail
 
   post_tasks:
+    - name: Parse the Markdown template
+      shell: python -m markdown -x extra -x smarty welcome.md > welcome.html.j2 chdir=templates
+      connection: local
+      sudo: no
+
     - name: Generate Welcome message on controller
       template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
+      connection: local
+      sudo: no
+
+    - name: Remove generated template
+      file: path=templates/welcome.html.j2 state=absent
       connection: local
       sudo: no
 
