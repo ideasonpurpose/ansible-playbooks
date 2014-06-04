@@ -4,15 +4,7 @@
 # the playbook non-destructive except for explicitly defined hosts. 
 
 - hosts: '{{ target }}'
-  user: iop
-
-  # pre_tasks:
-  # - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
-  # - set_fact: user_lib_prefs={{ user_lib }}/Preferences
-      # tags: bg
-      # with_items:
-      #   - user_lib=/Users/{{ ansible_ssh_user }}/Library
-      #   - user_lib_prefs={{ user_lib }}/Preferences
+  user: '{{ admin_user }}'
 
   roles:
     - global-prefs
