@@ -19,121 +19,88 @@
     - homebrew
 
   pre_tasks: 
-  - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
-  - set_fact: user_lib_prefs={{ user_lib }}/Preferences
+    - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
+    - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
-  - name: Make sure User icons directory exists
-    file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
-    sudo: yes
+    - name: Make sure User icons directory exists
+      file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
+      sudo: yes
 
-  - name: Send new account picture
-    copy: src=roles/new-user/files/IOP-logo-for-accounts-admin.png dest=/Library/User\ Pictures/IOP/IOP-logo-for-accounts-admin.png mode=0644
-    sudo: yes
+    - name: Send new account picture
+      copy: src=roles/new-user/files/IOP-logo-for-accounts-admin.png dest=/Library/User\ Pictures/IOP/IOP-logo-for-accounts-admin.png mode=0644
+      sudo: yes
 
-  - name: Upodate user account picture
-    command: 'dscl . {{ item }}'
-    with_items:
-      - delete /Users/iop jpegphoto
-      - delete /Users/iop Picture
-      - create /Users/iop Picture "/Library/User Pictures/IOP/IOP-logo-for-accounts-admin.png"
-    sudo: yes
+    - name: Upodate user account picture
+      command: 'dscl . {{ item }}'
+      with_items:
+        - delete /Users/iop jpegphoto
+        - delete /Users/iop Picture
+        - create /Users/iop Picture "/Library/User Pictures/IOP/IOP-logo-for-accounts-admin.png"
+      sudo: yes
 
-  - name: Prepend /usr/local/bin to $PATH in .profile
-    lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+PATH=/usr/local/bin:\\$PATH" insertafter=EOF line="export PATH=/usr/local/bin:$PATH" create=yes'
+    - name: Prepend /usr/local/bin to $PATH in .profile
+      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+PATH=/usr/local/bin:\\$PATH" insertafter=EOF line="export PATH=/usr/local/bin:$PATH" create=yes'
 
-  - name: add WORKON_HOME to .profile
-    lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+WORKON_HOME=" insertafter=EOF line="export WORKON_HOME=$HOME/.virtualenvs" create=yes'
+    - name: add WORKON_HOME to .profile
+      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+WORKON_HOME=" insertafter=EOF line="export WORKON_HOME=$HOME/.virtualenvs" create=yes'
 
-  - name: add VIRTUALENVWRAPPER_VIRTUALENV_ARGS to .profile
-    lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+VIRTUALENVWRAPPER_VIRTUALENV_ARGS=" insertafter=EOF line="export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=\"--no-site-packages\"" create=yes'
+    - name: add VIRTUALENVWRAPPER_VIRTUALENV_ARGS to .profile
+      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+VIRTUALENVWRAPPER_VIRTUALENV_ARGS=" insertafter=EOF line="export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=\"--no-site-packages\"" create=yes'
 
-  - name: source virtualenvwrapper from .profile
-    lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^source .*virtualenvwrapper.sh$" insertafter=EOF line="source /usr/local/bin/virtualenvwrapper.sh" create=yes'
-    tags: pip
+    - name: source virtualenvwrapper from .profile
+      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^source .*virtualenvwrapper.sh$" insertafter=EOF line="source /usr/local/bin/virtualenvwrapper.sh" create=yes'
+      tags: pip
 
-  - name: 'Finder: Very fast keyboard repeat'
-    shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences KeyRepeat -int 0
+    - name: 'Finder: Very fast keyboard repeat'
+      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences KeyRepeat -int 0
 
-  - name: 'Finder: Initial KeyRepeat delay'
-    shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences InitialKeyRepeat -int 25
+    - name: 'Finder: Initial KeyRepeat delay'
+      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences InitialKeyRepeat -int 25
 
-  - name: 'Finder: Set sidebar icon size to small'
-    shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences NSTableViewDefaultSizeMode -int 1
+    - name: 'Finder: Set sidebar icon size to small'
+      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences NSTableViewDefaultSizeMode -int 1
 
-  - name: "Finder: Show status bar"
-    shell: defaults write {{ user_lib_prefs }}/com.apple.finder ShowStatusBar -bool true
+    - name: "Finder: Show status bar"
+      shell: defaults write {{ user_lib_prefs }}/com.apple.finder ShowStatusBar -bool true
 
-  - name: 'Finder: Enable Airdrop on all network interfaces'
-    shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+    - name: 'Finder: Enable Airdrop on all network interfaces'
+      shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-  - name: 'Set desktop background'
-    shell: defaults write {{ user_lib_prefs }}/com.apple.desktop Background '{{ item }}'
-    with_items:
-      - '{default = {ImageFilePath = "/Library/Desktop Pictures/Solid Colors/Solid Gray Dark.png"; };}'
+    - name: 'Set desktop background'
+      shell: defaults write {{ user_lib_prefs }}/com.apple.desktop Background '{{ item }}'
+      with_items:
+        - '{default = {ImageFilePath = "/Library/Desktop Pictures/Solid Colors/Solid Gray Dark.png"; };}'
 
-  - name: Kill Dock
-    command: killall Dock
-    ignore_errors: yes
-    sudo: yes
+    - name: Kill Dock
+      command: killall Dock
+      ignore_errors: yes
+      sudo: yes
 
-  - name: Repair permissions
-    shell: "chown -R {{ ansible_ssh_user }}:staff {{ user_lib_prefs }}/"
-    sudo: yes
-
-  # - name: Check for Homebrew
-  #   stat: path=/usr/local/bin/brew
-  #   register: brew_installed
-
-  # - name: Download Homebrew
-  #   get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
-  #   when: not brew_installed.stat.exists
-
-  # - name: Make sure /usr/local exists
-  #   file: path=/usr/local/ state=directory mode=0755 owner=iop group=admin
-  #   sudo: yes
-  #   when: not brew_installed.stat.exists
-
-  # - name: Install Homebrew
-  #   command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'
-  #   sudo: yes
-  #   when: not brew_installed.stat.exists
-
-  # - name: chown homebrew stuff
-  #   shell: "chown -R {{ ansible_ssh_user }}:admin /usr/local/"
-  #   sudo: yes
-  #   when: not brew_installed.stat.exists
-
-  # - name: Update Homebrew
-  #   homebrew: name=null state=absent update_homebrew=yes
-
-  # - name: Install stuff via Homebrew
-  #   homebrew: name={{ item }} state=present
-  #   with_items: 
-  #     - git
-  #     - python
-  #     - nodejs
+    - name: Repair permissions
+      shell: "chown -R {{ ansible_ssh_user }}:staff {{ user_lib_prefs }}/"
+      sudo: yes
 
   post_tasks:
-  - name: Install virtualenvwrapper
-    pip: name=virtualenvwrapper
-    environment:
-      PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
-    sudo: yes
-    tags: pip
+    - name: Install virtualenvwrapper
+      pip: name=virtualenvwrapper
+      environment:
+        PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
+      sudo: yes
+      tags: pip
 
-  - name: Copy terminal settings file
-    copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
-    tags: terminal
+    - name: Copy terminal settings file
+      copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
+      tags: terminal
 
-  - name: Set default terminal
-    command: open /tmp/smoke.terminal
-    ignore_errors: yes
-    tags: terminal
+    - name: Set default terminal
+      command: open /tmp/smoke.terminal
+      ignore_errors: yes
+      tags: terminal
 
-  - name: 'Terminal: Set startup window'
-    shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Startup Window Settings" -string smoke'
-    tags: terminal
+    - name: 'Terminal: Set startup window'
+      shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Startup Window Settings" -string smoke'
+      tags: terminal
 
-  - name: 'Terminal: Set startup window'
-    shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
-    tags: terminal
+    - name: 'Terminal: Set default window'
+      shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
+      tags: terminal
