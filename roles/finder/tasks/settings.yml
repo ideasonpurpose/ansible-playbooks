@@ -12,6 +12,15 @@
 - name: 'Finder: Set Dock from template'
   template: src=com.apple.dock.j2 dest={{ user_lib_prefs }}/com.apple.dock.plist
 
+- name: 'Finder: Disable iCloud popup'
+  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant DidSeeCloudSetup -bool true
+
+- name: 'Finder: Disable Gesture movie'
+  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant GestureMovieSeen none
+
+- name: 'Finder: Set last seen cloud version'
+  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenCloudProductVersion "10.9"
+
 - name: Repair permissions
   shell: "chown -R {{ username }}:staff {{ user_lib_prefs }}/"
 
