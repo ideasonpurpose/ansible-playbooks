@@ -1,49 +1,60 @@
-##IOP's Ansible Playbooks
+##IOP’s Ansible Playbooks
 
 This repository contains a set of Ansible playbooks we're evolving for managing user creation and workstation maintenence at [Ideas On Purpose][iop]. While the overall tasks are very specific to our needs, there's likely something here which might be helpful towards other goals. 
 
 This started out as a basic recipe to eliminate some of the repetitive drudgery of creating and setting up accounts, but it's becoming more of a general toolkit for all sorts of repetitive tasks.
 
-### Requirements
-
-The managing computer should have Ansible >1.4 installed. To keep my computer clean, I keep Ansible in a like-named virtualenv which is activated through [virtualenvwrapper][venvw].
-
-The target can be any existing Mac.
-
 ### Running the playbooks
 
-Here are some excessively complete instructions for running these playbooks. Partly in case I forget, partly so I can ask someone else to do this for me. 
+Below are excessively complete instructions for running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me. 
 
-The pre-run steps are annoying. I've tried mightily to get around these, but it seems like it's just easier to suck it up and deal with XCode
+The pre-run steps are annoying. I've tried mightily to get around these, but it seems like it's just easier to suck it up and deal with a little bit of manually configuration.
 
-#### Pre-run setup on the target
+#### Target computer pre-run setup
+The target playbooks are only tested against Mavericks.
+
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account. 
 2. Turn on **Remote Login** in **System Preferences** > **Sharing**.
 3. Install XCode from the Mac App Store. Open Xcode, agree to the license agreement and let it finish installing.
 4. Install the Xcode Command Line Tools from Xcode's **Preferences** > **Downloads** (I've found this method to be most dependable)
 
-#### Pre-run on the controller
-1. [Install Virtualenvwrapper][venvw install]
-2. Inside a clean virtualenv (`mkvirtualenv ansible`), install Ansible:
-        `pip install ansible`
-3. Clone this repository: ` git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
+#### Controller Setup
 
+This should be every step necessary to set up a clean Mavericks system to run the playbooks.
+
+1. Install Xcode from the Mac App Store
+2. Install [Homebrew][]
+3. `brew install python ssh-copy-id` (includes pip)
+4. [Install Virtualenvwrapper][venvw install]
+    1. `pip install virtualenvwrapper` 
+    2. Add the following three lines to `~/.bashrc` (or `~/.profile`)  
+        ``` 
+        export WORKON_HOME=$HOME/.virtualenvs
+        export PROJECT_HOME=$HOME/Devel
+        source /usr/local/bin/virtualenvwrapper.sh
+        ```
+
+5. Create a new virtualenv: `mkvirtualenv ansible`
+6. Clone this repository: `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
+7. `cd ansible-playbooks`
+8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
 #### First run
 1. Add target machines to the `hosts` file in the playbook directory
-2. Copy your ssh public key and the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to allow passwordless ssh connections and to configure the target's sudoers file. 
+2. Copy your SSH public key to the target: `ssh-copy-id admin@target-imac.local`
+2. Copy the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to configure the target's sudoers file. 
         
-        $ scp ~/.ssh/id_dsa.pub admin@imac-1.local:
-        $ scp bootstrap.sh admin@imac-1.local:
-        $ ssh admin@imac-1.local
+        $ ssh-copy-id admin@imac-2.local
+        $ scp bootstrap.sh admin@imac-2.local:
+        $ ssh admin@imac-2.local
         imac-1.local$ sudo ruby bootstrap.rb
         imac-1.local$ logout
 
 #### Account setup
 1. Copy `vars/user_sample.yml` to `vars/user.yml` and update the user credentials
-2. Configure the admin account:
+2. Configure the admin account:  
     `ansible-playbook admin.yml --extra-vars "target=imac-2.local"`
-3. Create and set up the user account:
+3. Create and set up the user account:  
     `ansible-playbook user.yml --extra-vars "target=imac-2.local"`
 
 
@@ -53,7 +64,7 @@ The pre-run steps are annoying. I've tried mightily to get around these, but it 
 There are two main playbooks:
 
 * **admin.yml**  
-    Sets up the admin account with some of my preferred settings and tools
+    Sets up an admin account on the target computer with some of my preferred settings and tools. This can also be used to reset an admin account back to a clean state. 
 * **user.yml**  
     Sets up the new user account and a bunch of default settings
 
