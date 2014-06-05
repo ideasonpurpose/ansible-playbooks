@@ -4,14 +4,15 @@
 # the playbook non-destructive except for explicitly defined hosts. 
 
 - hosts: '{{ target }}'
-  user: '{{ admin_user }}'
+  user: '{{ user }}'
 
   roles:
     - global-prefs
     - homebrew
 
   pre_tasks: 
-    - set_fact: user_lib=/Users/{{ ansible_ssh_user }}/Library
+    - set_fact: user_home=/Users/{{ ansible_ssh_user }}
+    - set_fact: user_lib={{ user_home }}/Library
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
     - name: Make sure User icons directory exists
@@ -22,7 +23,7 @@
       copy: src=roles/new-user/files/IOP-logo-for-accounts-admin.png dest=/Library/User\ Pictures/IOP/IOP-logo-for-accounts-admin.png mode=0644
       sudo: yes
 
-    - name: Upodate user account picture
+    - name: Update user account picture
       command: 'dscl . {{ item }}'
       with_items:
         - delete /Users/iop jpegphoto
@@ -58,10 +59,11 @@
     - name: 'Finder: Enable Airdrop on all network interfaces'
       shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-    - name: 'Set desktop background'
-      shell: defaults write {{ user_lib_prefs }}/com.apple.desktop Background '{{ item }}'
-      with_items:
-        - '{default = {ImageFilePath = "/Library/Desktop Pictures/Solid Colors/Solid Gray Dark.png"; };}'
+    - name: 'Finder: Show all files'
+      shell: defaults write {{ user_lib_prefs }}/com.apple.finder AppleShowAllFiles -bool true
+
+    - name: 'Finder: Empty the Desktop folder'
+      shell: find {{ user_home}}/Desktop -mindepth 1 -delete
 
     - name: Kill Dock
       command: killall Dock
