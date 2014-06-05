@@ -8,18 +8,14 @@
   when: not brew_installed.stat.exists
 
 - name: Make sure Homebrew directories exist
-  file: path={{ item }} state=directory mode=0775 owner=iop group=staff recurse=yes
+  file: path={{ item }} state=directory mode=0775 owner={{ ansible_ssh_user }} group=staff recurse=yes
   sudo: yes
   with_items: 
     - /usr/local 
     - /Library/Caches/Homebrew
 
-- name: Set group to staff 
-  command: chgrp -R staff {{ item }}
-  sudo: yes
-  with_items: 
-    - /usr/local 
-    - /Library/Caches/Homebrew
+- name: Reset Homebrew Git repository
+  shell: git reset --hard chdir=/usr/local
 
 - name: Set permissions for multiple users
   command: chmod -R g+w {{ item }}
@@ -34,9 +30,9 @@
   when: not brew_installed.stat.exists
 
 - name: chown homebrew stuff
-  shell: "chown -R {{ ansible_ssh_user }}:admin /usr/local/"
+  shell: "chown -R {{ ansible_ssh_user }}:staff /usr/local/"
   sudo: yes
   when: not brew_installed.stat.exists
 
 - name: Update Homebrew
-  homebrew: name=null state=absent update_homebrew=yes
+  homebrew: update_homebrew=yes

@@ -7,5 +7,4 @@
     - git
     - python
     - python3
-    # - nodejs
-    # node seems to install but returns an error, breaking the playbook
+    - node
