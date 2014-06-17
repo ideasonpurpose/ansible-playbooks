@@ -2,7 +2,7 @@
 - name: Homebrew installs
   environment:
     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
-  homebrew: name={{ item }}
+  homebrew: name={{ item }} state=latest
   with_items:
     - git
     - python
