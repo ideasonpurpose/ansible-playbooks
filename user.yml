@@ -16,6 +16,7 @@
 
     - set_fact: user_exists={{ user_stat.stat.exists }}
 
+    - set_fact: user_home=/Users/{{ username }}
     - set_fact: user_lib=/Users/{{ username }}/Library
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
