@@ -1,0 +1,6 @@
+[office:vars]
+admin_user=iop
+
+[office]
+imac-1.local
+imac-2.local

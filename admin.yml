@@ -4,7 +4,7 @@
 # the playbook non-destructive except for explicitly defined hosts. 
 
 - hosts: '{{ target }}'
-  user: '{{ user }}'
+  user: '{{ admin_user }}'
 
   roles:
     - global-prefs

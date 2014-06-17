@@ -2,7 +2,7 @@
 # playbook for creating new users at IOP
 # this only sets up the user, configuration is handled by another playbook.
 - hosts: '{{ target }}'
-  user: iop
+  user: '{{ admin_user }}'
   sudo: yes
 
 # This file contains login/password info, recreate it for specific runs
