@@ -14,7 +14,7 @@ chown -R {{ username }}:staff /Users/{{ username }}
 
 dscl . append /Groups/admin GroupMembership {{ username }}
 
-defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant DidSeeCloudSetup -bool TRUE
-defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant GestureMovieSeen none
-defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant LastSeenCloudProductVersion 10.8
+# defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant DidSeeCloudSetup -bool TRUE
+# defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant GestureMovieSeen none
+# defaults write /Users/{{ username }}/Library/Preferences/com.apple.SetupAssistant LastSeenCloudProductVersion 10.8
 
