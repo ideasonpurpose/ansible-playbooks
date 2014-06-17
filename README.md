@@ -40,12 +40,12 @@ This should be every step necessary to set up a clean Mavericks system to run th
 8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
 #### First run
-1. Add target machines to the `hosts` file in the playbook directory
+1. Rename the `hosts_sample` document to `hosts` and enter the addresses of your target machines
 2. Copy your SSH public key to the target: `ssh-copy-id admin@target-imac.local`
 2. Copy the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to configure the target's sudoers file.
 
         $ ssh-copy-id admin@imac-2.local
-        $ scp bootstrap.sh admin@imac-2.local:
+        $ scp bootstrap.rb admin@imac-2.local:
         $ ssh admin@imac-2.local
         imac-1.local$ sudo ruby bootstrap.rb
         imac-1.local$ logout
