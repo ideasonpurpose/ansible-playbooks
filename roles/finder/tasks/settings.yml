@@ -6,6 +6,12 @@
 - name: "Finder: Show status bar"
   shell: defaults write {{ user_lib_prefs }}/com.apple.finder ShowStatusBar -bool true
 
+- name: 'Finder: New Window Target'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder NewWindowTarget -string PfHm'
+
+- name: 'Finder: New Window Target Path'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder NewWindowTargetPath -string file://{{ user_home }}/'
+
 - name: 'Finder: Enable Airdrop on all network interfaces'
   shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
@@ -19,7 +25,7 @@
   shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant GestureMovieSeen none
 
 - name: 'Finder: Set last seen cloud version'
-  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenCloudProductVersion "10.9"
+  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenCloudProductVersion -string 10.9
 
 - name: Repair permissions
   shell: "chown -R {{ username }}:staff {{ user_lib_prefs }}/"
