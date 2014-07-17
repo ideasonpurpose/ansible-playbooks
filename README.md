@@ -14,8 +14,7 @@ The target playbooks are only tested against Mavericks.
 
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
 2. Turn on **Remote Login** in **System Preferences** > **Sharing**.
-3. Install XCode from the Mac App Store. Open Xcode, agree to the license agreement and let it finish installing.
-4. Install the Xcode Command Line Tools from Xcode's **Preferences** > **Downloads** (I've found this method to be most dependable)
+3. Install XCode from the Mac App Store. Open Xcode, agree to the license agreement and let it finish installing. The installation should include the XCode Command Line Tools.
 
 #### Controller Setup
 
