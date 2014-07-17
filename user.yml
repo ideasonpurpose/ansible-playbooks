@@ -26,6 +26,7 @@
     - safari
     - finder
     - mail
+    - git
 
   post_tasks:
     - name: Parse the Markdown template

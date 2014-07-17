@@ -1,5 +1,5 @@
 [office:vars]
-admin_user=iop
+admin_user=admin
 
 [office]
 imac-1.local
