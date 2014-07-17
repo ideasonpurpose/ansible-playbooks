@@ -4,11 +4,10 @@ This repository contains a set of Ansible playbooks we're evolving for managing 
 
 This started out as a basic recipe to eliminate some of the repetitive drudgery of creating and setting up accounts, but it's becoming more of a general toolkit for all sorts of repetitive tasks.
 
-### Running the playbooks
+Below are excessively complete instructions for setting up the controller and running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me.
 
-Below are excessively complete instructions for running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me.
-
-The pre-run steps are annoying. I've tried mightily to get around these, but it seems like it's just easier to suck it up and deal with a little bit of manually configuration.
+### Initial Setup
+These pre-run steps are annoying. I've tried mightily to get around them, but it seems like it's just easier to suck it up and deal with a little bit of manual configuration.
 
 #### Target computer pre-run setup
 The target playbooks are only tested against Mavericks.
@@ -20,7 +19,7 @@ The target playbooks are only tested against Mavericks.
 
 #### Controller Setup
 
-This should be every step necessary to set up a clean Mavericks system to run the playbooks.
+This should be every step necessary to set up a clean Mavericks system to run the playbooks. This should only need to be done once.
 
 1. Install Xcode from the Mac App Store
 2. Install [Homebrew][]
@@ -28,18 +27,22 @@ This should be every step necessary to set up a clean Mavericks system to run th
 4. [Install Virtualenvwrapper][venvw install]
     1. `pip install virtualenvwrapper`
     2. Add the following three lines to `~/.bashrc` (or `~/.profile`)
-        ```
-        export WORKON_HOME=$HOME/.virtualenvs
-        export PROJECT_HOME=$HOME/Devel
-        source /usr/local/bin/virtualenvwrapper.sh
-        ```
+ 
+            export WORKON_HOME=$HOME/.virtualenvs  
+            export PROJECT_HOME=$HOME/Devel
+            source /usr/local/bin/virtualenvwrapper.sh
+
 
 5. Create a new virtualenv: `mkvirtualenv ansible`
 6. Clone this repository: `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
 7. `cd ansible-playbooks`
 8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
-#### First run
+### Running the playbooks
+
+These first steps make sure the controller can talk to the target and execute commands. 
+
+#### First run 
 1. Rename the `hosts_sample` document to `hosts` and enter the addresses of your target machines
 2. Copy your SSH public key to the target: `ssh-copy-id admin@target-imac.local`
 2. Copy the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to configure the target's sudoers file.
