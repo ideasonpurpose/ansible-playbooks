@@ -7,7 +7,7 @@ This started out as a basic recipe to eliminate some of the repetitive drudgery 
 Below are excessively complete instructions for setting up the controller and running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me.
 
 ### Initial Setup
-These pre-run steps are annoying. I've tried mightily to get around them, but it seems like it's just easier to suck it up and deal with a little bit of manual configuration.
+Pre-run steps are annoying. I've tried mightily to get around these, but it seems like it's just easier to suck it up and deal with a little bit of manual configuration.
 
 #### Target computer pre-run setup
 The target playbooks are only tested against Mavericks.
@@ -42,7 +42,7 @@ This should be every step necessary to set up a clean Mavericks system to run th
 These first steps make sure the controller can talk to the target and execute commands. 
 
 #### First run 
-1. Rename the `hosts_sample` document to `hosts` and enter the addresses of your target machines
+1. Rename the `hosts_sample` document to `hosts` and enter the addresses of your target machines and the name of the admin user.
 2. Copy your SSH public key to the target: `ssh-copy-id admin@target-imac.local`
 2. Copy the bootstrap.sh script to the target machine. SSH into the target and run the ruby script with sudo to configure the target's sudoers file.
 
@@ -76,11 +76,16 @@ There are two main playbooks:
 Hosts is simply an INI file listing known computers. It should look something like this:
 
     # file: hosts
+    [imacs:vars]
+    admin_user=macadmin
+    
     [imacs]
     imac-1.local
     imac-2.local
 
 Ansible will ignore computers that do not appear in hosts.
+
+The `:vars` section is used to define `admin_user` which should be an account which can run sudo commands.
 
 ### Targeting a single machine
 Because these playbooks are potentially destructive, `hosts:` is declared with the `{{ target }}` variable. This way, the playbooks default to doing nothing instead of running on every machine in the office. Explicit wins.
@@ -96,11 +101,15 @@ The group could be just as easily targeted with `--extra-vars "target=imacs"` to
 The `bootstrap.rb` script sets up ssh keys and adds the admin user to `sudoers`. This is necessary for playbooks to run without password prompts.
 
 ### Running Locally
-The playbooks can also be run locally by adding `--connection=local` and targeting localhost: `--extra-vars "target=localhost"`
+The playbooks can also be run locally by targeting localhost and setting connection to local:
+    
+    $ ansible-playbook user.yml --extra-vars "target=localhost" --connection=local
 
+### Admin accounts
+Don't name your admin account `admin`. That's one of the first names automated attacks will try to connect to.
 
 ## Warning
-I'm going to assume that if you've gone so far as to get Ansible running and have downloaded these playbooks, then you probably have a bit of an understanding about how this stuff works and how much damage it could do. But just in case, **These playbooks will remove data, destroy accounts and wreak havok if pointed to the wrong account.** Please be careful, keep backups and read the code before running it.
+Assuming you've gone so far as to get Ansible running and have downloaded these playbooks, you should probably understand how this stuff works and how much damage it could do. But just in case, **These playbooks will remove data, destroy accounts and wreak havok if pointed to the wrong account.** Please be careful, keep backups and read the code before running it.
 
 ### Tasks
 Here are a few of the things these playbooks accomplish:
