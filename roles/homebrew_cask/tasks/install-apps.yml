@@ -1,0 +1,5 @@
+---
+- name: Install Applications from Homebrew Cask
+  environment: { HOMEBREW_CASK_OPTS: "--appdir=/Applications" }
+  homebrew_cask: name={{ item }}
+  with_items: apps

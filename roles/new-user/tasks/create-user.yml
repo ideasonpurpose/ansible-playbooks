@@ -1,9 +1,5 @@
 ---
 
-# - name: Check if user exists
-#   shell: "[ -d /Users/{{ username }} ] && echo 'True' || echo 'False'"
-#   register: user_exists
-
 - name: Get next available User ID
   shell: "echo $(dscl . -list /Users uid | awk '{print $2}' | sort -ug  | tail -1) + 1 | bc"
   register: uid
@@ -31,3 +27,13 @@
 
 - name: Remove the newuser script
   file: path=/tmp/{{ newuser_sh }} state=absent
+
+- name: Prepend /usr/local/bin to $PATH in .profile
+  lineinfile:
+    dest=/Users/{{ username }}/.profile
+    state=present
+    regexp="^export\s+PATH=/usr/local/bin:\\$PATH"
+    insertafter=EOF
+    line="export
+    PATH=/usr/local/bin:$PATH"
+    create=yes

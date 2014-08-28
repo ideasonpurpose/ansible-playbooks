@@ -6,9 +6,19 @@
 - hosts: '{{ target }}'
   user: '{{ admin_user }}'
 
+  vars: 
+    homebrew_apps:
+      - git
+      - node
+      - python
+      - python3
+    cask_apps:
+      - sublime-text3
+
   roles:
     - global-prefs
-    - homebrew
+    - { role: homebrew, apps: "{{ homebrew_apps }}" }
+    - { role: homebrew_cask, apps: "{{ cask_apps }}" }
 
   pre_tasks: 
     - set_fact: user_home=/Users/{{ ansible_ssh_user }}

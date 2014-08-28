@@ -9,12 +9,27 @@
   vars_files:
     - vars/user.yml
 
+  vars:
+    homebrew_apps:
+      - git
+    cask_apps:
+      - adobe-creative-cloud
+      - google-chrome
+      - kaleidoscope
+      - sourcetree
+      - sublime-text3
+      - transmit
+      - vagrant
+      - virtualbox
+    account_icons:
+      - IOP-logo-for-accounts-blue.png
+      - IOP-logo-for-accounts-brown.png
+      - IOP-logo-for-accounts-green.png
+
   pre_tasks:
     - name: Check if user exists
       stat: path=/Users/{{ username }}
       register: user_stat
-
-    - set_fact: user_exists={{ user_stat.stat.exists }}
 
     - set_fact: user_home=/Users/{{ username }}
     - set_fact: user_lib=/Users/{{ username }}/Library
@@ -22,9 +37,11 @@
 
   roles:
     - global-prefs
-    - new-user
-    - safari
-    - finder
+    - { role: new-user, when: not user_stat.stat.exists }
+    - { role: homebrew, apps: "{{ homebrew_apps }}" }
+    - { role: homebrew_cask, apps: "{{ cask_apps }}" }
+    - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
+    - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - mail
     - git
 
@@ -43,9 +60,3 @@
       file: path=templates/welcome.html.j2 state=absent
       connection: local
       sudo: no
-
-  vars:
-    account_icons:
-      - IOP-logo-for-accounts-blue.png
-      - IOP-logo-for-accounts-brown.png
-      - IOP-logo-for-accounts-green.png

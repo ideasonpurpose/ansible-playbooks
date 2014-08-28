@@ -1,5 +1,3 @@
 ---
 
 - include: settings.yml
-  when: user_lib is defined
-  when: user_lib_prefs is defined

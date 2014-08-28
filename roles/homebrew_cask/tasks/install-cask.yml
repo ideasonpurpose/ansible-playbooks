@@ -1,0 +1,13 @@
+---
+
+- name: Tap caskroom/cask
+  homebrew_tap: tap=caskroom/cask
+
+- name: Install Homebrew Cask
+  homebrew: name=brew-cask
+
+- name: Tap cask/versions
+  homebrew_tap: tap=caskroom/versions
+
+- name: Update Homebrew
+  homebrew: update_homebrew=yes

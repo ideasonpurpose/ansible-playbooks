@@ -1,0 +1,14 @@
+---
+
+apps:
+  - git
+  - node
+  - python
+  - python3
+
+homebrew_paths:
+  - /usr/local
+  - /usr/local/Cellar
+  - /usr/local/Library
+  - /Library/Caches/Homebrew
+  - /Library/Caches/Homebrew/Formula

@@ -1,10 +1,6 @@
 ---
-- name: Homebrew installs
+- name: Install applications
   environment:
     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
   homebrew: name={{ item }} state=latest
-  with_items:
-    - git
-    - python
-    - python3
-    - node
+  with_items: apps

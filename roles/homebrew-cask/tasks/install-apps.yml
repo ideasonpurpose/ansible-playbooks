@@ -1,8 +1,0 @@
----
-- name: Cask installs
-  environment: {PATH: '/usr/local/bin:{{ ansible_env["PATH"] }}'}
-  shell: /usr/local/bin/brew cask install {{ item }} --appdir=/Applications
-  with_items:
-    - kaleidoscope
-    - sourcetree
-    - transmit

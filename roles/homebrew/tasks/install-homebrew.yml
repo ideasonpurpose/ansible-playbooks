@@ -1,38 +1,36 @@
 ---
-- name: Check for Homebrew
-  stat: path=/usr/local/bin/brew
-  register: brew_installed
 
-- name: Download Homebrew
-  get_url: url=https://github.com/mxcl/homebrew/tarball/master dest=/tmp/homebrew.tgz
-  when: not brew_installed.stat.exists
-
-- name: Make sure Homebrew directories exist
-  file: path={{ item }} state=directory mode=0775 owner={{ ansible_ssh_user }} group=staff recurse=yes
+- name: Make sure Homebrew directory exists
+  file: 
+    path=/usr/local
+    state=directory
+    mode=0775
+    group=admin
   sudo: yes
-  with_items: 
-    - /usr/local 
-    - /Library/Caches/Homebrew
 
-- name: Reset Homebrew Git repository
-  shell: git reset --hard chdir=/usr/local
+- name: Install Homebrew with git
+  git: 
+    repo=https://github.com/Homebrew/homebrew.git
+    dest=/usr/local
 
 - name: Set permissions for multiple users
-  command: chmod -R g+w {{ item }}
+  file: 
+    path={{ item }}
+    mode=0775
+    owner=root
+    group=admin
+    recurse=yes
+    state=directory
   sudo: yes
-  with_items:
-    - /usr/local 
-    - /Library/Caches/Homebrew
+  with_items: homebrew_paths
 
-- name: Install Homebrew
-  command: 'tar xzf /tmp/homebrew.tgz --strip 1 -C /usr/local'
+- name: Fix ACL permissions for multiple users
   sudo: yes
-  when: not brew_installed.stat.exists
+  command: 'chmod +a "group:admin allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" {{ item }}'
+  with_items: homebrew_paths
 
-- name: chown homebrew stuff
-  shell: "chown -R {{ ansible_ssh_user }}:staff /usr/local/"
-  sudo: yes
-  when: not brew_installed.stat.exists
+- name: Hard-reset the Homebrew Library (resets file permissions)
+  command: git reset --hard chdir=/usr/local/Library
 
 - name: Update Homebrew
   homebrew: update_homebrew=yes
