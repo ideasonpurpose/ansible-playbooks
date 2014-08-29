@@ -11,7 +11,7 @@
     table { margin-left: 2em; width: 55%;}
     tr { vertical-align: top; }
     th { text-align: left;}
-    td { padding: 0.25em 0;}
+    td { text-align: left;padding: 0.25em 0;}
     td:last-child { padding-bottom: 1em;}   /* hack for table spacing in text-edit */
     </style>
 </head>
@@ -22,11 +22,18 @@
 
 The account login for your computer is:
 
-| username         | password         |
-|------------------|------------------|
-| `{{ username }}` | `{{ password }}` |
+<table>
+    <tr>
+        <th align="left">username</th>
+        <th align="left">password</th>
+    </tr>
+    <tr>
+        <td align="left"><code>{{ username }}</code></td>
+        <td align="left"><code>{{ password }}</code></td>
+    </tr>
+</table>
 
-Most all IOP services can be accessed using this password and username. Please keep your password private. 
+Most all IOP services can be accessed using this password and username. Please keep your password private.
 
 
 ### IOP Fileserver
@@ -38,11 +45,19 @@ Please see the *IOP Server and File Name Conventions* document for more informat
 ### Email
 Your email is already set up on your computer. Below are the settings you'll need to access your IOP email account from other devices. Our email uses Exchange and should auto-configure with these settings:
 
-| address & username                  | password         |
-|-------------------------------------|------------------|
-| `{{ username }}@ideasonpurpose.com` | `{{ password }}` |
 
-IOP's webmail can be accessed at <a href="{{ webmail_url }}">{{ webmail_url }}</a>, login with your full email address and password. 
+<table>
+    <tr>
+        <th align="left">address &amp; username</th>
+        <th align="left">password</th>
+    </tr>
+    <tr>
+        <td align="left"><code>{{ username }}@ideasonpurpose.com</code></td>
+        <td align="left"><code>{{ password }}</code></td>
+    </tr>
+</table>
+
+IOP's webmail can be accessed at <a href="{{ webmail_url }}">{{ webmail_url }}</a>, login with your full email address and password.
 
 
 ### Confidentiality & Social Networks
@@ -55,15 +70,15 @@ The Ideas On Purpose wireless network password is:  `{{ wifi_password }}`
 
 
 ### Google Apps
-IOP's Google Apps URL is <a href="{{ google_apps_url }}">{{ google_apps_url }}</a>. Login with your email address and password. 
+IOP's Google Apps URL is <a href="{{ google_apps_url }}">{{ google_apps_url }}</a>. Login with your email address and password.
 
 
 ### Fonts
 An "IOP Font Library" folder containing an extensive library of fonts can be found at the top level of your hard drive. Use OpenType format fonts. Legacy formats (Truetype, PostScript) should only be used as a last resort.
 
-IOP recommends Font Book for font management, but we're open to other solutions. 
+IOP recommends Font Book for font management, but we're open to other solutions.
 
-Please talk to Joe Maller if you need to install any additional applications or utilities.   
+Please talk to Joe Maller if you need to install any additional applications or utilities.
 
 </body>
 </html>
