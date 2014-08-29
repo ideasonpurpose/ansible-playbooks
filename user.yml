@@ -5,7 +5,7 @@
   user: '{{ admin_user }}'
   sudo: yes
 
-# This file contains login/password info, recreate it for specific runs
+# The vars/user.yml file contains login/password info, recreate it for specific runs
   vars_files:
     - vars/user.yml
 
@@ -21,23 +21,50 @@
       - transmit
       - vagrant
       - virtualbox
-    account_icons:
-      - IOP-logo-for-accounts-blue.png
-      - IOP-logo-for-accounts-brown.png
-      - IOP-logo-for-accounts-green.png
 
   pre_tasks:
     - name: Check if user exists
       stat: path=/Users/{{ username }}
-      register: user_stat
+      register: check_user
 
     - set_fact: user_home=/Users/{{ username }}
     - set_fact: user_lib=/Users/{{ username }}/Library
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
+    - name: Get available account pictures
+      shell: ls -1 files/user_account_images/*.png
+      register: account_images
+      ignore_errors: yes
+      sudo: no
+      connection: local
+
+    - name: Default to an empty list if no images are found
+      # The `with_random_choice` command needs a list to pull from, it fails loudly if the list is empty
+      # Sending a list with one empty string allows us to use `account_images.stdout_lines[0]` as a boolean
+      set_fact:
+         account_images:
+            stdout_lines: ['']
+      when: account_images.stdout_lines | length == 0
+
+    - name: Send new account picture
+      copy: 
+        src={{ item }}
+        dest="/Library/User Pictures/Ansible/{{ item | basename }}"
+        mode=0644
+      when: account_images.stdout_lines[0]
+      with_random_choice: account_images.stdout_lines
+      ignore_errors: yes
+      register: account_image
+      sudo: yes
+
+    - name: Handle missing images so we can pass an empty string to the role
+      set_fact: 
+        account_image: { results: [ { item: '' } ] }
+      when: account_image.results[0].item is not defined
+
   roles:
     - global-prefs
-    - { role: new-user, when: not user_stat.stat.exists }
+    - { role: new-user, image: "{{ account_image.results[0].item | basename}}", when: not check_user.stat.exists }
     - { role: homebrew, apps: "{{ homebrew_apps }}" }
     - { role: homebrew_cask, apps: "{{ cask_apps }}" }
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }

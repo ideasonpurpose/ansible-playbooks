@@ -26,19 +26,44 @@
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
     - name: Make sure User icons directory exists
-      file: path=/Library/User\ Pictures/IOP/ state=directory mode=0755
+      file: path=/Library/User\ Pictures/Ansible/ state=directory mode=0755
       sudo: yes
 
+    - name: Get available account pictures
+      shell: ls -1 files/admin_account_images/*.png
+      register: account_images
+      ignore_errors: yes
+      connection: local
+
+    - name: Default to an empty list if no images are found
+      # The `with_random_choice` command needs a list to pull from, it fails loudly if the list is empty
+      # Sending a list with one empty string allows us to use `account_images.stdout_lines[0]` as a boolean
+      set_fact:
+         account_images:
+            stdout_lines: ['']
+      when: account_images.stdout_lines | length == 0
+
     - name: Send new account picture
-      copy: src=roles/new-user/files/IOP-logo-for-accounts-admin.png dest=/Library/User\ Pictures/IOP/IOP-logo-for-accounts-admin.png mode=0644
+      copy: 
+        src={{ item }}
+        dest="/Library/User Pictures/Ansible/{{ item | basename }}"
+        mode=0644
+      when: account_images.stdout_lines[0]
+      with_random_choice: account_images.stdout_lines
+      ignore_errors: yes
+      register: account_image
+      sudo: yes
+
+    - name: Clear existing user account picture
+      command: 'dscl . {{ item }}'
+      with_items:
+        - 'delete /Users/{{ admin_user }} jpegphoto'
+        - 'delete /Users/{{ admin_user }} Picture'
       sudo: yes
 
     - name: Update user account picture
-      command: 'dscl . {{ item }}'
-      with_items:
-        - delete /Users/iop jpegphoto
-        - delete /Users/iop Picture
-        - create /Users/iop Picture "/Library/User Pictures/IOP/IOP-logo-for-accounts-admin.png"
+      command: 'dscl . create /Users/{{ admin_user }} Picture "/Library/User Pictures/Ansible/{{ account_image.results[0].item | basename }}"'
+      when: account_image.results[0].item is defined
       sudo: yes
 
     - name: Prepend /usr/local/bin to $PATH in .profile
