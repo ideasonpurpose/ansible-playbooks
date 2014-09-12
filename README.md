@@ -23,7 +23,7 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 The target playbooks are only tested against Mavericks.
 
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
-2. Turn on **Remote Login** in **System Preferences** > **Sharing**. (This enabled ssh)
+2. Turn on **Remote Login** in **System Preferences** > **Sharing**. (This enables ssh)
 3. Install [XCode from the Mac App Store][xcode appstore]. Open Xcode, agree to the license agreement and let it finish installing. The installation should include the XCode Command Line Tools.
 
 #### Controller Setup
@@ -44,7 +44,8 @@ These first steps make sure the controller can talk to the target and execute co
 #### First run 
 
 1. Rename the `hosts_sample` document to `hosts` and enter the addresses of your target machines and the name of the admin user.
-2. Copy your SSH public key to the target: `ssh-copy-id admin@target-imac.local`
+2. Copy your SSH public key to the target:  
+    `ssh-copy-id admin@target-imac.local`
 3. Copy the `bootstrap.sh` script to the target machine. SSH into the target and run the ruby script with sudo to configure the target's sudoers file.
 
 ```
@@ -56,9 +57,9 @@ imac-1.local$ logout
 ```
 #### Account setup
 1. Copy `vars/user_sample.yml` to `vars/user.yml` and update the user credentials
-2. Configure the admin account:
+2. Configure the admin account:  
     `ansible-playbook admin.yml --extra-vars "target=imac-2.local"`
-3. Create and set up the user account:
+3. Create and set up the user account:  
     `ansible-playbook user.yml --extra-vars "target=imac-2.local"`
 
 
