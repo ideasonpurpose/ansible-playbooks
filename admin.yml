@@ -115,10 +115,20 @@
       shell: find {{ user_home }}/Desktop -mindepth 1 -delete
       sudo: yes
 
-    - name: Kill Dock
-      command: killall Dock
-      ignore_errors: yes
+    - stat: path={{ user_home }}/Downloads
+      register: downloads
+
+    - name: Move existing Downloads folder out of the way
+      shell: mv {{ user_home}}/Downloads {{ user_home}}/Old_Downloads
       sudo: yes
+      when: not downloads.stat.islnk
+
+    - name: symlink /tmp to ~/Downloads
+      file:
+        src=/tmp
+        dest={{ user_home }}/Downloads
+        state=link
+        force=yes
 
     - name: Repair permissions
       shell: "chown -R {{ ansible_ssh_user }}:staff {{ user_lib_prefs }}/"
