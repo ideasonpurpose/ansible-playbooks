@@ -69,14 +69,18 @@
     - { role: homebrew_cask, apps: "{{ cask_apps }}" }
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
+    - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
     - mail
     - git
 
   post_tasks:
     - name: Parse the Markdown template
-      shell: python -m markdown -x extra -x smarty welcome.md > welcome.html.j2 chdir=templates
+      shell: 'python -m markdown -x extra -x smarty {{ item }} > welcome.html.j2 chdir=templates'
       connection: local
       sudo: no
+      with_first_found:
+        - welcome.md
+        - welcome_sample.md
 
     - name: Generate Welcome message on controller
       template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
