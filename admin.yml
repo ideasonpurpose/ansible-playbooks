@@ -105,15 +105,6 @@
     - name: 'Finder: Initial KeyRepeat delay'
       shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences InitialKeyRepeat -int 25
 
-    - name: 'Finder: Set sidebar icon size to small'
-      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences NSTableViewDefaultSizeMode -int 1
-
-    - name: "Finder: Show status bar"
-      shell: defaults write {{ user_lib_prefs }}/com.apple.finder ShowStatusBar -bool true
-
-    - name: 'Finder: Enable Airdrop on all network interfaces'
-      shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
     - name: 'Finder: Show all files'
       shell: defaults write {{ user_lib_prefs }}/com.apple.finder AppleShowAllFiles -bool true
 
