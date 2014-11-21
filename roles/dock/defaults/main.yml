@@ -1,0 +1,28 @@
+---
+
+username: "{{ ansible_ssh_user }}"
+
+dock_apps:
+  - /Applications/Mail.app
+  - /Applications/Messages.app
+  - /Applications/Safari.app
+  - /Applications/Google Chrome.app
+  - /Applications/xScope.app
+  - /Applications/Transmit.app
+  - /Applications/Adobe Bridge CC/Adobe Bridge CC.app
+  - /Applications/Adobe Illustrator CC 2014/Adobe Illustrator.app
+  - /Applications/Adobe InDesign CC 2014/Adobe InDesign CC 2014.app
+  - /Applications/Adobe After Effects CC 2014/Adobe After Effects CC 2014.app
+  - /Applications/Adobe Photoshop CC 2014/Adobe Photoshop CC 2014.app
+  - /Applications/Adobe Acrobat XI Pro/Adobe Acrobat Pro.app
+  - /Applications/Font Book.app
+  - /Applications/Microsoft Office 2011/Microsoft Word.app
+  - /Applications/Contacts.app
+  - /Applications/Calendar.app
+  - /Applications/Preview.app
+  - /Applications/Time Machine.app
+  - /Applications/System Preferences.app
+
+dock_others:
+  - /IOP Font Library
+  - /Users/{{ username }}/Downloads

@@ -15,8 +15,6 @@
 - name: 'Finder: Enable Airdrop on all network interfaces'
   shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-- name: 'Finder: Set Dock from template'
-  template: src=com.apple.dock.j2 dest={{ user_lib_prefs }}/com.apple.dock.plist
 
 - name: 'Finder: Disable iCloud popup'
   shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant DidSeeCloudSetup -bool true
@@ -30,10 +28,7 @@
 - name: Repair permissions
   shell: "chown -R {{ username }}:staff {{ user_lib_prefs }}/"
 
-- name: 'Restart Dock'
-  command: killall {{ item }}
+- name: 'Restart Finder'
+  command: killall Finder
   ignore_errors: yes
-  with_items: 
-    - Dock
-    - Finder
 

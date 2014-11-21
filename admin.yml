@@ -17,6 +17,8 @@
 
   roles:
     - global-prefs
+    - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
+    - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
     - { role: homebrew, apps: "{{ homebrew_apps }}" }
     - { role: homebrew_cask, apps: "{{ cask_apps }}" }
 
