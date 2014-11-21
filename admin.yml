@@ -83,6 +83,9 @@
       when: account_image.results[0].item is defined
       sudo: yes
 
+    - name: set umask to 002 in .profile
+      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^umask\s+\d+" insertafter=EOF line="umask 002" create=yes'
+
     - name: Prepend /usr/local/bin to $PATH in .profile
       lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+PATH=/usr/local/bin:\\$PATH" insertafter=EOF line="export PATH=/usr/local/bin:$PATH" create=yes'
 
