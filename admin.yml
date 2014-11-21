@@ -14,6 +14,21 @@
       - python3
     cask_apps:
       - sublime-text3
+      - kaleidoscope
+      - sourcetree
+      - sublime-text3
+      - vagrant
+      - virtualbox
+    username: '{{ ansible_ssh_user }}'
+    dock_apps:
+      - /Applications/Safari.app
+      - /Applications/Google Chrome.app
+      - /Applications/Kaleidoscope.app
+      - /Applications/Sublime Text.app
+      - /Applications/SourceTree.app
+      - /Applications/Utilities/Terminal.app
+    dock_others:
+    - /Users/{{ username }}/Downloads
 
   roles:
     - global-prefs
