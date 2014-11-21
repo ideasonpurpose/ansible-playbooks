@@ -3,7 +3,7 @@
 - name: 'Finder: Set sidebar icon size to small'
   shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences NSTableViewDefaultSizeMode -int 1
 
-- name: "Finder: Show status bar"
+- name: 'Finder: Show status bar'
   shell: defaults write {{ user_lib_prefs }}/com.apple.finder ShowStatusBar -bool true
 
 - name: 'Finder: New Window Target'
@@ -15,6 +15,12 @@
 - name: 'Finder: Enable Airdrop on all network interfaces'
   shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
+# Helpful: http://derflounder.wordpress.com/2014/10/16/disabling-the-icloud-and-diagnostics-pop-up-windows-in-yosemite/
+- shell: sw_vers -productVersion
+  register: os_productVersion
+
+- shell: sw_vers -buildVersion
+  register: os_buildVersion
 
 - name: 'Finder: Disable iCloud popup'
   shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant DidSeeCloudSetup -bool true
@@ -23,10 +29,13 @@
   shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant GestureMovieSeen none
 
 - name: 'Finder: Set last seen cloud version'
-  shell: defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenCloudProductVersion -string 10.9
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenCloudProductVersion -string "{{ os_productVersion }}"'
+
+- name: 'Finder: Set last seen build version'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenBuddyBuildVersion -string "{{ os_buildVersion }}"'
 
 - name: Repair permissions
-  shell: "chown -R {{ username }}:staff {{ user_lib_prefs }}/"
+  shell: 'chown -R {{ username }}:staff {{ user_lib_prefs }}/'
 
 - name: 'Restart Finder'
   command: killall Finder
