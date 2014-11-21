@@ -8,7 +8,4 @@ apps:
 
 homebrew_paths:
   - /usr/local
-  - /usr/local/Cellar
-  - /usr/local/Library
   - /Library/Caches/Homebrew
-  - /Library/Caches/Homebrew/Formula
