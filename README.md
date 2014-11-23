@@ -1,39 +1,57 @@
 ##IOP’s Ansible Playbooks
 
-This repository contains a set of Ansible playbooks we're evolving for managing user creation and workstation maintenence at [Ideas On Purpose][iop]. While these tasks are very specific to our needs, there's likely something here which will be helpful towards other goals.
+This repository contains a set of Ansible playbooks we're evolving for automating Mac user creation and designer workstation maintenence at [Ideas On Purpose][iop]. While these are ultimately very specific to our needs, there's likely something here which will be helpful in other situations.
 
-This started out as a basic recipe to eliminate some of the repetitive drudgery of creating and setting up accounts, but it's becoming more of a general toolkit for all sorts of repetitive tasks.
+A few of the things these playbooks accomplish:
 
-Below are excessively complete instructions for setting up the controller and running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me.
+* Configure an admin user account
+* Reset admin account picture and desktop pattern
+* Set a default Dock from a simple Yaml list
+* Set preferences in Finder and Safari to our preferred defaults (see [osx dotfiles][dotfiles])
+* Reset Safari
+* Disable first-login iCloud popups (thanks to [Rich Trouton][rtrouton])
+* Install [Homebrew][] and several packages from Homebrew
+* Tweak Homebrew to run for multiple users
+* Install [Homebrew Cask][cask] and several common applications via Cask
+* Install modules with pip (from homebrew's /usr/local/bin)
+* Clears out some common Adobe cruft and install leftovers
+* Modify default terminal settings
+* Generate a pre-formatted email signature
+* Generate a custom HTML welcome document
+
+The playbooks have been updated for Yosemite, and also work on Mavericks. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
 
 ### The Playbooks
 
 There are two main playbooks:
 
+* **admin.yml**
+    Sets up an admin account on the target computer with some of my preferred settings and tools. This can also be used to reset an admin account back to a clean state. This playbook will delete everything in `~/Desktop`.
+
 * **user.yml**
     Sets up the new user account and a bunch of default settings. These are primarily used by designers. 
 
-* **admin.yml**
-    Sets up an admin account on the target computer with some of my preferred settings and tools. This can also be used to reset an admin account back to a clean state.
+Below are excessively complete instructions for setting up the controlling computer and running the playbooks. Partly in case I forget, partly so I can ask someone else to do this for me.
 
 ### Initial Setup
 Pre-run steps are annoying. I've tried mightily to get around these, but it seems like it's just easier to suck it up and deal with a little bit of manual configuration.
 
 #### Target computer pre-run setup
-The target playbooks are only tested against Mavericks.
 
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
-2. Turn on **Remote Login** in **System Preferences** > **Sharing**. (This enables ssh)
+2. Set the computer's name in **System Preferences** > **Sharing**. Make a note of the local hostname, a computer named "iMac 3" will probably have the local hostname `imac-3.local`. Ansible will find the target computer by its local hostname or IP address.
+2. Turn on **Remote Login** in **System Preferences** > **Sharing** to enable SSH connections.
 3. Install [XCode from the Mac App Store][xcode appstore]. Open Xcode, agree to the license agreement and let it finish installing. The installation should include the XCode Command Line Tools.
 
 #### Controller Setup
 
-This should be every step necessary to set up a clean Mavericks system to run the playbooks. This should only need to be done once.
+The controller is the computer the playbooks are run from (eg. *your* computer). This should be every step necessary to set up a clean Mavericks system to run the playbooks. This should only need to be done once.
 
 1. Install [Xcode from the Mac App Store][xcode appstore]
 2. Install [Homebrew][]
 3. `brew install ansible multimarkdown ssh-copy-id`
-6. Clone this repository: `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
+6. Clone this repository: 
+        `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
 7. `cd ansible-playbooks`
 8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
@@ -78,7 +96,7 @@ Hosts is simply an INI file listing known computers. It should look something li
     imac-1.local
     imac-2.local
 
-Ansible will ignore computers that do not appear in hosts.
+Ansible won't run on computers which don't appear in hosts.
 
 The `:vars` section is used to define `admin_user` which should be an account which can run sudo commands.
 
@@ -109,20 +127,6 @@ Don't name your admin account `admin`. That's one of the first names automated a
 ## Warning
 Assuming you've gone so far as to get Ansible running and have downloaded these playbooks, you probably understand how this stuff works and how much damage it could do. But just in case, **These playbooks will remove data, destroy accounts and wreak havok if pointed to the wrong account.** Please be careful, keep backups and read the code before running it.
 
-### Tasks
-Here are a few of the things these playbooks accomplish:
-
-* Configure an admin user account
-* Set a default Dock (using a stripped down template plist)
-* Set preferences in Finder and Safari to our preferred defaults (see [osx dotfiles][dotfiles])
-* Reset Safari
-* Reset admin account picture and desktop pattern
-* Install [Homebrew][] and several packages from Homebrew
-* Install [Homebrew Cask][cask] and several common applications via Cask.
-* Install modules with pip (from homebrew's /usr/local/bin)
-* Modify default terminal settings
-* Generate a pre-formatted email signature
-* Generate a custom HTML welcome document
 
 
 [iop]: http://ideasonpurpose.com
@@ -132,3 +136,4 @@ Here are a few of the things these playbooks accomplish:
 [venvw]: https://bitbucket.org/dhellmann/virtualenvwrapper/
 [venvw install]: http://virtualenvwrapper.readthedocs.org/en/latest/install.html
 [xcode appstore]: https://itunes.apple.com/us/app/xcode/id497799835?mt=12
+[rtrouton]: http://derflounder.wordpress.com/2014/10/16/disabling-the-icloud-and-diagnostics-pop-up-windows-in-yosemite/
