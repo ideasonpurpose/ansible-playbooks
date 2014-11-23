@@ -146,7 +146,7 @@
       copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
       tags: terminal
 
-    - name: Set default terminal
+    - name: Set terminal to Smoke theme
       command: open /tmp/smoke.terminal
       ignore_errors: yes
       tags: terminal
