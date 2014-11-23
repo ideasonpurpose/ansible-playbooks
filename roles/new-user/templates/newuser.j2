@@ -1,12 +1,12 @@
 #!/bin/sh
 . /etc/rc.common
 dscl . create /Users/{{ username }}
-dscl . create /Users/{{ username }} RealName "{{ fullname }}"
-dscl . create /Users/{{ username }} hint "{{ password | truncate(4, True) }}"
+dscl . create /Users/{{ username }} RealName '{{ fullname | replace("'", "'\\''") }}'
+dscl . create /Users/{{ username }} hint '{{ password | replace("'", "'\\''") | truncate(4, True) }}'
 if [ -n "{{ image }}" ]; then
     dscl . create /Users/{{ username }} picture "/Library/User Pictures/Ansible/{{ image }}"
 fi
-dscl . passwd /Users/{{ username }} {{ password }}
+dscl . passwd /Users/{{ username }} '{{ password | replace("'", "'\\''") }}'
 dscl . create /Users/{{ username }} UniqueID {{ uid.stdout }}
 dscl . create /Users/{{ username }} PrimaryGroupID 20
 dscl . create /Users/{{ username }} UserShell /bin/bash
