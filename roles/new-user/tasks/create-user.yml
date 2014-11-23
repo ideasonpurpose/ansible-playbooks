@@ -4,20 +4,17 @@
   shell: "echo $(dscl . -list /Users uid | awk '{print $2}' | sort -ug  | tail -1) + 1 | bc"
   register: uid
 
-- name: Use a uuid for the script name
-  shell: "date | shasum -a 384 | awk '{print $1}'" 
-  register: script_name
-
-- set_fact: 'newuser_sh={{ script_name.stdout }}.sh'
+- command: mktemp -t create_{{ username }}-XXXXX
+  register: newuser_script
 
 - name: Create user script
-  template: src=newuser.j2 dest=/tmp/{{ newuser_sh }} mode=0755
+  template: src=newuser.j2 dest={{ newuser_script.stdout }} mode=0755
 
 - name: Make a user!
-  shell: /tmp/{{ newuser_sh }} creates=/Users/{{ username }}
+  shell: "{{ newuser_script.stdout }} creates=/Users/{{ username }}"
 
 - name: Remove the newuser script
-  file: path=/tmp/{{ newuser_sh }} state=absent
+  file: path={{ newuser_script.stdout }} state=absent
 
 - name: Prepend /usr/local/bin to $PATH in .profile
   lineinfile:
