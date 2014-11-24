@@ -90,8 +90,8 @@
       connection: local
       sudo: no
       with_first_found:
-        - welcome.md
-        - welcome_sample.md
+        - templates/welcome.md
+        - templates/welcome_sample.md
 
     - name: Generate Welcome message on controller
       template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
