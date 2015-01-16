@@ -13,7 +13,6 @@
       - python
       - python3
     cask_apps:
-      - sublime-text3
       - kaleidoscope
       - sourcetree
       - sublime-text3
