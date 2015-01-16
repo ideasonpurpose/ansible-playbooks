@@ -42,6 +42,13 @@
     - set_fact: user_lib={{ user_home }}/Library
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
 
+    - command: scutil --get ComputerName
+      register: computer_name
+
+    - name: Set name of HD to ComputerName + HD/SSD
+      shell:
+        diskutil rename / '{{ computer_name.stdout ~ " HD" }}'
+
     - name: Make sure User icons directory exists
       file: path=/Library/User\ Pictures/Ansible/ state=directory mode=0755
       sudo: yes
