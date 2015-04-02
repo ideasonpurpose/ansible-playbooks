@@ -16,7 +16,7 @@
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder SidebarTagsSctionDisclosedState -bool false'
 
 - name: 'Finder: Enable Airdrop on all network interfaces'
-  shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+  shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool false
 
 # Helpful: http://derflounder.wordpress.com/2014/10/16/disabling-the-icloud-and-diagnostics-pop-up-windows-in-yosemite/
 - shell: sw_vers -productVersion
