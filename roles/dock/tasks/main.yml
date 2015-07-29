@@ -27,7 +27,7 @@
   with_items: dock_apps
 
 - name: 'Dock: Insert Others'
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others -array-add "<dict><key>tile-type</key><string>{{ item.type | default("directory") }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict></dict></dict>"'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others -array-add "<dict><key>tile-type</key><string>{{ item.type | default("directory") }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>"'
   sudo_user: "{{ username }}"
   with_items: dock_others
 
