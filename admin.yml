@@ -27,7 +27,7 @@
       - /Applications/SourceTree.app
       - /Applications/Utilities/Terminal.app
     dock_others:
-    - /Users/{{ username }}/Downloads
+    - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
 
   roles:
     - global-prefs
