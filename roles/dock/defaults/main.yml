@@ -24,5 +24,6 @@ dock_apps:
   - /Applications/System Preferences.app
 
 dock_others:
+  # either a plain path string or a dict like "{path: /path, type: [file | directory] }"
   - /IOP Font Library
-  - /Users/{{ username }}/Downloads
+  - {path: "/Users/{{ username }}/Downloads", type: directory}
