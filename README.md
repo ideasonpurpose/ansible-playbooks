@@ -127,6 +127,10 @@ Don't name your admin account `admin`. That's one of the first names automated a
 ## Warning
 Assuming you've gone so far as to get Ansible running and have downloaded these playbooks, you probably understand how this stuff works and how much damage it could do. But just in case, **These playbooks will remove data, destroy accounts and wreak havok if pointed to the wrong account.** Please be careful, keep backups and read the code before running it.
 
+## About
+
+[![iop_logo](https://cloud.githubusercontent.com/assets/8320/9443542/944a8bce-4a4f-11e5-9d2f-54999b1687d5.png)][iop]  
+This project is sponsored by [Ideas On Purpose][iop]
 
 
 [iop]: http://ideasonpurpose.com
