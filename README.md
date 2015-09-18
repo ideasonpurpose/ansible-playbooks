@@ -17,7 +17,7 @@ A few of the things these playbooks accomplish:
 * Clears out some common Adobe cruft and install leftovers
 * Modify default terminal settings
 * Generate a pre-formatted email signature
-* Generate a custom HTML welcome document
+* Generate a custom HTML welcome document from a Markdown template
 
 The playbooks have been updated for Yosemite, and also work on Mavericks. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
 
@@ -49,7 +49,7 @@ The controller is the computer the playbooks are run from (eg. *your* computer).
 
 1. Install [Xcode from the Mac App Store][xcode appstore]
 2. Install [Homebrew][]
-3. `brew install ansible multimarkdown ssh-copy-id`
+3. `brew install ansible pandoc ssh-copy-id`
 6. Clone this repository: 
         `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
 7. `cd ansible-playbooks`

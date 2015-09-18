@@ -87,12 +87,23 @@
 
   post_tasks:
     - name: Parse the Markdown template
-      shell: 'python -m markdown -x extra -x smarty {{ item }} > welcome.html.j2 chdir=templates'
+      shell: 'pandoc -f commonmark -o templates/welcome.html.j2 {{ item }}'
       connection: local
       sudo: no
       with_first_found:
         - templates/welcome.md
         - templates/welcome_sample.md
+
+    - name: add doctype (because commonmark is choking on it)
+      connection: local
+      sudo: no
+      lineinfile:
+        dest=templates/welcome.html.j2
+        state=present
+        regexp="^<(p>&lt;)?!doctype[^>]*>"
+        insertbefore=BOF
+        line="<!doctype html>"
+        create=yes
 
     - name: Generate Welcome message on controller
       template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
