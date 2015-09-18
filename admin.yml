@@ -95,16 +95,6 @@
     - name: Prepend /usr/local/bin to $PATH in .profile
       lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+PATH=/usr/local/bin:\\$PATH" insertafter=EOF line="export PATH=/usr/local/bin:$PATH" create=yes'
 
-    - name: add WORKON_HOME to .profile
-      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+WORKON_HOME=" insertafter=EOF line="export WORKON_HOME=$HOME/.virtualenvs" create=yes'
-
-    - name: add VIRTUALENVWRAPPER_VIRTUALENV_ARGS to .profile
-      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^export\s+VIRTUALENVWRAPPER_VIRTUALENV_ARGS=" insertafter=EOF line="export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=\"--no-site-packages\"" create=yes'
-
-    - name: source virtualenvwrapper from .profile
-      lineinfile: 'dest=/Users/{{ ansible_ssh_user }}/.profile state=present regexp="^source .*virtualenvwrapper.sh$" insertafter=EOF line="source /usr/local/bin/virtualenvwrapper.sh" create=yes'
-      tags: pip
-
     - name: 'Finder: Very fast keyboard repeat'
       shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences KeyRepeat -int 0
 
