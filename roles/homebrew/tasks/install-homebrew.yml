@@ -5,13 +5,19 @@
     path=/usr/local
     state=directory
     mode=0775
+    owner=root
     group=admin
+    recurse=yes
   sudo: yes
 
 - name: Install Homebrew with git
-  git: 
+  git:
     repo=https://github.com/Homebrew/homebrew.git
     dest=/usr/local
+    version=master
+    force=yes
+    clone=yes
+    update=yes
 
 - name: Set permissions for multiple users
   file: 
