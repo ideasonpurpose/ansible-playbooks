@@ -132,12 +132,12 @@
       sudo: yes
 
   post_tasks:
-    - name: Install virtualenvwrapper
-      pip: name=virtualenvwrapper
-      environment:
-        PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
-      sudo: yes
-      tags: pip
+    # - name: Install virtualenvwrapper
+    #   pip: name=virtualenvwrapper
+    #   environment:
+    #     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
+    #   sudo: yes
+    #   tags: pip
 
     - name: Copy terminal settings file
       copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
