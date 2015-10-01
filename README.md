@@ -40,8 +40,9 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
 2. Set the computer's name in **System Preferences** > **Sharing**. Make a note of the local hostname, a computer named "iMac 3" will probably have the local hostname `imac-3.local`. Ansible will find the target computer by its local hostname or IP address.
-2. Turn on **Remote Login** in **System Preferences** > **Sharing** to enable SSH connections.
-3. Install [XCode from the Mac App Store][xcode appstore]. Open Xcode, agree to the license agreement and let it finish installing. The installation should include the XCode Command Line Tools.
+3. Turn on **Remote Login** in **System Preferences** > **Sharing** to enable SSH connections.
+4. Install [XCode from the Mac App Store][xcode appstore]. Open Xcode, agree to the license agreement and let it finish installing. 
+5. Open **Terminal** and run `xcode-select --install` to install the Xcode Command Line Tools. 
 
 #### Controller Setup
 
