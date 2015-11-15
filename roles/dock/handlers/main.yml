@@ -1,0 +1,5 @@
+---
+
+- name: restart dock
+  shell: killall Dock
+  ignore_errors: yes
