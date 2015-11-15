@@ -1,5 +1,10 @@
 ---
 
+- name: 'Finder: Reset appearance to default Aqua'
+  shell: 'defaults write {{ user_lib_prefs }}/.GlobalPreferences AppleAquaColorVariant -int 1; defaults delete {{ user_lib_prefs }}/.GlobalPreferences AppleAquaColorVariant'
+  notify:
+    - restart finder
+
 - name: 'Finder: Set sidebar icon size to small'
   shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences NSTableViewDefaultSizeMode -int 1
 
