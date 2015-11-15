@@ -42,8 +42,5 @@
 
 - name: Repair permissions
   shell: 'chown -R {{ username }}:staff {{ user_lib_prefs }}/'
-
-- name: 'Restart Finder'
-  command: killall Finder
-  ignore_errors: yes
-
+  notify:
+    - restart finder
