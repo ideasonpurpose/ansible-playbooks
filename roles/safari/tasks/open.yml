@@ -4,4 +4,5 @@
 # correctly due to permissions
 - name: Open Safari
   command: su - {{ username }} -c "open /Applications/Safari.app"
+  sudo: yes
   ignore_errors: yes
