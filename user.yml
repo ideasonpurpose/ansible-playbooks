@@ -14,9 +14,11 @@
       - git
     cask_apps:
       - adobe-creative-cloud
+      - atom
       - google-chrome
       - kaleidoscope
       - microsoft-office
+      - sketch
       - sourcetree
       - sublime-text3
       - transmit
