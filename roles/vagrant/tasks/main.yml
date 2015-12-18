@@ -1,0 +1,16 @@
+---
+
+- name: Check that Vagrant is installed
+  stat: path=/usr/local/bin/vagrant
+  sudo: no
+  tags: [vagrant]
+  register: vagrant_installed 
+
+- name: Install additional Vagrant plugins
+  shell: 'su - {{ vagrant_user }} -c "{{ vagrant_installed.stat.path }} plugin install {{ item }}"'
+  sudo: yes
+  tags: [vagrant]
+  when: vagrant_installed.stat.exists
+  with_items:
+    - vagrant-hostsupdater
+    - vagrant-bindfs
