@@ -31,8 +31,11 @@
       register: check_user
 
     - set_fact: user_home=/Users/{{ username }}
+      tags: always
     - set_fact: user_lib=/Users/{{ username }}/Library
+      tags: always
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
+      tags: always
 
     - name: Get available account pictures
       shell: ls -1 files/user_account_images/*.png
@@ -84,22 +87,27 @@
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
-    - mail
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant]}
+    - { role: mail, tags: [mail] }
     - git
 
-  post_tasks:
+
+# Do all the local template stuff
+- hosts: '{{ target }}'
+  connection: local
+  sudo: no
+  
+  vars_files:
+    - vars/user.yml
+
+  tasks:
     - name: Parse the Markdown template
       shell: 'pandoc -f commonmark -o templates/welcome.html.j2 {{ item }}'
-      connection: local
-      sudo: no
       with_first_found:
         - templates/welcome.md
         - templates/welcome_sample.md
 
     - name: add doctype (because commonmark is choking on it)
-      connection: local
-      sudo: no
       lineinfile:
         dest=templates/welcome.html.j2
         state=present
@@ -110,10 +118,9 @@
 
     - name: Generate Welcome message on controller
       template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
-      connection: local
-      sudo: no
 
     - name: Remove generated template
       file: path=templates/welcome.html.j2 state=absent
-      connection: local
-      sudo: no
+
+    - name: Open generated HTML template
+      shell: open ./Welcome-to-IOP_{{ username }}.html

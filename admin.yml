@@ -31,11 +31,11 @@
 
   roles:
     - global-prefs
-    - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
+    - { role: finder, tags: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, tags: dock, when: user_lib is defined and user_lib_prefs is defined }
-    - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
-    - { role: homebrew, apps: "{{ homebrew_apps }}" }
-    - { role: homebrew_cask, apps: "{{ cask_apps }}" }
+    - { role: safari, tags: safari, when: user_lib is defined and user_lib_prefs is defined }
+    - { role: homebrew, tags: [homebrew], apps: "{{ homebrew_apps }}" }
+    - { role: homebrew_cask, tags: [homebrew, cask], apps: "{{ cask_apps }}" }
 
   pre_tasks: 
     - set_fact: user_home=/Users/{{ ansible_ssh_user }}
