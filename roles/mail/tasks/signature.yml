@@ -1,24 +1,39 @@
 ---
 
-
 - name: Generate UUID
   command: uuidgen
   register: uuid
+
+- shell: sw_vers -productVersion
+  register: os_productVersion
+  
+- set_fact: 'mail_version_folder={{ "V3" if os_productVersion.stdout | version_compare("10.11", ">=") else "v2" }}'
+
+- debug: var=mail_version_folder
 
 - set_fact: 'uuid="{{ uuid.stdout }}"'
 
 - set_fact: 'plistbuddy=/usr/libexec/PlistBuddy'
 
-- set_fact: 'sig_plist={{ user_lib }}/Mail/V2/MailData/Signatures/AllSignatures.plist'
+- set_fact: 'sig_plist={{ user_lib }}/Mail/{{ mail_version_folder }}/MailData/Signatures/AllSignatures.plist'
 
 - name: 'Mail: Make sure prefs directory exists'
-  file: path={{ user_lib }}/Mail/V2/MailData/Signatures state=directory owner={{ username }} group=staff
+  file: 
+    path={{ user_lib }}/Mail/{{ mail_version_folder }}/MailData/Signatures 
+    state=directory 
+    owner={{ username }} 
+    group=staff
 
 - name: "Mail: Create empty plist if one doesn't exist"
-  copy: src=empty_array.plist dest={{ user_lib }}/Mail/V2/MailData/Signatures/AllSignatures.plist force=no owner={{ username }} group=staff
+  copy: 
+    src=empty_array.plist 
+    dest={{ user_lib }}/Mail/{{ mail_version_folder }}/MailData/Signatures/AllSignatures.plist
+    force=yes 
+    owner={{ username }} 
+    group=staff
 
 - name: 'Mail: Generate signature plist'
-  command: '{{ plistbuddy }} -c "{{ item }}" {{ sig_plist }}'
+  shell: '{{ plistbuddy }} -c "{{ item }}" {{ sig_plist }}'
   with_items: 
     - "add :0 dict"
     - "add :0:SignatureIsRich bool No"
@@ -26,7 +41,11 @@
     - "add :0:SignatureUniqueId string {{ uuid }}"
 
 - name: 'Mail: Generate signature'
-  template: src=signature.j2 dest={{ user_lib }}/Mail/V2/MailData/Signatures/{{ uuid }}.mailsignature owner={{ username }} group=staff
+  template: 
+    src=signature.j2 
+    dest={{ user_lib }}/Mail/{{ mail_version_folder }}/MailData/Signatures/{{ uuid }}.mailsignature 
+    owner={{ username }} 
+    group=staff
 
 - name: Repair Permissions
   command: "chown -R {{ username }}:staff {{ user_lib }}/Mail"
