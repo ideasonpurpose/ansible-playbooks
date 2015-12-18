@@ -108,7 +108,11 @@ A command targeted to one machine looks like this:
 
     $ ansible-playbook user.yml --extra-vars "target=imac-2.local"
 
-The group could be just as easily targeted with `--extra-vars "target=imacs"` to create the user account on each computer
+A group of hosts could be just as easily targeted with `--extra-vars "target=imacs"` to create the user account on each computer.
+
+Specific admin users can also be set here instead of defining them in `host:vars`:
+
+    $ ansible-playbook user.yml --extra-vars "target=imac-2.local admin_user=joe"
 
 ### Bootstrapping the first run
 
