@@ -40,3 +40,4 @@
 
 - name: Update Homebrew
   homebrew: update_homebrew=yes
+  sudo: no

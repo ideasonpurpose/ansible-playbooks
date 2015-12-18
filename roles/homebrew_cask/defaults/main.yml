@@ -1,5 +1,9 @@
 ---
 
+homebrew_cask_paths:
+  - /Library/Caches/Homebrew/Casks
+  - /opt/homebrew-cask
+
 apps:
   - adobe-creative-cloud
   - google-chrome

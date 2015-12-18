@@ -1,5 +1,36 @@
 ---
 
+  # Temporary workaround for Homebrew Cask changes
+  # see https://github.com/caskroom/homebrew-cask/pull/15381
+- name: Force upgrade Homebrew-cask
+  shell: '/usr/local/bin/brew uninstall --force brew-cask; /usr/local/bin/brew update'
+
+- name: Make sure Homebrew Cask directory exists
+  file: 
+    path=/usr/local
+    state=directory
+    mode=0775
+    owner=root
+    group=admin
+    recurse=yes
+  sudo: yes
+
+- name: Set permissions for multiple users
+  file: 
+    path={{ item }}
+    mode=0775
+    owner=root
+    group=admin
+    recurse=yes
+    state=directory
+  sudo: yes
+  with_items: homebrew_cask_paths
+
+- name: Fix ACL permissions for multiple users
+  sudo: yes
+  command: 'chmod -R +a "group:admin allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" {{ item }}'
+  with_items: homebrew_cask_paths
+
 - name: Tap caskroom/cask
   homebrew_tap: tap=caskroom/cask
 
@@ -8,6 +39,7 @@
 
 - name: Tap cask/versions
   homebrew_tap: tap=caskroom/versions
+  sudo: no
 
-- name: Update Homebrew
+- name: Update Homebrew & Homebrew Cask
   homebrew: update_homebrew=yes

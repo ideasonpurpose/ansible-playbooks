@@ -4,3 +4,4 @@
     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
   homebrew: name={{ item }} state=latest
   with_items: apps
+  sudo: no
