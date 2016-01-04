@@ -77,9 +77,9 @@ imac-1.local$ logout
 #### Account setup
 1. Copy `vars/user_sample.yml` to `vars/user.yml` and update the user credentials
 2. Configure the admin account:  
-    `ansible-playbook admin.yml --extra-vars "target=imac-2.local"`
+    `ansible-playbook --extra-vars "target=imac-2.local" admin.yml`
 3. Create and set up the user account:  
-    `ansible-playbook user.yml --extra-vars "target=imac-2.local"`
+    `ansible-playbook --extra-vars "target=imac-2.local" user.yml`
 
 
 ## Additional Notes
@@ -106,13 +106,13 @@ Because these playbooks are potentially destructive, `hosts:` is declared with t
 
 A command targeted to one machine looks like this:
 
-    $ ansible-playbook user.yml --extra-vars "target=imac-2.local"
+    $ ansible-playbook --extra-vars "target=imac-2.local" user.yml
 
 A group of hosts could be just as easily targeted with `--extra-vars "target=imacs"` to create the user account on each computer.
 
 Specific admin users can also be set here instead of defining them in `host:vars`:
 
-    $ ansible-playbook user.yml --extra-vars "target=imac-2.local admin_user=joe"
+    $ ansible-playbook--extra-vars "target=imac-2.local admin_user=joe" user.yml 
 
 ### Bootstrapping the first run
 
@@ -121,7 +121,7 @@ The `bootstrap.rb` script sets up ssh keys and adds the admin user to `sudoers`.
 ### Running Locally
 The playbooks can also be run locally by targeting localhost and setting connection to local:
     
-    $ ansible-playbook user.yml --extra-vars "target=localhost" --connection=local
+    $ ansible-playbook --extra-vars "target=localhost" --connection=local user.yml
 
 ### User account images
 The playbooks will randomly select a user image from any png images found in `files/admin_account_images` or `files/user_account_images`. If no images are found, the accounts will be created using the system placeholder image. 
