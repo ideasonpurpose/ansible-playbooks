@@ -1,3 +1,4 @@
+.DS_Store
 hosts
 node_modules/
 vars/user.yml
