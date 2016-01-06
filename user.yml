@@ -87,7 +87,7 @@
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
-    - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant]}
+    - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: mail, tags: [mail] }
     - git
 
@@ -96,7 +96,7 @@
 - hosts: '{{ target }}'
   connection: local
   sudo: no
-  
+
   vars_files:
     - vars/user.yml
 
