@@ -1,0 +1,13 @@
+---
+
+- name: Dock: Enable App Exposé
+  shell: defaults write {{ user_lib_prefs }}/com.apple.dock showAppExposeGestureEnabled -bool true
+  sudo: no
+  notify:
+    - restart dock
+
+- name: Dock: Use translucent icons for hidden applications
+  shell: defaults write {{ user_lib_prefs }}/com.apple.dock showhidden -bool true
+  sudo: no
+  notify:
+    - restart dock
