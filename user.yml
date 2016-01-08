@@ -17,7 +17,7 @@
       - atom
       - google-chrome
       - kaleidoscope
-      - microsoft-office-2011
+      # - microsoft-office-2011
       - sketch
       - slack
       - sourcetree
