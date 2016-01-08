@@ -17,6 +17,9 @@
 - name: 'Finder: New Window Target Path'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder NewWindowTargetPath -string file://{{ user_home }}/'
 
+- name: 'Finder: Enable Path Bar'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder ShowPathbar -bool true'
+
 - name: 'Finder: Hide tags in sidebar'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder SidebarTagsSctionDisclosedState -bool false'
 
