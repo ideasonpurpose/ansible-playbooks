@@ -4,7 +4,7 @@ username: "{{ ansible_ssh_user }}"
 
 dock_apps:
   - /Applications/Mail.app
-  - /Applications/Messages.app
+  - /Applications/Slack.app
   - /Applications/Safari.app
   - /Applications/Google Chrome.app
   - /Applications/xScope.app
