@@ -1,6 +1,6 @@
 ##IOP’s Ansible Playbooks
 
-This repository contains a set of Ansible playbooks we're evolving for automating Mac user creation and designer workstation maintenence at [Ideas On Purpose][iop]. While these are ultimately very specific to our needs, there's likely something here which will be helpful in other situations.
+This repository contains a set of evolving Ansible playbooks for automating Mac user creation and designer workstation maintenance at [Ideas On Purpose][iop]. While these are ultimately very specific to our needs, there's likely something here which will be helpful in other situations.
 
 A few of the things these playbooks accomplish:
 
@@ -13,7 +13,6 @@ A few of the things these playbooks accomplish:
 * Install [Homebrew][] and several packages from Homebrew
 * Tweak Homebrew to run for multiple users
 * Install [Homebrew Cask][cask] and several common applications via Cask
-* Install modules with pip (from homebrew's /usr/local/bin)
 * Clears out some common Adobe cruft and install leftovers
 * Modify default terminal settings
 * Generate a pre-formatted email signature
@@ -102,7 +101,7 @@ Ansible won't run on computers which don't appear in hosts.
 The `:vars` section is used to define `admin_user` which should be an account which can run sudo commands.
 
 ### Targeting a single machine
-Because these playbooks are potentially destructive, `hosts:` is declared with the `{{ target }}` variable. This way, the playbooks default to doing nothing instead of running on every machine in the office. Explicit wins.
+Because these playbooks are potentially destructive, `hosts:` is declared with the `{{ target }}` variable. This way, [the playbooks default to doing nothing](http://stackoverflow.com/q/18195142) instead of running on every machine in the office. Explicit wins.
 
 A command targeted to one machine looks like this:
 
@@ -135,7 +134,7 @@ Assuming you've gone so far as to get Ansible running and have downloaded these 
 ## About
 
 [![iop_logo](https://cloud.githubusercontent.com/assets/8320/9443542/944a8bce-4a4f-11e5-9d2f-54999b1687d5.png)][iop]  
-This project is sponsored by [Ideas On Purpose][iop]
+This project is sponsored by [Ideas On Purpose][iop].
 
 
 [iop]: http://ideasonpurpose.com
