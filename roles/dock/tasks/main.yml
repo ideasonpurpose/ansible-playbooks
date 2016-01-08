@@ -1,5 +1,5 @@
 ---
 
 - include: apps.yml
-- include: settings.yml
+# - include: settings.yml
 - include: wallpaper.yml

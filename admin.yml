@@ -50,7 +50,7 @@
 
     - name: Set name of HD to ComputerName + HD/SSD
       shell:
-        diskutil rename / '{{ computer_name.stdout ~ " HD" }}'
+        diskutil rename / '{{ computer_name.stdout }} SSD'
 
     - name: Make sure User icons directory exists
       file: path=/Library/User\ Pictures/Ansible/ state=directory mode=0755
@@ -114,6 +114,12 @@
     - name: 'Finder: Empty the Desktop folder'
       shell: find {{ user_home }}/Desktop -mindepth 1 -delete
       sudo: yes
+
+    - name: 'Dock: Enable App Exposé'
+      shell: defaults write {{ user_lib_prefs }}/com.apple.dock showAppExposeGestureEnabled -bool true
+
+    - name: 'Dock: Use translucent icons for hidden applications'
+      shell: defaults write {{ user_lib_prefs }}/com.apple.dock showhidden -bool true
 
     - stat: path={{ user_home }}/Downloads
       register: downloads
