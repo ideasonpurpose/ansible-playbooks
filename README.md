@@ -13,12 +13,12 @@ A few of the things these playbooks accomplish:
 * Install [Homebrew][] and several packages from Homebrew
 * Tweak Homebrew to run for multiple users
 * Install [Homebrew Cask][cask] and several common applications via Cask
-* Clears out some common Adobe cruft and install leftovers
+* Clear out some common Adobe cruft and install leftovers
 * Modify default terminal settings
 * Generate a pre-formatted email signature
-* Generate a custom HTML welcome document from a Markdown template
+* Generate a welcome document from a custom HTML template.
 
-The playbooks have been updated for Yosemite, and also work on Mavericks. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
+The playbooks have been updated for El Capitan and should be compatible with Yosemite and Mavericks, though testing is limited to the current release. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
 
 ### The Playbooks
 
@@ -40,8 +40,8 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 1. Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
 2. Set the computer's name in **System Preferences** > **Sharing**. Make a note of the local hostname, a computer named "iMac 3" will probably have the local hostname `imac-3.local`. Ansible will find the target computer by its local hostname or IP address.
 3. Turn on **Remote Login** in **System Preferences** > **Sharing** to enable SSH connections.
-4. Install [XCode from the Mac App Store][xcode appstore]. Open Xcode, agree to the license agreement and let it finish installing. 
-5. Open **Terminal** and run `xcode-select --install` to install the Xcode Command Line Tools. 
+4. Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal** and following the prompts. (or just install [XCode from the Mac App Store][xcode appstore] -- but remember to open it and agree to the license agreement.)
+5. Open **Terminal** and run `xcode-select --install` to install the Xcode Command Line Tools.
 
 #### Controller Setup
 
@@ -124,6 +124,16 @@ The playbooks can also be run locally by targeting localhost and setting connect
 
 ### User account images
 The playbooks will randomly select a user image from any png images found in `files/admin_account_images` or `files/user_account_images`. If no images are found, the accounts will be created using the system placeholder image. 
+
+### The Welcome Template
+A simple `gulpfile` is included for working in the template. To create a custom welcome message, follow these steps:
+
+1. Install dependencies by running `npm install` .
+2. Copy `templates/src/welcome_sample.html.j2` to `templates/src/welcome.html.j2`
+3. Run `gulp watch`
+4. Open a web browser to [localhost:3000](http://localhost:3000) and start hacking away on the template files.
+
+Gulp will compile changes to `templates/src/welcome.html.j2` into **`/templates/welcome.html.j2`**. Ansible will use the generated template.
 
 ### Admin accounts
 Don't name your admin account `admin`. That's one of the first names automated attacks will try to connect to.
