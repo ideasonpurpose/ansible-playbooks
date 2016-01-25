@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to EXAMPLE</title>
+    <style>/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}*{font-size:9pt}@media print{*{font-size:7.5pt;font-family:"Helvetica Neue",helvetica,sans-serif}}@media screen{body{max-width:600px;margin:1em auto}}@media print{body{margin:.75in 1in}}tr{vertical-align:top}th,td{text-align:left}code{color:#fd5500;font-family:"Menlo"}@media print{code{font-weight:700;color:#000}}a{color:#00f}@media print{a span{display:none}a:after{content:attr(href)}}#main{margin:0 auto}#main tr{border-bottom:1px solid #ccc}#main tr:last-child{border-bottom:none}#main tr:first-child td{padding-top:0}#main tr td{padding:1.5em 0}#main tr td:first-child{width:1.25in;font-weight:700}#main tr td p:first-child{margin-top:0}#main tr td p:last-child{margin-bottom:0}#main .creds{white-space:nowrap}#main .creds tr{border-width:0!important}#main .creds tr td{width:auto;font-weight:400;margin:0;padding:0;line-height:150%}#main .creds tr td.label{padding-right:1em;font-weight:700;text-align:right}</style>
+</head>
+
+<body>
+    <table id="main">
+
+        <tr>
+            <td>Accounts</td>
+            <td>
+                <p>The account login for your computer is:</p>
+                <table class="creds">
+                    <tr>
+                        <td class="label">username: </td>
+                        <td><code>{{ username }}</code></td>
+                    </tr>
+                    <tr>
+                        <td class="label">password: </td>
+                        <td><code>{{ password }}</code></td>
+                    </tr>
+                </table>
+
+                <p>Most all company services can be accessed using this password and username. Please keep your password private.</p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Server Access</td>
+            <td>
+
+                <p>
+                    To connect to our servers, choose <strong>Connect to Server...</strong> from the Finder’s <strong>Go</strong> menu.
+                    <br> The server's address is: <a href="{{ fileserver_address }}"><span>{{ fileserver_address }}</span></a>
+                </p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Email</td>
+            <td>
+                <p>
+                    Your email account is already set up on your computer. Use your full address and password to access email from phones or other devices:
+                </p>
+                <table class="creds">
+                    <tr>
+                        <td class="label">address &amp; username:</td>
+                        <td><code>{{ username }}@example.com</code></td>
+                    </tr>
+                    <tr>
+                        <td class="label">password: </td>
+                        <td><code>{{ password }}</code></td>
+                    </tr>
+                </table>
+
+                <p>
+                    Webmail can be accessed at <a href="{{ webmail_url }}"><span>{{ webmail_url | replace('https://', '') | replace('http://', '') }}</span></a>. Login with your email address and password.
+                </p>
+
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>Wi-Fi</td>
+            <td>
+                <p>
+                    The <strong>Free Public WiFi</strong> wireless network password is: <code>{{ wifi_password }}</code>
+                </p>
+            </td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td>Google Apps</td>
+            <td>
+                <p>
+                    Our Google Apps URL is <a href="{{ google_apps_url }}"><span>{{ google_apps_url | replace('https://', '') | replace('http://', '')  }}</span></a>.
+                </p>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <p>This is a nice space for a note that doesn't fit into any of the above slots.</p>
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>
