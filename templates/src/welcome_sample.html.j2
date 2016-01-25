@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to EXAMPLE</title>
+    <link rel="stylesheet" href="styles.css" inline>
+</head>
+
+<body>
+    <table id="main">
+
+        <tr>
+            <td>Accounts</td>
+            <td>
+                <p>The account login for your computer is:</p>
+                <table class="creds">
+                    <tr>
+                        <td class="label">username: </td>
+                        <td><code>{{ username }}</code></td>
+                    </tr>
+                    <tr>
+                        <td class="label">password: </td>
+                        <td><code>{{ password }}</code></td>
+                    </tr>
+                </table>
+
+                <p>Most all company services can be accessed using this password and username. Please keep your password private.</p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Server Access</td>
+            <td>
+
+                <p>
+                    To connect to our servers, choose <strong>Connect to Server...</strong> from the Finder’s <strong>Go</strong> menu.
+                    <br> The server's address is: <a href="{{ fileserver_address }}"><span>{{ fileserver_address }}</span></a>
+                </p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Email</td>
+            <td>
+                <p>
+                    Your email account is already set up on your computer. Use your full address and password to access email from phones or other devices:
+                </p>
+                <table class="creds">
+                    <tr>
+                        <td class="label">address &amp; username:</td>
+                        <td><code>{{ username }}@example.com</code></td>
+                    </tr>
+                    <tr>
+                        <td class="label">password: </td>
+                        <td><code>{{ password }}</code></td>
+                    </tr>
+                </table>
+
+                <p>
+                    Webmail can be accessed at <a href="{{ webmail_url }}"><span>{{ webmail_url | replace('https://', '') | replace('http://', '') }}</span></a>.
+                    Login with your email address and password.
+                </p>
+
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>Wi-Fi</td>
+            <td>
+                <p>
+                    The <strong>Free Public WiFi</strong> wireless network password is: <code>{{ wifi_password }}</code>
+                </p>
+            </td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td>Google Apps</td>
+            <td>
+                <p>
+                    Our Google Apps URL is <a href="{{ google_apps_url }}"><span>{{ google_apps_url | replace('https://', '') | replace('http://', '')  }}</span></a>.
+                </p>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <p>This is a nice space for a note that doesn't fit into any of the above slots.</p>
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>

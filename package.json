@@ -1,6 +1,22 @@
 {
   "devDependencies": {
-    "gulp": "^3.8.1",
-    "gulp-livereload": "^2.1.0"
-  }
+    "browser-sync": "^2.11.1",
+    "faker": "^3.0.1",
+    "gulp": "^3.9.0",
+    "gulp-clone": "^1.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-inline-source": "^2.1.0",
+    "gulp-jsbeautifier": "^1.0.1",
+    "gulp-nunjucks-render": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.1",
+    "gulp-util": "^3.0.7",
+    "merge-stream": "^1.0.0",
+    "normalize.css": "^3.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ideasonpurpose/ansible-playbooks.git"
+  },
+  "license": "MIT"
 }

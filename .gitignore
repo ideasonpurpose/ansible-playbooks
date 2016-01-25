@@ -7,3 +7,4 @@ Welcome-to-IOP*.rtf
 Welcome-to-IOP*.html
 templates/welcome.html.j2
 templates/welcome.md
+templates/preview

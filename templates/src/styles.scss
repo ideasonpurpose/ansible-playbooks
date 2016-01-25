@@ -1,0 +1,109 @@
+* {
+  font-size: 9pt;
+
+  @media print {
+    font-size: 7.5pt;
+    font-family: "Helvetica Neue", helvetica, sans-serif;
+  }
+}
+
+body {
+  @media screen {
+    max-width: 600px;
+    margin: 1em auto;
+  }
+  @media print {
+    margin: 0.75in 1in;
+  }
+}
+
+tr {
+  vertical-align: top;
+}
+
+th, td {
+  text-align: left;
+}
+
+// hack for table spacing in text-edit
+td:last-child {
+  // padding-bottom: 1em;
+}
+
+code {
+  color: #fd5500;
+  font-family: "Menlo";
+  // letter-spacing: 0.05em;
+  @media print {
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+  a {
+    color: blue;
+  }
+
+@media print {
+  a span {
+    display: none;
+  }
+
+  a:after {
+    content: attr(href);
+  }
+}
+
+#main {
+  margin: 0 auto;
+
+  tr {
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:first-child td {
+      padding-top: 0;
+    }
+
+    td {
+      padding: 1.5em 0;
+
+      &:first-child {
+        width: 1.25in;
+        font-weight: bold;
+      }
+      p:first-child {
+        margin-top: 0;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .creds {
+    white-space: nowrap;
+
+    // width: 100%;
+    tr {
+      border-width: 0 !important;
+
+      td {
+        width: auto;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        line-height: 150%;
+
+        &.label {
+          padding-right: 1em;
+          font-weight: bold;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
