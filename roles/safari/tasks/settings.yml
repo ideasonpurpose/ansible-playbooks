@@ -11,6 +11,7 @@
     - NewWindowBehavior -int 1
     - ShowFavoritesBar -bool no
     - ConvertedNewWindowBehaviorForTopSites -bool true
+    - ShowFullURLInSmartSearchField -bool yes
 
 - name: Repair Permissions
   command: "chown -R {{ username }}:staff {{ user_lib_prefs }}"
