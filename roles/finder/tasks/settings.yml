@@ -49,6 +49,10 @@
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenBuddyBuildVersion -string "{{ os_buildVersion.stdout }}"'
 
 - name: Repair permissions
-  shell: 'chown -R {{ username }}:staff {{ user_lib_prefs }}/'
+  file:
+    path={{ user_lib_prefs }}
+    owner={{ username }}
+    group=staff
+    recurse=yes
   notify:
     - restart finder

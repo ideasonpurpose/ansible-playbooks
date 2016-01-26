@@ -14,4 +14,8 @@
     - ShowFullURLInSmartSearchField -bool yes
 
 - name: Repair Permissions
-  command: "chown -R {{ username }}:staff {{ user_lib_prefs }}"
+  file:
+    path={{ user_lib_prefs }}
+    owner={{ username }}
+    group=staff
+    recurse=yes

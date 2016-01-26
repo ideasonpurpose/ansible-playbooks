@@ -1,10 +1,11 @@
 .DS_Store
 hosts
+fonts/
 node_modules/
 vars/user.yml
 files/*_account_images/*.png
-Welcome-to-IOP*.rtf
-Welcome-to-IOP*.html
+Welcome-*.rtf
+Welcome-*.html
 templates/welcome.html.j2
-templates/welcome.md
+templates/src/welcome.html.j2
 templates/preview

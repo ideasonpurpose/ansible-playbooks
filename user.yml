@@ -1,9 +1,9 @@
 ---
-# playbook for creating new users at IOP
+# playbook for creating new users
 # this only sets up the user, configuration is handled by another playbook.
 - hosts: '{{ target }}'
   user: '{{ admin_user }}'
-  sudo: yes
+  become: yes
 
 # The vars/user.yml file contains login/password info, recreate it for specific runs
   vars_files:
@@ -42,7 +42,7 @@
       shell: ls -1 files/user_account_images/*.png
       register: account_images
       ignore_errors: yes
-      sudo: no
+      become: no
       connection: local
 
     - name: Default to an empty list if no images are found
@@ -55,14 +55,14 @@
 
     - name: Send new account picture
       copy: 
-        src={{ item }}
-        dest="/Library/User Pictures/Ansible/{{ item | basename }}"
-        mode=0644
+        src: '{{ item }}'
+        dest: '/Library/User Pictures/Ansible/{{ item | basename }}'
+        mode: 0644
       when: account_images.stdout_lines[0]
       with_random_choice: account_images.stdout_lines
       ignore_errors: yes
       register: account_image
-      sudo: yes
+      become: yes
 
     - name: Handle missing images so we can pass an empty string to the role
       set_fact: 
@@ -92,36 +92,31 @@
     - { role: mail, tags: [mail] }
     - git
 
+  tasks:
+    - name: Install default font set from ./fonts
+      synchronize:
+        src: fonts/
+        dest: "{{ user_lib }}/Fonts"
+        archive: no
+        rsync_path: "sudo rsync"
+        rsync_opts: ["--exclude=.gitkeep"]
+      become: no
 
-# Do all the local template stuff
+
+# Second playbook for running the local template stuff
 - hosts: '{{ target }}'
   connection: local
-  sudo: no
+  become: no
 
   vars_files:
     - vars/user.yml
 
   tasks:
-    - name: Parse the Markdown template
-      shell: 'pandoc -f commonmark -o templates/welcome.html.j2 {{ item }}'
-      with_first_found:
-        - templates/welcome.md
-        - templates/welcome_sample.md
-
-    - name: add doctype (because commonmark is choking on it)
-      lineinfile:
-        dest=templates/welcome.html.j2
-        state=present
-        regexp="^<(p>&lt;)?!doctype[^>]*>"
-        insertbefore=BOF
-        line="<!doctype html>"
-        create=yes
-
     - name: Generate Welcome message on controller
-      template: src=templates/welcome.html.j2 dest=./Welcome-to-IOP_{{ username }}.html
-
-    - name: Remove generated template
-      file: path=templates/welcome.html.j2 state=absent
+      template: src={{ item }} dest=./Welcome-{{ username }}.html
+      with_first_found:
+        - templates/welcome.html.j2
+        - templates/welcome_sample.html.j2
 
     - name: Open generated HTML template
-      shell: open ./Welcome-to-IOP_{{ username }}.html
+      shell: open ./Welcome-{{ username }}.html

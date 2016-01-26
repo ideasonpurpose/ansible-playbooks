@@ -48,4 +48,8 @@
     group=staff
 
 - name: Repair Permissions
-  command: "chown -R {{ username }}:staff {{ user_lib }}/Mail"
+  file:
+    path={{ user_lib }}/Mail
+    owner={{ username }}
+    group=staff
+    recurse=yes  

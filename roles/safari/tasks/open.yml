@@ -2,7 +2,30 @@
 
 # this has to be run as {{ username }} or the process won't be able to run
 # correctly due to permissions
+# unhappy about the deprecation warnings with Ansible 2.0, 
+# but I'm not sure this task is even worth keeping
+
 - name: Open Safari
   command: su - {{ username }} -c "open /Applications/Safari.app"
-  sudo: yes
   ignore_errors: yes
+
+
+# TODO: The two following tasks might be failing due to a bug in 2.0.0.2
+#       need to test against dev HEAD
+
+# this fails to open Safari in the user's account
+# - name: Open Safari
+#   command: open /Applications/Safari.app
+#   become: yes
+#   become_user: '{{ username }}'
+#   ignore_errors: yes
+
+
+# This just completely fails with an "UNREACHABLE!" error.
+# Happens with `become` yes or no.
+# Plus, it fails in a way that `ignore_errors` doesn't catch
+# - name: Open Safari
+#   command: open /Applications/Safari.app
+#   remote_user: '{{ username }}'
+#   become: yes
+#   ignore_errors: yes
