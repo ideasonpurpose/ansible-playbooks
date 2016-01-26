@@ -13,13 +13,16 @@
       - python
       - python3
     cask_apps:
+      - google-chrome
       - kaleidoscope
+      - slack
       - sourcetree
       - sublime-text3
       - vagrant
       - virtualbox
     username: '{{ ansible_user_id }}'
     dock_apps:
+      - /Applications/Slack.app
       - /Applications/Safari.app
       - /Applications/Google Chrome.app
       - /Applications/Kaleidoscope.app
