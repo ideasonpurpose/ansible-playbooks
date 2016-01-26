@@ -69,17 +69,6 @@
         account_image: { results: [ { item: '' } ] }
       when: account_image.results[0].item is not defined
 
-    - name: Remove old leftovers and junk
-      file:
-        path={{ item }}
-        state=absent
-      with_items:
-        - /Library/LaunchAgents/com.adobe.CS5ServiceManager.plist
-        - /Library/LaunchAgents/com.xrite.device.softwareupdate.plist
-        - /Library/LaunchDaemons/com.xrite.device.xrdd.plist
-        - /Library/LaunchAgents/com.wacom.wacomtablet.plist
-        - /Library/LaunchAgents/com.wacom.pentablet.plist
-
   roles:
     - global-prefs
     - { role: new-user, image: "{{ account_image.results[0].item | basename}}", when: not check_user.stat.exists }
