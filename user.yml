@@ -17,7 +17,7 @@
       - atom
       - google-chrome
       - kaleidoscope
-      # - microsoft-office-2011
+      - microsoft-office-2011
       - sketch
       - slack
       - sourcetree
@@ -54,7 +54,7 @@
       when: account_images.stdout_lines | length == 0
 
     - name: Send new account picture
-      copy: 
+      copy:
         src: '{{ item }}'
         dest: '/Library/User Pictures/Ansible/{{ item | basename }}'
         mode: 0644
@@ -65,7 +65,7 @@
       become: yes
 
     - name: Handle missing images so we can pass an empty string to the role
-      set_fact: 
+      set_fact:
         account_image: { results: [ { item: '' } ] }
       when: account_image.results[0].item is not defined
 
@@ -82,14 +82,42 @@
     - git
 
   tasks:
-    - name: Install default font set from ./fonts
+    - set_fact:
+        font_dirs:
+          - "{{ user_lib }}"
+          - "{{ user_lib }}/Fonts"
+
+    - name: Relax permissions on user's Library/Fonts directory
+      file:
+        path: "{{ item }}"
+        mode: 0777
+        state: directory
+      with_items: font_dirs
+
+    - name: Install default font set from fonts/
       synchronize:
         src: fonts/
-        dest: "{{ user_lib }}/Fonts"
-        archive: no
-        rsync_path: "sudo rsync"
+        dest: "{{ user_lib }}/Fonts/"
         rsync_opts: ["--exclude=.gitkeep"]
+        archive: no
+        recursive: yes
       become: no
+
+    - name: Set user as owner of all fonts in Library/Fonts
+      file:
+        path: "{{ font_dirs | last }}"
+        owner: "{{ username }}"
+        group: staff
+        mode: 0755
+        state: directory
+        recurse: yes
+
+    - name: Restore permissions on user's Library/Fonts directory
+      file:
+        path: "{{ item }}"
+        mode: 0700
+        state: directory
+      with_items: font_dirs
 
 
 # Second playbook for running the local template stuff
