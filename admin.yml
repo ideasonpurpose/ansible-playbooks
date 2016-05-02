@@ -150,6 +150,7 @@
         - /Library/LaunchDaemons/com.xrite.device.xrdd.plist
         - /Library/LaunchAgents/com.wacom.wacomtablet.plist
         - /Library/LaunchAgents/com.wacom.pentablet.plist
+      become: yes
 
     - name: Repair permissions
       file:
