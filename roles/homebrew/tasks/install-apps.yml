@@ -3,7 +3,7 @@
   environment:
     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
   homebrew: name={{ item }} state=latest
-  with_items: apps
+  with_items: '{{ apps }}'
   become: no
   notify:
   - restart dock

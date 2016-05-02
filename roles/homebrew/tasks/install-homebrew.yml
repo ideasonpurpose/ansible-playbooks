@@ -28,12 +28,12 @@
     recurse=yes
     state=directory
   become: yes
-  with_items: homebrew_paths
+  with_items: '{{ homebrew_paths }}'
 
 - name: Fix ACL permissions for multiple users
   become: yes
   command: 'chmod -R +a "group:admin allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" {{ item }}'
-  with_items: homebrew_paths
+  with_items: '{{ homebrew_paths }}'
 
 - name: Reset the Homebrew Library repo
   git: 

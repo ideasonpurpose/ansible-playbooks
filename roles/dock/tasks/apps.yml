@@ -24,11 +24,11 @@
 - name: 'Dock: Insert Apps'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"'
   become_user: "{{ username }}"
-  with_items: dock_apps
+  with_items: '{{ dock_apps }}'
 
 - name: 'Dock: Insert Others'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others -array-add "<dict><key>tile-type</key><string>{{ item.type | default("directory") }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>"'
   become_user: "{{ username }}"
-  with_items: dock_others
+  with_items: '{{ dock_others }}'
   notify:
     - restart dock

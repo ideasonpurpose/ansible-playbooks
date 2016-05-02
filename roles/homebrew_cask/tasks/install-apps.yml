@@ -3,5 +3,5 @@
   environment:
     HOMEBREW_CASK_OPTS: --appdir=/Applications
   homebrew_cask: name={{ item }}
-  with_items: apps
+  with_items: '{{ apps }}'
   become: no
