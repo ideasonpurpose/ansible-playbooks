@@ -80,7 +80,7 @@
         dest: '/Library/User Pictures/Ansible/{{ item | basename }}'
         mode: 0644
       when: account_images.stdout_lines[0]
-      with_random_choice: account_images.stdout_lines
+      with_random_choice: '{{ account_images.stdout_lines }}'
       ignore_errors: yes
       register: account_image
       become: yes
