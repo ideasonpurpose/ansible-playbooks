@@ -7,6 +7,13 @@
   notify:
     - restart dock
 
+- name: 'Dock: Enable Group by Application'
+  shell: defaults write {{ user_lib_prefs }}/com.apple.dock expose-group-by-app -bool true
+  when: dock_expose_group_by_app
+  become: no
+  notify:
+    - restart dock
+
 - name: 'Dock: Use translucent icons for hidden applications'
   shell: defaults write {{ user_lib_prefs }}/com.apple.dock showhidden -bool true
   when: dock_dim_hidden

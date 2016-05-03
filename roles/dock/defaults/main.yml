@@ -28,3 +28,12 @@ dock_others:
   # either a plain path string or a dict like "{path: /path, type: [file | directory], arrange: [1-5] }"
   - /IOP Font Library
   - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
+
+# Enable App Exposé
+dock_app_expose: no
+
+# Enable App Exposé (app grouping)
+dock_expose_group_by_app: no
+
+# Use Translucent icons for hidden apps
+dock_dim_hidden: no
