@@ -31,6 +31,8 @@
       - /Applications/Utilities/Terminal.app
     dock_others:
     - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
+    dock_app_expose: yes
+    dock_dim_hidden: yes
 
   roles:
     - global-prefs
