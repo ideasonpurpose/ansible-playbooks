@@ -1,6 +1,6 @@
 ---
 
-- name: Set screensaver password delay to 15 minutes
-  shell: defaults write {{ user_lib_prefs }}/com.apple.screensaver askForPasswordDelay -int 900
+- name: Set screensaver password delay to 30 minutes
+  shell: defaults write {{ user_lib_prefs }}/com.apple.screensaver askForPasswordDelay -int 1800
   notify:
     - restart finder
