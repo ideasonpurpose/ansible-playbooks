@@ -28,5 +28,3 @@ dock_others:
   # either a plain path string or a dict like "{path: /path, type: [file | directory], arrange: [1-5] }"
   - /IOP Font Library
   - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
-
-wallpaper_image: /Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png

@@ -1,7 +1,0 @@
----
-
-- name: Set Desktop Wallpaper
-  shell: sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ wallpaper_image }}'"
-  become: no
-  notify:
-    - restart dock
