@@ -30,8 +30,8 @@
       - /Applications/SourceTree.app
       - /Applications/Utilities/Terminal.app
     dock_others:
-    - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
-    dock_app_expose: yes
+    - {path: "/tmp", type: directory, arrange: 2}
+    dock_expose_group_by_app: yes
     dock_dim_hidden: yes
 
   roles:
