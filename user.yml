@@ -101,7 +101,6 @@
         rsync_opts: ["--exclude=.gitkeep"]
         archive: no
         recursive: yes
-      become: no
 
     - name: Set user as owner of all fonts in Library/Fonts
       file:
