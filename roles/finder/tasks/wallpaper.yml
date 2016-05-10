@@ -1,8 +1,6 @@
 ---
 
 - name: Set Desktop Wallpaper
-  shell: osascript -e 'tell app "Finder" to set desktop picture to POSIX file "{{ wallpaper_image }}"'
-  # shell:  ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ wallpaper_image }}'"
-  become: no
-  notify:
-    - restart dock
+  shell: sqlite3 {{ user_lib }}/Application\ Support/Dock/desktoppicture.db "update data set value = '{{ wallpaper_image }}'"
+  become: yes
+  become_user: "{{ username }}"
