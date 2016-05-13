@@ -15,12 +15,12 @@
     cask_apps:
       - adobe-creative-cloud
       - atom
+      - gitkraken
       - google-chrome
       - kaleidoscope
       - microsoft-office
       - sketch
       - slack
-      - sourcetree
       - sublime-text3
       - transmit
       - vagrant

@@ -13,10 +13,10 @@
       - python
       - python3
     cask_apps:
+      - gitkraken
       - google-chrome
       - kaleidoscope
       - slack
-      - sourcetree
       - sublime-text3
       - vagrant
       - virtualbox
@@ -27,7 +27,7 @@
       - /Applications/Google Chrome.app
       - /Applications/Kaleidoscope.app
       - /Applications/Sublime Text.app
-      - /Applications/SourceTree.app
+      - /Applications/GitKraken.app
       - /Applications/Utilities/Terminal.app
     dock_others:
     - {path: "/tmp", type: directory, arrange: 2}
