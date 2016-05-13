@@ -60,7 +60,7 @@ gulp.task('build', ['styles'], function() {
     })
 
   var preview = templateBase
-    .pipe(nunjucksRender(fakeData))
+    .pipe(nunjucksRender({data: fakeData}))
     .pipe(rename(function(path) {
       path.basename = path.basename.replace('welcome', 'index');
       path.extname = '';  // seems like a bug, basename still has the extension
