@@ -12,6 +12,7 @@ body {
     max-width: 600px;
     margin: 1em auto;
   }
+
   @media print {
     margin: 0.75in 1in;
   }
@@ -25,24 +26,18 @@ th, td {
   text-align: left;
 }
 
-// hack for table spacing in text-edit
-td:last-child {
-  // padding-bottom: 1em;
-}
-
 code {
   color: #fd5500;
   font-family: "Menlo";
-  // letter-spacing: 0.05em;
+
   @media print {
     font-weight: bold;
-    color: #000;
   }
 }
 
-  a {
-    color: blue;
-  }
+a {
+  color: blue;
+}
 
 @media print {
   a span {
@@ -75,9 +70,11 @@ code {
         width: 1.25in;
         font-weight: bold;
       }
+
       p:first-child {
         margin-top: 0;
       }
+
       p:last-child {
         margin-bottom: 0;
       }
@@ -87,7 +84,6 @@ code {
   .creds {
     white-space: nowrap;
 
-    // width: 100%;
     tr {
       border-width: 0 !important;
 
