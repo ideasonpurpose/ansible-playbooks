@@ -1,6 +1,9 @@
 {
   "devDependencies": {
     "browser-sync": "^2.12.8",
+    "eslint": "^2.10.1",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.8.0",
     "faker": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-clone": "^1.0.0",
@@ -19,6 +22,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "lint": "eslint ./**/*.js; exit 0"
   }
 }

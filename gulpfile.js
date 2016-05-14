@@ -1,5 +1,3 @@
-'use strict';
-
 var os = require('os');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -12,21 +10,21 @@ var inlinesource = require('gulp-inline-source');
 var prettify = require('gulp-jsbeautifier');
 var nunjucksRender = require('gulp-nunjucks-render');
 var faker = require('faker');
-var browserSync  = require('browser-sync').create();
-var mergeStream = require('merge-stream');
+var browserSync = require('browser-sync').create();
 
 gulp.task('styles', function() {
   return gulp.src('./templates/src/styles.scss')
   .pipe(sass({
     outputStyle: 'expanded'
-    })
+  })
     .on('data', function(data) {
       gutil.log('Sass: compiled', chalk.cyan(data.relative));
     })
     .on('error', sass.logError))
   .pipe(gulp.dest('./templates/preview'))
-  .pipe(browserSync.stream())
+  .pipe(browserSync.stream());
 });
+
 
 gulp.task('build', ['styles'], function() {
   var fakeData = {
@@ -38,22 +36,21 @@ gulp.task('build', ['styles'], function() {
     fileserver_address: 'smb://' + faker.internet.domainName(),
     webmail_url: 'http://mail.' + faker.internet.domainName(),
     google_apps_url: 'http://docs.' + faker.internet.domainName()
-
-  }
+  };
 
   var templateBase = gulp.src('./templates/src/welcome*.html.j2')
-    .pipe(prettify())
+    .pipe(prettify());
 
   var template = templateBase
     .pipe(clone())
-    .pipe(inlinesource({rootpath: './templates/preview'}))
+    .pipe(inlinesource({ rootpath: './templates/preview' }))
     .pipe(gulp.dest('./templates'))
     .on('data', function(data) {
       gutil.log('Generated template', chalk.cyan(data.relative));
-    })
+    });
 
   var preview = templateBase
-    .pipe(nunjucksRender({data: fakeData}))
+    .pipe(nunjucksRender({ data: fakeData }))
     .pipe(rename(function(path) {
       path.basename = path.basename.replace('welcome', 'index');
       path.extname = '';  // seems like a bug, basename still has the extension
@@ -62,7 +59,7 @@ gulp.task('build', ['styles'], function() {
     .pipe(browserSync.stream())
     .on('data', function(data) {
       gutil.log('Rendered preview template', chalk.cyan(data.relative));
-    })
+    });
 
   return mergeStream(template, preview);
 });
