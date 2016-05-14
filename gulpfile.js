@@ -6,7 +6,6 @@ var gutil = require('gulp-util');
 var chalk = gutil.colors;
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
-var concat = require('gulp-concat');
 var clone = require('gulp-clone');
 var mergeStream = require('merge-stream');
 var inlinesource = require('gulp-inline-source');
@@ -17,22 +16,16 @@ var browserSync  = require('browser-sync').create();
 var mergeStream = require('merge-stream');
 
 gulp.task('styles', function() {
-  return gulp.src([
-    './node_modules/normalize.css/normalize.css',
-    './templates/src/styles.scss'
-  ])
-  .pipe(concat('styles.css'))
+  return gulp.src('./templates/src/styles.scss')
   .pipe(sass({
     outputStyle: 'expanded'
-  })
-  .on('data', function(data) {
-    gutil.log('Sass: compiled', chalk.cyan(data.relative));
-  })
-  .on('error', sass.logError))
-
+    })
+    .on('data', function(data) {
+      gutil.log('Sass: compiled', chalk.cyan(data.relative));
+    })
+    .on('error', sass.logError))
   .pipe(gulp.dest('./templates/preview'))
   .pipe(browserSync.stream())
-
 });
 
 gulp.task('build', ['styles'], function() {
@@ -77,7 +70,7 @@ gulp.task('build', ['styles'], function() {
 
 gulp.task('watch', ['build'], function() {
   browserSync.init({
-    host: os.hostname().replace(/(\.local)*$/i, '.local'),
+    host: os.hostname().toLowerCase().replace(/(\.local)*$/, '.local'),
     open: false,
     logConnections: true,
     logPrefix: 'BrowserSync',
