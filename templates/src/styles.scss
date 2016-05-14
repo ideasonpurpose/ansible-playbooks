@@ -44,6 +44,11 @@ a {
     display: none;
   }
 
+  a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(blue, 0.2);
+  }
+
   a:after {
     content: attr(href);
   }
