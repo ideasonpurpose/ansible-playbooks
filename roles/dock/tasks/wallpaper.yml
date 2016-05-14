@@ -16,7 +16,7 @@
 
 - name: Copy empty desktoppicture.db
   copy:
-      src=desktoppicture_empty.db
+      src=desktoppicture_clean.db
       dest='{{ user_lib }}/Application Support/Dock/desktoppicture.db'
   become: yes
   become_user: "{{ username }}"
@@ -25,3 +25,5 @@
   shell: sqlite3 {{ user_lib }}/Application\ Support/Dock/desktoppicture.db "UPDATE data SET VALUE = '{{ wallpaper_image }}'"
   become: yes
   become_user: "{{ username }}"
+  notify: 
+    - restart dock

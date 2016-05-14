@@ -37,3 +37,6 @@ dock_expose_group_by_app: no
 
 # Use Translucent icons for hidden apps
 dock_dim_hidden: no
+
+# Default wallpaper image
+wallpaper_image: /Library/Desktop Pictures/Solid Colors/Solid Gray Pro Dark.png
