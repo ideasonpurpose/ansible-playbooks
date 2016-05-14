@@ -33,31 +33,30 @@ code {
   font-family: "Menlo";
 
   @media print {
-    font-weight: bold;
+    // font-weight: bold;
   }
 }
 
 a {
   color: blue;
-}
 
-@media print {
-  a span {
-    display: none;
-  }
-
-  a {
+  @media print {
     text-decoration: none;
     border-bottom: 1px solid rgba(blue, 0.2);
-  }
 
-  a:after {
-    content: attr(href);
+    & span {
+      display: none;
+    }
+
+    &:after {
+      content: attr(href);
+    }
   }
 }
 
 #main {
   margin: 0 auto;
+  border-collapse: collapse;
 
   tr {
     border-bottom: 1px solid #ccc;
