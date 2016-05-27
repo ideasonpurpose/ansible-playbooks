@@ -42,7 +42,7 @@ a {
 
   @media print {
     text-decoration: none;
-    border-bottom: 1px solid rgba(blue, 0.2);
+    border-bottom: 1px dotted #B8CCFF;
 
     & span {
       display: none;
@@ -71,6 +71,10 @@ a {
 
     td {
       padding: 1.5em 0;
+
+      @media print {
+        padding: 2em 0;
+      }
 
       &:first-child {
         width: 1.25in;
