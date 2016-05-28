@@ -46,7 +46,7 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 
 The controller is the computer the playbooks are run from (eg. *your* computer). This should be every step necessary to set up a clean Mavericks system to run the playbooks. This should only need to be done once.
 
-1. Install [Xcode from the Mac App Store][xcode appstore]
+1. Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal**
 2. Install [Homebrew][]
 3. `brew install ansible pandoc ssh-copy-id`
 6. Clone this repository: 
