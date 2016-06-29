@@ -1,11 +1,9 @@
 ---
-# playbook for creating new users
-# this only sets up the user, configuration is handled by another playbook.
+# playbook for creating and configuring new users
 - hosts: '{{ target }}'
   user: '{{ admin_user }}'
   become: yes
 
-# The vars/user.yml file contains login/password info, recreate it for specific runs
   vars_files:
     - vars/user.yml
 
