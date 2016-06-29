@@ -1,5 +1,39 @@
 ---
 
 - name: restart dock
+  file:
+    name: '{{ user_lib_prefs }}/{{ item }}'
+    owner: '{{ username }}'
+    group: staff
+  with_items:
+    - com.apple.dock.plist
+    - com.apple.screensaver.plist
+  notify:
+    - kill dock
+
+- name: kill dock
   shell: killall Dock
   ignore_errors: yes
+
+
+# TODO: Once Ansible 2.2 ships, these should be switched to the upcoming
+# 'listen' syntax. See note here:
+# 
+# http://docs.ansible.com/ansible/playbooks_intro.html#handlers
+
+# Here, done:
+# Note: Not sure what happens if the name of the task is the same as the listen string. 
+# eg. If the task name is "Restart Dock" and listen is also "Restart Dock", which wins?
+# Other questions: Do the strings need to be case sensitive to match?
+
+# - name: kill dock
+#   shell: killall Dock
+#   listen: "Restart Dock"
+#   ignore_errors: yes
+
+# - name: fix dock permissions
+#   file:
+#     name: '{{ user_lib_prefs }}/com.apple.dock.plist'
+#     owner: '{{ username }}'
+#     group: staff
+#   listen: "Restart Dock"
