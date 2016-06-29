@@ -4,26 +4,18 @@
   file: 
     path='{{ user_lib }}/Application Support/Dock'
     state=directory
-  become: yes
-  become_user: "{{ username }}"
 
 - name: Remove existing desktoppicture.db file
   file: 
     path='{{ user_lib }}/Application Support/Dock/desktoppicture.db'
     state=absent
-  become: yes
-  become_user: "{{ username }}"
 
 - name: Copy empty desktoppicture.db
   copy:
       src=desktoppicture_clean.db
       dest='{{ user_lib }}/Application Support/Dock/desktoppicture.db'
-  become: yes
-  become_user: "{{ username }}"
 
 - name: Set Desktop Wallpaper
   shell: sqlite3 {{ user_lib }}/Application\ Support/Dock/desktoppicture.db "UPDATE data SET VALUE = '{{ wallpaper_image }}'"
-  become: yes
-  become_user: "{{ username }}"
   notify: 
     - restart dock

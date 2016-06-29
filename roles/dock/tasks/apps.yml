@@ -2,33 +2,26 @@
 
 - name: 'Dock: Reset the Dock'
   shell: 'defaults delete {{ user_lib_prefs }}/com.apple.dock'
-  become_user: "{{ username }}"
   ignore_errors: yes
 
 - name: 'Dock: Boilerplate: mod-count'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock mod-count -integer 2'
-  become_user: "{{ username }}"
 
 - name: 'Dock: Boilerplate: version'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock version -integer 1'
-  become_user: "{{ username }}"
 
 - name: 'Dock: Remove All Dock Apps'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-apps "<array/>"'
-  become_user: "{{ username }}"
 
 - name: 'Dock: Remove All Dock Others'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others "<array/>"'
-  become_user: "{{ username }}"
 
 - name: 'Dock: Insert Apps'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"'
-  become_user: "{{ username }}"
   with_items: '{{ dock_apps }}'
 
 - name: 'Dock: Insert Others'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others -array-add "<dict><key>tile-type</key><string>{{ item.type | default("directory") }}-tile</string><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://{% if item is mapping %}{{ item.path }}{% else %}{{ item }}{% endif %}</string><key>_CFURLStringType</key><integer>15</integer></dict><key>arrangement</key><integer>{{ item.arrange | default(1) }}</integer></dict></dict>"'
-  become_user: "{{ username }}"
   with_items: '{{ dock_others }}'
   notify:
     - restart dock
