@@ -17,7 +17,7 @@
       - google-chrome
       - kaleidoscope
       - slack
-      - sublime-text3
+      - sublime-text
       - vagrant
       - virtualbox
     username: '{{ ansible_user_id }}'

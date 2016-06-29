@@ -11,7 +11,7 @@ apps:
   - sketch
   - slack
   - sourcetree
-  - sublime-text3
+  - sublime-text
   - transmit
   - vagrant
   - virtualbox
