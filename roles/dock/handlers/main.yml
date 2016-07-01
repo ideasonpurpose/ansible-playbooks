@@ -2,12 +2,14 @@
 
 - name: restart dock
   file:
-    name: '{{ user_lib_prefs }}/{{ item }}'
+    name: '{{ item }}'
     owner: '{{ username }}'
     group: staff
   with_items:
-    - com.apple.dock.plist
-    - com.apple.screensaver.plist
+    - '{{ user_lib_prefs }}/com.apple.dock.plist'
+    - '{{ user_lib_prefs }}/com.apple.screensaver.plist'
+    - '{{ user_lib }}/Application Support/Dock'
+    - '{{ user_lib }}/Application Support/Dock/desktoppicture.db'
   notify:
     - kill dock
 
