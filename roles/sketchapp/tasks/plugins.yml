@@ -1,0 +1,19 @@
+---
+
+- set_fact: 
+    sketch_plugins_dir: "{{ user_lib }}/Application Support/com.bohemiancoding.sketch3/Plugins"
+
+- name: Make sure Sketch Plugins directory exists
+  file: 
+    path: "{{ sketch_plugins_dir }}"
+    state: directory
+    mode: 0775
+    owner: "{{ username }}"
+    group: admin
+    recurse: yes
+
+- name: Download and install Sketch Measure from GitHub
+  unarchive: 
+    src: https://github.com/utom/sketch-measure/archive/master.zip
+    dest: "{{ sketch_plugins_dir }}"
+    remote_src: yes
