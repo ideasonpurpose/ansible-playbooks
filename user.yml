@@ -12,7 +12,7 @@
       - git
     cask_apps:
       - adobe-creative-cloud
-      - atom
+      - colorpicker-skalacolor
       - gitkraken
       - google-chrome
       - kaleidoscope
