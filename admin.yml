@@ -106,7 +106,7 @@
       lineinfile: 'dest=/Users/{{ ansible_user_id }}/.profile state=present regexp="^export\s+PATH=/usr/local/bin:\\$PATH" insertafter=EOF line="export PATH=/usr/local/bin:$PATH" create=yes'
 
     - name: 'Finder: Very fast keyboard repeat'
-      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences KeyRepeat -int 0
+      shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences KeyRepeat -int 1
 
     - name: 'Finder: Initial KeyRepeat delay'
       shell: defaults write {{ user_lib_prefs }}/.GlobalPreferences InitialKeyRepeat -int 25
