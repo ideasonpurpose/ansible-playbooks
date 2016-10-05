@@ -7,7 +7,7 @@ A few of the things these playbooks accomplish:
 * Configure an admin user account
 * Reset admin account picture and desktop pattern
 * Set a default Dock from a simple Yaml list
-* Set preferences in Finder and Safari to our preferred defaults (see [osx dotfiles][dotfiles])
+* Set preferences in Finder and Safari to our preferred defaults (see [macos dotfiles][dotfiles])
 * Reset Safari
 * Disable first-login iCloud popups (thanks to [Rich Trouton][rtrouton])
 * Install [Homebrew][] and several packages from Homebrew
@@ -48,9 +48,13 @@ The controller is the computer the playbooks are run from (eg. *your* computer).
 
 1. Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal**
 2. Install [Homebrew][]
-3. `brew install ansible pandoc ssh-copy-id`
+3. `brew install pandoc ssh-copy-id`
+4. Install [Ansible from source](http://docs.ansible.com/ansible/intro_installation.html)
+    * clone `git clone https://github.com/ansible/ansible.git`
+    * `git submodule update --init --recursive`
+    * `source hacking/env-setup`
 6. Clone this repository: 
-        `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
+    *  `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
 7. `cd ansible-playbooks`
 8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
@@ -147,7 +151,7 @@ This project is sponsored by [Ideas On Purpose][iop].
 
 
 [iop]: http://ideasonpurpose.com
-[dotfiles]: https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+[dotfiles]: https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 [homebrew]: http://brew.sh
 [cask]: https://github.com/phinze/homebrew-cask
 [venvw]: https://bitbucket.org/dhellmann/virtualenvwrapper/
