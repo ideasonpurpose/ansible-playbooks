@@ -1,10 +1,6 @@
-Jinja2==2.7.3
-Markdown==2.5.2
+Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.11
-ansible==1.7.2
-ecdsa==0.11
-nodeenv==0.11.1
-paramiko==1.15.1
+ecdsa==0.13
+paramiko==2.0.2
 pycrypto==2.6.1
-wsgiref==0.1.2
