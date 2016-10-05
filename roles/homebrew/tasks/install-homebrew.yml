@@ -6,18 +6,22 @@
     state=directory
     mode=0775
     owner=root
-    group=admin
-    recurse=yes
+    group=wheel
+    recurse=no
   become: yes
 
-- name: Install Homebrew with git
-  git:
-    repo=https://github.com/Homebrew/homebrew.git
-    dest=/usr/local
-    version=master
-    force=yes
-    clone=yes
-    update=yes
+- name: Download Homebrew
+  unarchive:
+    src: 'https://github.com/Homebrew/brew/archive/master.zip'
+    dest: /tmp/
+    remote_src: yes
+    
+- name: move Homebrew files to /usr/local
+  synchronize: 
+    src: /tmp/brew-master/
+    dest: /usr/local/
+  delegate_to: "{{ inventory_hostname }}"
+  become: yes
 
 - name: Set permissions for multiple users
   file: 
@@ -37,13 +41,16 @@
 
 - name: Reset the Homebrew Library repo
   git: 
-    repo=https://github.com/Homebrew/homebrew.git
-    dest=/usr/local/Library
+    repo=https://github.com/Homebrew/brew.git
+    dest=/usr/local/Homebrew/Library
     clone=no
     update=yes
     force=yes
-# - name: Hard-reset the Homebrew Library (resets file permissions)
-#   command: git reset --hard chdir=/usr/local/Library
+
+- name: Update Homebrew (first try may fail)
+  homebrew: update_homebrew=yes
+  become: no
+  ignore_errors: yes
 
 - name: Update Homebrew
   homebrew: update_homebrew=yes

@@ -7,5 +7,5 @@ apps:
   - python3
 
 homebrew_paths:
-  - /usr/local
+  - /usr/local/Homebrew
   - /Library/Caches/Homebrew
