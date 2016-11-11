@@ -1,6 +1,7 @@
 ---
 - name: Install Applications from Homebrew Cask
-  homebrew_cask: name={{ item }}
+  homebrew_cask:
+    name: '{{ item }}'
+    options: force
   with_items: '{{ apps }}'
-  become: yes
-  # become_user: "{{ username }}"
+  become: no
