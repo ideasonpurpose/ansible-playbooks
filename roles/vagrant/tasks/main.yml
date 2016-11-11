@@ -12,5 +12,5 @@
   tags: [vagrant]
   when: vagrant_installed.stat.exists
   with_items:
-    - vagrant-hostsupdater
+    - vagrant-hostmanager
     - vagrant-bindfs
