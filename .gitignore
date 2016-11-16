@@ -9,3 +9,4 @@ Welcome-*.html
 templates/welcome.html.j2
 templates/src/welcome.html.j2
 templates/preview
+*.retry
