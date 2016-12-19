@@ -3,18 +3,18 @@
 - name: Safari preferences
   command: defaults write {{ user_lib_prefs }}/com.apple.Safari {{ item }}
   with_items: 
-    - IncludeDevelopMenu -bool true
-    - WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-    - ShowStatusBar -bool true
     - AutoOpenSafeDownloads -bool false
-    - HomePage -string "http://ideasonpurpose.com"
-    - NewWindowBehavior -int 1
-    - ShowFavoritesBar -bool false
-    - ConvertedNewWindowBehaviorForTopSites -bool true
-    - ShowFullURLInSmartSearchField -bool true
-    - InstallExtensionUpdatesAutomatically -bool true
-    - SendDoNotTrackHTTPHeader =bool true
     - BookmarksMenuIncludesRendezvous -bool true
+    - ConvertedNewWindowBehaviorForTopSites -bool true
+    - HomePage -string "http://ideasonpurpose.com"
+    - IncludeDevelopMenu -bool true
+    - InstallExtensionUpdatesAutomatically -bool true
+    - NewWindowBehavior -int 1
+    - SendDoNotTrackHTTPHeader =bool true
+    - ShowFavoritesBar -bool false
+    - ShowFullURLInSmartSearchField -bool true
+    - ShowStatusBar -bool true
+    - WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 
 - name: Repair Permissions
   file:
