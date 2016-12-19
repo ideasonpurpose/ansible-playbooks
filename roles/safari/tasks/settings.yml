@@ -9,9 +9,12 @@
     - AutoOpenSafeDownloads -bool false
     - HomePage -string "http://ideasonpurpose.com"
     - NewWindowBehavior -int 1
-    - ShowFavoritesBar -bool no
+    - ShowFavoritesBar -bool false
     - ConvertedNewWindowBehaviorForTopSites -bool true
-    - ShowFullURLInSmartSearchField -bool yes
+    - ShowFullURLInSmartSearchField -bool true
+    - InstallExtensionUpdatesAutomatically -bool true
+    - SendDoNotTrackHTTPHeader =bool true
+    - BookmarksMenuIncludesRendezvous -bool true
 
 - name: Repair Permissions
   file:
