@@ -23,9 +23,6 @@
 - name: 'Finder: Hide tags in sidebar'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.finder SidebarTagsSctionDisclosedState -bool false'
 
-- name: 'Finder: Enable Airdrop on all network interfaces'
-  shell: defaults write {{ user_lib_prefs }}/com.apple.NetworkBrowser BrowseAllInterfaces -bool false
-
 - name: 'Finder: Stop writing .DS_Store files on servers'
   shell: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
