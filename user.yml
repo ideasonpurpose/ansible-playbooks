@@ -77,7 +77,9 @@
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: mail, tags: [mail] }
-    - { role: sketchapp, apps: "{{ cask_apps }}" }
+    - { role: sketchapp }
+    - { role: sublime-text }
+    # - { role: node.js }
     - git
 
   tasks:

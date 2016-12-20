@@ -1,0 +1,18 @@
+---
+
+- name: Make sure Subime Text Preferences directory exists
+  file: 
+    path: '{{ user_lib }}/Application Support/Sublime Text 3/Packages/User/'
+    state: directory
+    owner: '{{ username }}'
+    group: staff
+    mode: 0700
+    
+- name: Write packages to Packge Control.sublime-settings preference file
+  template: 
+    src: packageControl.sublime-settings.j2
+    dest: '{{ user_lib }}/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings' 
+    mode: 0644
+    owner: '{{ username }}'
+    group: staff
+    force: no
