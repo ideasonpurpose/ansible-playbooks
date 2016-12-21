@@ -10,7 +10,7 @@
     - IncludeDevelopMenu -bool true
     - InstallExtensionUpdatesAutomatically -bool true
     - NewWindowBehavior -int 1
-    - SendDoNotTrackHTTPHeader =bool true
+    - SendDoNotTrackHTTPHeader -bool true
     - ShowFavoritesBar -bool false
     - ShowFullURLInSmartSearchField -bool true
     - ShowStatusBar -bool true
