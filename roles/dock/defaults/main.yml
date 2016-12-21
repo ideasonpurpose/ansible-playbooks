@@ -10,11 +10,11 @@ dock_apps:
   - /Applications/xScope.app
   - /Applications/Transmit.app
   - /Applications/Sketch.app
-  - /Applications/Adobe Bridge CC/Adobe Bridge CC.app/
-  - /Applications/Adobe Illustrator CC 2015/Adobe Illustrator.app/
-  - /Applications/Adobe InDesign CC 2015/Adobe InDesign CC 2015.app/
-  - /Applications/Adobe After Effects CC 2015/Adobe After Effects CC 2015.app/
-  - /Applications/Adobe Photoshop CC 2015/Adobe Photoshop CC 2015.app/
+  - /Applications/Adobe Bridge CC 2017/Adobe Bridge CC 2017.app/
+  - /Applications/Adobe Illustrator CC 2017/Adobe Illustrator.app/
+  - /Applications/Adobe InDesign CC 2017/Adobe InDesign CC 2017.app/
+  - /Applications/Adobe After Effects CC 2017/Adobe After Effects CC 2017.app/
+  - /Applications/Adobe Photoshop CC 2017/Adobe Photoshop CC 2017.app/
   - /Applications/Adobe Acrobat DC/Adobe Acrobat.app/
   - /Applications/Font Book.app
   - /Applications/Microsoft Word.app
