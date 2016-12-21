@@ -1,21 +1,5 @@
 ---
 
-- name: 'Dock: Reset the Dock'
-  shell: 'defaults delete {{ user_lib_prefs }}/com.apple.dock'
-  ignore_errors: yes
-
-- name: 'Dock: Boilerplate: mod-count'
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock mod-count -integer 2'
-
-- name: 'Dock: Boilerplate: version'
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock version -integer 1'
-
-- name: 'Dock: Remove All Dock Apps'
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-apps "<array/>"'
-
-- name: 'Dock: Remove All Dock Others'
-  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-others "<array/>"'
-
 - name: 'Dock: Insert Apps'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>{{ item }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"'
   with_items: '{{ dock_apps }}'
@@ -25,3 +9,4 @@
   with_items: '{{ dock_others }}'
   notify:
     - restart dock
+    - kill dock

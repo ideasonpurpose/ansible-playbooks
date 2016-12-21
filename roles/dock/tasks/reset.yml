@@ -1,0 +1,16 @@
+---
+
+# The magic number 978325200 is seconds between the unix epock and core data's epoch. (2001-01-01 - 1970-01-01)
+- set_fact: core_data_timestamp={{ (ansible_date_time.epoch | int) - 978325200 }} 
+  tags: always
+
+- name: Reset to empty dock
+  template: 
+    src: empty-dock.j2 
+    dest: '{{ user_lib_prefs }}/com.apple.dock.plist'
+    owner: '{{ username }}'
+    group: staff
+    mode: 0600
+
+- name: 'Dock: Boilerplate: mod-count'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.dock mod-count -integer 42'

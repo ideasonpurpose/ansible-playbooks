@@ -2,18 +2,25 @@
 
 - name: Ensure Application Support/Dock directory exists
   file: 
-    path='{{ user_lib }}/Application Support/Dock'
-    state=directory
+    path: '{{ user_lib }}/Application Support/Dock'
+    state: directory
+    owner: '{{ username }}'
+    group: staff
+    mode: 0700
+
 
 - name: Remove existing desktoppicture.db file
   file: 
-    path='{{ user_lib }}/Application Support/Dock/desktoppicture.db'
-    state=absent
+    path: '{{ user_lib }}/Application Support/Dock/desktoppicture.db'
+    state: absent
 
 - name: Copy empty desktoppicture.db
   copy:
-      src=desktoppicture_clean.db
-      dest='{{ user_lib }}/Application Support/Dock/desktoppicture.db'
+      src: desktoppicture_clean.db
+      dest: '{{ user_lib }}/Application Support/Dock/desktoppicture.db'
+      owner: '{{ username }}'
+      group: staff
+      mode: 0644
 
 - name: Set Desktop Wallpaper
   shell: sqlite3 {{ user_lib }}/Application\ Support/Dock/desktoppicture.db "UPDATE data SET VALUE = '{{ wallpaper_image }}'"
