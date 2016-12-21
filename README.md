@@ -13,12 +13,13 @@ A few of the things these playbooks accomplish:
 * Install [Homebrew][] and several packages from Homebrew
 * Tweak Homebrew to run for multiple users
 * Install [Homebrew Cask][cask] and several common applications via Cask
+* Pre-install several Sublime Text packages
 * Clear out some common Adobe cruft and install leftovers
 * Modify default terminal settings
 * Generate a pre-formatted email signature
 * Generate a welcome document from a custom HTML template.
 
-The playbooks have been updated for El Capitan and should be compatible with Yosemite and Mavericks, though testing is limited to the current release. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
+The playbooks have been updated for Sierra. They may be compatible with El Capitan and ealier macOS releases (previous iterations ran on Yosemite and Mavericks), though testing is limited to the current release. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
 
 ### The Playbooks
 
