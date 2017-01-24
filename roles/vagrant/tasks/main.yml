@@ -14,3 +14,11 @@
   with_items:
     - vagrant-hostmanager
     - vagrant-bindfs
+
+- name: Install sudoers.d file for password-free vagrant up with vagrant-hostmanager
+  get_url:
+    url: 'https://gist.githubusercontent.com/joemaller/41912f5d027a4adc7c14/raw'
+    dest: '/etc/sudoers.d/vagrant-hostmanager-nopasswd'
+    owner: root
+    group: wheel
+    mode: 0400
