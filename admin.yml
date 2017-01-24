@@ -13,9 +13,15 @@
       - python
       - python3
     cask_apps:
+      - betterzipql
       - gitkraken
       - google-chrome
       - kaleidoscope
+      - qlcolorcode
+      - qlimagesize
+      - qlmarkdown
+      - qlstephen
+      - quicklook-json
       - slack
       - sublime-text
       - vagrant

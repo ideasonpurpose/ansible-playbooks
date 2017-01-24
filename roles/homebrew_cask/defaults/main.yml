@@ -6,10 +6,13 @@ homebrew_cask_paths:
 
 apps:
   - adobe-creative-cloud
+  - betterzipql
   - colorpicker-skalacolor
   - gitkraken
   - google-chrome
   - kaleidoscope
+  - qlimagesize
+  - qlstephen
   - sketch
   - slack
   - sublime-text

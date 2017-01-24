@@ -12,11 +12,17 @@
       - git
     cask_apps:
       - adobe-creative-cloud
+      - betterzipql
       - colorpicker-skalacolor
       - gitkraken
       - google-chrome
       - kaleidoscope
       - microsoft-office
+      - qlcolorcode
+      - qlimagesize
+      - qlmarkdown
+      - qlstephen
+      - quicklook-json
       - sketch
       - slack
       - sublime-text
