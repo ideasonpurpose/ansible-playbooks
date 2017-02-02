@@ -8,15 +8,14 @@ Mime-Version: 1.0 (Ideas On Purpose)
 ........................................................................<br>
 <br>
 {{ fullname | lower }}<br>
-{{ title | lower}}<br>
+{% if title %}{{ title | lower}}<br>{% endif %}
 <br>
 ideas on purpose<br>
 307 seventh avenue<br>
 suite 701<br>
 new york, ny 10001<br>
 <br>
-212 366 6355 ph<br>
-212 366 6353 fx<br>
+212 366 6355<br>
 <br>
-http://ideasonpurpose.com<br>
+http://www.ideasonpurpose.com<br>
 </span>
