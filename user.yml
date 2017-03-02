@@ -78,6 +78,7 @@
     - { role: new-user, image: "{{ account_image.results[0].item | basename}}", when: not check_user.stat.exists }
     - { role: homebrew, apps: "{{ homebrew_apps }}" }
     - { role: homebrew_cask, apps: "{{ cask_apps }}" }
+    - { role: node.js }
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
@@ -85,7 +86,6 @@
     - { role: mail, tags: [mail] }
     - { role: sketchapp }
     - { role: sublime-text }
-    # - { role: node.js }
     - git
 
   tasks:

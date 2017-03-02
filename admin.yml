@@ -47,9 +47,9 @@
     - { role: safari, tags: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: homebrew, tags: [homebrew], apps: "{{ homebrew_apps }}" }
     - { role: homebrew_cask, tags: [homebrew, cask], apps: "{{ cask_apps }}" }
+    - { role: node.js }
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: sublime-text }
-    # - { role: node.js }
 
   pre_tasks: 
     - set_fact: user_home=/Users/{{ ansible_user_id }}

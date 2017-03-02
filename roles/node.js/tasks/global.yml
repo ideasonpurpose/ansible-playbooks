@@ -1,0 +1,18 @@
+---
+
+- name: Globally install node.js packages
+  npm:
+    # executable: /usr/local/bin/npm    # use npm from homebrew's node.js package
+    global: yes
+    name: '{{ item }}'
+    state: latest
+    # path: /usr/local/lib/node_modules   # install to the homebrew global node_modules dir
+  # shell: 'npm install -g {{ item }}'
+  # args: 
+  #   executable: /bin/bash
+
+  with_items: '{{ global_packages }}'
+  # become: yes
+  # become_user: '{{ username }}'
+  environment: 
+    PATH: '/usr/local/bin:/usr/local/sbin:{{ ansible_env.PATH }}'
