@@ -26,6 +26,9 @@
 - name: 'Finder: Stop writing .DS_Store files on servers'
   shell: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+- name: 'Finder: Stop writing .DS_Store files on USB volumes'
+  shell: defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
 - name: 'Finder: Hide Back to My Mac and Bonjour Computers in Finder sidebar'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.sidebarlists.plist networkbrowser "<dict><key>Controller</key><string>CustomListItems</string><key>CustomListItems</key><array/><key>CustomListProperties</key><dict><key>com.apple.NetworkBrowser.backToMyMacEnabled</key><false/><key>com.apple.NetworkBrowser.connectedEnabled</key><true/><key>com.apple.NetworkBrowser.bonjourEnabled</key><false/></dict></dict>"'
 
