@@ -1,6 +1,6 @@
-##IOP’s Ansible Playbooks
+# IOP’s Ansible Playbooks
 
-This repository contains a set of evolving Ansible playbooks for automating Mac user creation and designer workstation maintenance at [Ideas On Purpose][iop]. While these are ultimately very specific to our needs, there's likely something here which will be helpful in other situations.
+This evolving set of Ansible playbooks automates Mac user creation and designer workstation maintenance at [Ideas On Purpose][iop]. While these are ultimately very specific to our needs, there's likely something here which will be helpful in other situations.
 
 A few of the things these playbooks accomplish:
 
@@ -26,7 +26,7 @@ The playbooks have been updated for Sierra. They may be compatible with El Capit
 There are two main playbooks:
 
 * **admin.yml**
-    Sets up an admin account on the target computer with some of my preferred settings and tools. This can also be used to reset an admin account back to a clean state. This playbook will delete everything in `~/Desktop`.
+    Sets up an admin account on the target computer with some preferred settings and tools. This can also reset an admin account back to a clean state. *This playbook deletes everything in `~/Desktop`.*
 
 * **user.yml**
     Sets up the new user account and a bunch of default settings. These are primarily used by designers. 
