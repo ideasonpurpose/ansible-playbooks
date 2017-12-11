@@ -10,11 +10,11 @@ dock_apps:
   - /Applications/xScope.app
   - /Applications/Transmit.app
   - /Applications/Sketch.app
-  - /Applications/Adobe Bridge CC 2017/Adobe Bridge CC 2017.app/
-  - /Applications/Adobe Illustrator CC 2017/Adobe Illustrator.app/
-  - /Applications/Adobe InDesign CC 2017/Adobe InDesign CC 2017.app/
-  - /Applications/Adobe After Effects CC 2017/Adobe After Effects CC 2017.app/
-  - /Applications/Adobe Photoshop CC 2017/Adobe Photoshop CC 2017.app/
+  - /Applications/Adobe Bridge CC 2018/Adobe Bridge CC 2018.app/
+  - /Applications/Adobe Illustrator CC 2018/Adobe Illustrator.app/
+  - /Applications/Adobe InDesign CC 2018/Adobe InDesign CC 2018.app/
+  - /Applications/Adobe After Effects CC 2018/Adobe After Effects CC 2018.app/
+  - /Applications/Adobe Photoshop CC 2018/Adobe Photoshop CC 2018.app/
   - /Applications/Adobe Acrobat DC/Adobe Acrobat.app/
   - /Applications/Font Book.app
   - /Applications/Microsoft Word.app
@@ -23,10 +23,11 @@ dock_apps:
   - /Applications/Preview.app
   - /Applications/Time Machine.app
   - /Applications/System Preferences.app
+  - /Applications/Harvest.app
 
 dock_others:
   # either a plain path string or a dict like "{path: /path, type: [file | directory], arrange: [1-5] }"
-  - /IOP Font Library
+  - {path: "/Users/{{ username }}/IOP Font Library", type: directory, arrange: 1}
   - {path: "/Users/{{ username }}/Downloads", type: directory, arrange: 2}
 
 # Enable App Exposé
