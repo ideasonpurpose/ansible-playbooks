@@ -51,6 +51,10 @@
 - name: 'Finder: Set last seen build version'
   shell: 'defaults write {{ user_lib_prefs }}/com.apple.SetupAssistant LastSeenBuddyBuildVersion -string "{{ os_buildVersion.stdout }}"'
 
+- name: 'Finder: Default Save to disk, not to iCloud'
+  shell: 'defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false'
+
+
 - name: Repair permissions
   file:
     path={{ user_lib_prefs }}
