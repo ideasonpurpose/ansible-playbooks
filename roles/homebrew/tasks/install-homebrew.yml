@@ -2,12 +2,12 @@
 
 - name: Make sure Homebrew directory exists
   file: 
-    path=/usr/local
+    path=/usr/local/*
     state=directory
     mode=0775
     owner=root
     group=wheel
-    recurse=no
+    recurse=yes
   become: yes
 
 - name: Download Homebrew

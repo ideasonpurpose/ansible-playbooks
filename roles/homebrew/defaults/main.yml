@@ -8,4 +8,6 @@ apps:
 
 homebrew_paths:
   - /usr/local/Homebrew
+  - /usr/local/bin
+  - /usr/local/var
   - /Library/Caches/Homebrew
