@@ -13,7 +13,6 @@
       - python
       - python3
     cask_apps:
-      - betterzipql
       - gitkraken
       - google-chrome
       - kaleidoscope

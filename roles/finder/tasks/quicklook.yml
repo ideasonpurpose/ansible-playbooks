@@ -1,0 +1,16 @@
+---
+
+- name: Make sure User Library/QuickLook directory exists
+  file: 
+    path: '{{ user_lib }}/QuickLook' 
+    state: directory
+    mode: 0755
+
+- name: Manually install BetterZipQL QuickLook plugin
+  unarchive:
+    src: 'https://macitbetter.com/dl/BetterZipQL-1.5.zip'
+    dest: '{{ user_lib }}/QuickLook'
+    remote_src: yes
+
+- name: Reload QuickLook Generators
+  shell: qlmanage -r

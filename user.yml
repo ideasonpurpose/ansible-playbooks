@@ -12,7 +12,6 @@
       - git
     cask_apps:
       - adobe-creative-cloud
-      - betterzipql
       - colorpicker-skalacolor
       - gitkraken
       - google-chrome
