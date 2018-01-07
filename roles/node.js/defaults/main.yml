@@ -6,4 +6,4 @@ global_packages:
   - gulp-cli
   - npm
   - npm-check-updates
-  
+  - prettier
