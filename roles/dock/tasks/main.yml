@@ -1,6 +1,6 @@
 ---
 
-- include: reset.yml
-- include: apps.yml
-- include: settings.yml
-- include: wallpaper.yml
+- import_tasks: reset.yml
+- import_tasks: apps.yml
+- import_tasks: settings.yml
+- import_tasks: wallpaper.yml

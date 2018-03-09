@@ -1,3 +1,3 @@
 ---
 
-- include: gitconfig.yml
+- import_tasks: gitconfig.yml

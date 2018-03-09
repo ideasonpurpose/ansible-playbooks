@@ -1,4 +1,4 @@
 ---
 
-- include: install-cask.yml
-- include: install-apps.yml
+- import_tasks: install-cask.yml
+- import_tasks: install-apps.yml

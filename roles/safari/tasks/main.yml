@@ -1,7 +1,7 @@
 ---
 
-- include: kill.yml
-- include: reset.yml
-- include: settings.yml
+- import_tasks: kill.yml
+- import_tasks: reset.yml
+- import_tasks: settings.yml
 # too much fail, will revisit
 # - include: open.yml

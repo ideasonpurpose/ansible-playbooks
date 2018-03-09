@@ -1,3 +1,3 @@
 ---
 
-- include: signature.yml
+- import_tasks: signature.yml
