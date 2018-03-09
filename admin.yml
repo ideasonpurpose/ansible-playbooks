@@ -11,7 +11,7 @@
       - git
       - node
       - python
-      - python3
+      - yarn
     cask_apps:
       - gitkraken
       - google-chrome
