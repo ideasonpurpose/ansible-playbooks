@@ -30,6 +30,10 @@
       - transmit
       - vagrant
       - virtualbox
+    node_global_packages:
+      - browser-sync
+      - gulp-cli
+      - npm
 
   pre_tasks:
     - name: Check if user exists

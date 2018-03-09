@@ -38,6 +38,13 @@
     - {path: "/tmp", type: directory, arrange: 2}
     dock_expose_group_by_app: yes
     dock_dim_hidden: yes
+    node_global_packages:
+      - browser-sync
+      - eslint
+      - gulp-cli
+      - npm
+      - npm-check-updates
+      - prettier
 
   roles:
     - global-prefs

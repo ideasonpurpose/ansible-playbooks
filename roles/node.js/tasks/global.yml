@@ -11,7 +11,7 @@
   # args: 
   #   executable: /bin/bash
 
-  with_items: '{{ global_packages }}'
+  with_items: '{{ node_global_packages }}'
   # become: yes
   # become_user: '{{ username }}'
   environment: 

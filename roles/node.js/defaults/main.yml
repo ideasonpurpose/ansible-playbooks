@@ -1,6 +1,6 @@
 ---
 
-global_packages:
+node_global_packages:
   - browser-sync
   - eslint
   - gulp-cli
