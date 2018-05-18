@@ -13,6 +13,7 @@
     cask_apps:
       - adobe-creative-cloud
       - colorpicker-skalacolor
+      - github
       - gitkraken
       - google-chrome
       - harvest
@@ -30,6 +31,7 @@
       - transmit
       - vagrant
       - virtualbox
+      - visual-studio-code
     node_global_packages:
       - browser-sync
       - gulp-cli
@@ -81,9 +83,10 @@
   roles:
     - global-prefs
     - { role: new-user, image: "{{ account_image.results[0].item | basename}}", when: not check_user.stat.exists }
-    - { role: homebrew, apps: "{{ homebrew_apps }}" }
-    - { role: homebrew_cask, apps: "{{ cask_apps }}" }
-    - { role: node.js }
+    - { role: terminal, tags: [terminal] }
+    - { role: homebrew, apps: "{{ homebrew_apps }}", become: no }
+    - { role: homebrew_cask, apps: "{{ cask_apps }}", become: no }
+    - { role: node.js, become: no }
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
@@ -91,7 +94,7 @@
     - { role: mail, tags: [mail] }
     - { role: sketchapp }
     - { role: sublime-text }
-    - git
+    - { role: git }
 
   tasks:
     - set_fact:
