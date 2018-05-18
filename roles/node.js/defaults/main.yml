@@ -2,8 +2,4 @@
 
 node_global_packages:
   - browser-sync
-  - eslint
-  - gulp-cli
   - npm
-  - npm-check-updates
-  - prettier

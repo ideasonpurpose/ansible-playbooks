@@ -40,11 +40,7 @@
     dock_dim_hidden: yes
     node_global_packages:
       - browser-sync
-      - eslint
-      - gulp-cli
       - npm
-      - npm-check-updates
-      - prettier
 
   roles:
     - global-prefs
