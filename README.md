@@ -19,7 +19,7 @@ A few of the things these playbooks accomplish:
 * Generate a pre-formatted email signature
 * Generate a welcome document from a custom HTML template.
 
-The playbooks have been updated for Sierra. They may be compatible with El Capitan and ealier macOS releases (previous iterations ran on Yosemite and Mavericks), though testing is limited to the current release. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
+The playbooks have been updated for macOS High Sierra. They are likely to be compatible with ealier macOS releases (this project first ran on Mavericks), though testing is limited to the current release. Playbook execution time is dependent on the target computer state (how much needs doing), target CPU and network bandwidth but usually takes 5-10 minutes.
 
 ### The Playbooks
 
@@ -45,7 +45,7 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 
 #### Controller Setup
 
-The controller is the computer the playbooks are run from (eg. *your* computer). This should be every step necessary to set up a clean Mavericks system to run the playbooks. This should only need to be done once.
+The controller is the computer the playbooks are run from (eg. *your* computer). This should be every step necessary to set up a clean macOS system to run the playbooks. This should only need to be done once.
 
 1. Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal**
 2. Install [Homebrew][]
