@@ -1,0 +1,11 @@
+---
+
+vscode_extensions:
+  - BriteSnow.vscode-toggle-quotes  # Toggle Quotes - https://marketplace.visualstudio.com/items?itemName=BriteSnow.vscode-toggle-quotes
+  - CoenraadS.bracket-pair-colorizer  # Bracket Pair Colorizer https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer
+  - esbenp.prettier-vscode  # Prettier - Code formatter https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+  - formulahendry.auto-close-tag  # Auto Close Tag - https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag
+  - naumovs.trailing-semicolon  # Trailing Semicolon - https://marketplace.visualstudio.com/items?itemName=naumovs.trailing-semicolon
+  - oderwat.indent-rainbow  # indent-rainbow https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+  - wmaurer.change-case  # change-case - https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case
+  - zhuangtongfa.material-theme  # One Dark Pro theme - https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme

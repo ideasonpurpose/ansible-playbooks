@@ -96,6 +96,7 @@
     - { role: mail, tags: [mail] }
     - { role: sketchapp }
     - { role: sublime-text }
+    - { role: vscode }
     - { role: git }
 
   tasks:

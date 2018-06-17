@@ -1,0 +1,14 @@
+---
+
+- name: Add Visual Studio Code `code` binary to $PATH
+  lineinfile:
+    dest: /Users/{{ username }}/.bashrc
+    state: present
+    regexp: '^export\s+PATH=.*/Visual Studio Code.app/.*:\$PATH'
+    insertafter: EOF
+    line: 'export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"'
+    create: yes
+
+- name: Install Visual Studio Code extensions
+  command: code --install-extension {{ item }}
+    with_items: '{{ vscode_extensions }}'
