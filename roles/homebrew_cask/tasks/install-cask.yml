@@ -2,12 +2,12 @@
 
   # Temporary workaround for Homebrew Cask changes
   # see https://github.com/caskroom/homebrew-cask/pull/15381
-- name: Force upgrade Homebrew-cask
-  shell: '/usr/local/bin/brew uninstall --force brew-cask; /usr/local/bin/brew update'
-  become: no
+# - name: Force upgrade Homebrew-cask
+#   shell: '/usr/local/bin/brew uninstall --force brew-cask; /usr/local/bin/brew update'
+#   become: no
 
 - name: Tap caskroom/cask
-  homebrew_tap: tap=caskroom/cask
+  homebrew_tap: tap=homebrew/cask
   become: no
 
 - name: Update Homebrew & Homebrew Cask

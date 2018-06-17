@@ -4,10 +4,17 @@ apps:
   - git
   - node
   - python
-  - python3
+  - yarn
 
 homebrew_paths:
-  - /usr/local/Homebrew
-  - /usr/local/bin
-  - /usr/local/var
   - /Library/Caches/Homebrew
+  - /usr/local/bin
+  - /usr/local/Caskroom
+  - /usr/local/Cellar
+  - /usr/local/etc
+  - /usr/local/include
+  - /usr/local/Homebrew
+  - /usr/local/opt
+  - /usr/local/sbin
+  - /usr/local/share
+  - /usr/local/var

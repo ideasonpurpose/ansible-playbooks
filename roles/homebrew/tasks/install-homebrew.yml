@@ -10,18 +10,27 @@
     recurse=yes
   become: yes
 
-- name: Download Homebrew
-  unarchive:
-    src: 'https://github.com/Homebrew/brew/archive/master.zip'
-    dest: /tmp/
-    remote_src: yes
+- name: Download Homebrew installation script
+  get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/master/install
+    dest: /tmp/install
+
+- name: Install Homebrew
+  shell: /usr/bin/ruby /tmp/install
+
+
+# - name: Download Homebrew
+#   unarchive:
+#     src: 'https://github.com/Homebrew/brew/archive/master.tar.gz'
+#     dest: /tmp/
+#     remote_src: yes
     
-- name: move Homebrew files to /usr/local
-  synchronize: 
-    src: /tmp/brew-master/
-    dest: /usr/local/
-  delegate_to: "{{ inventory_hostname }}"
-  become: yes
+# - name: move Homebrew files to /usr/local
+#   synchronize: 
+#     src: /tmp/brew-master/
+#     dest: /usr/local/
+#   # delegate_to: "{{ inventory_hostname }}"
+#   become: yes
 
 - name: Set permissions for multiple users
   file: 
@@ -33,11 +42,17 @@
     state=directory
   become: yes
   with_items: '{{ homebrew_paths }}'
+  ignore_errors: yes
+
 
 - name: Fix ACL permissions for multiple users
   become: yes
   command: 'chmod -R +a "group:admin allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,file_inherit,directory_inherit" {{ item }}'
+  args:
+    warn: no
   with_items: '{{ homebrew_paths }}'
+  ignore_errors: yes
+
 
 - name: Reset the Homebrew Library repo
   git: 
