@@ -1,0 +1,50 @@
+---
+
+- user: 
+    name: '{{ username }}'
+    shell: /bin/bash
+  become: yes
+  
+- set_fact:
+    terminal_emoji: "{{ lookup('template', 'files/terminal_emojis.txt').split() | random }}"
+
+# - set_fact: 
+#     bashrc_prompt: "{{ lookup('template', 'templates/bashrc_prompt.j2') }}"
+
+- name: Load .bashrc from .profile
+  lineinfile:
+    dest: /Users/{{ username }}/.profile
+    state: present
+    owner: '{{ username }}'
+    group: staff
+    regexp: '\[ -r $HOME/\.bashrc \] && source \$HOME/\.bashrc'
+    insertbefore: BOF
+    line: '[ -r $HOME/.bashrc ] && source $HOME/.bashrc'
+    create: yes
+
+- name: Prepend /usr/local/bin to $PATH in .bashrc
+  lineinfile:
+    dest: /Users/{{ username }}/.bashrc
+    state: present
+    regexp: '^export\s+PATH=/usr/local/bin:\$PATH'
+    insertafter: EOF
+    line: 'export PATH=/usr/local/bin:$PATH'
+    create: yes
+
+- name: Append custom prompt to .bashrc
+  blockinfile:
+    dest: /Users/{{ username }}/.bashrc
+    block: '{{ lookup("template", "templates/bashrc_prompt.j2") }}'
+    create: yes
+    owner: '{{ username }}'
+    group: staff
+    insertafter: EOF
+    state: present
+
+- name: Normalize spacing around ANSIBLE MANAGED BLOCK blocks
+  replace:
+    path: /Users/{{ username }}/.bashrc
+    regexp: '\s*(# (?:BEGIN|END) ANSIBLE MANAGED BLOCK)\s*'
+    replace: '\n\n\1\n'
+
+

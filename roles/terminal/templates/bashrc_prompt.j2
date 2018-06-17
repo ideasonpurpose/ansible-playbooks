@@ -1,0 +1,112 @@
+# https://gist.github.com/joemaller/3165ace4b1f8a50924990ad373236ce8
+#
+# Append this file to the end of your ~/.bashrc file
+# Your terminal prompt will look something like this:
+#
+#    username@hostname /output/of/pwd [git-branch]$
+
+
+# https://gist.github.com/4503986
+#
+# A set of color functions to help with fancy $PS1 prompts
+#
+# This:
+#     PROMPT_COMMAND='PS1="\e[32;1m\]\u@\[\e[35;1m\]\H \[\e[0m\]\w]\$ "''
+#
+# Can be more clearly written as:
+#     PROMPT_COMMAND='PS1="$(DARK_GREEN \\u@)$(PURPLE \\H) \w]\$ "''
+#
+# note: Escape codes returned from these functions will not work in a directly
+#       assigned $PS1, use PROMPT_COMMAND to prevent extra escaping.
+#
+
+# Text Colors
+function RED         { echo "\[\e[0;91m\]$1\[\e[0m\]"; }
+function DARK_RED    { echo "\[\e[0;31m\]$1\[\e[0m\]"; }
+function YELLOW      { echo "\[\e[0;93m\]$1\[\e[0m\]"; }
+function DARK_YELLOW { echo "\[\e[0;33m\]$1\[\e[0m\]"; }
+function GREEN       { echo "\[\e[0;92m\]$1\[\e[0m\]"; }
+function DARK_GREEN  { echo "\[\e[0;32m\]$1\[\e[0m\]"; }
+function CYAN        { echo "\[\e[0;96m\]$1\[\e[0m\]"; }
+function DARK_CYAN   { echo "\[\e[0;36m\]$1\[\e[0m\]"; }
+function BLUE        { echo "\[\e[0;94m\]$1\[\e[0m\]"; }
+function DARK_BLUE   { echo "\[\e[0;34m\]$1\[\e[0m\]"; }
+function MAGENTA     { echo "\[\e[0;95m\]$1\[\e[0m\]"; }
+function PURPLE      { echo "\[\e[0;35m\]$1\[\e[0m\]"; }
+function BLACK       { echo "\[\e[0;30m\]$1\[\e[0m\]"; }
+function GRAY        { echo "\[\e[0;90m\]$1\[\e[0m\]"; }
+function LIGHT_GRAY  { echo "\[\e[0;37m\]$1\[\e[0m\]"; }
+function WHITE       { echo "\[\e[0;97m\]$1\[\e[0m\]"; }
+
+# Black on Background Color
+function B_ON_RED         { echo "\[\e[0;30;101m\]$1\[\e[0m\]"; }
+function B_ON_DARK_RED    { echo "\[\e[0;30;41m\]$1\[\e[0m\]"; }
+function B_ON_YELLOW      { echo "\[\e[0;30;103m\]$1\[\e[0m\]"; }
+function B_ON_DARK_YELLOW { echo "\[\e[0;30;43m\]$1\[\e[0m\]"; }
+function B_ON_GREEN       { echo "\[\e[0;30;102m\]$1\[\e[0m\]"; }
+function B_ON_DARK_GREEN  { echo "\[\e[0;30;42m\]$1\[\e[0m\]"; }
+function B_ON_CYAN        { echo "\[\e[0;30;106m\]$1\[\e[0m\]"; }
+function B_ON_DARK_CYAN   { echo "\[\e[0;30;46m\]$1\[\e[0m\]"; }
+function B_ON_BLUE        { echo "\[\e[0;30;104m\]$1\[\e[0m\]"; }
+function B_ON_DARK_BLUE   { echo "\[\e[0;30;44m\]$1\[\e[0m\]"; }
+function B_ON_MAGENTA     { echo "\[\e[0;30;105m\]$1\[\e[0m\]"; }
+function B_ON_PURPLE      { echo "\[\e[0;30;45m\]$1\[\e[0m\]"; }
+function B_ON_BLACK       { echo "\[\e[0;30;40m\]$1\[\e[0m\]"; }
+function B_ON_DARK_GRAY   { echo "\[\e[0;30;100m\]$1\[\e[0m\]"; }
+function B_ON_GRAY        { echo "\[\e[0;30;47m\]$1\[\e[0m\]"; }
+function B_ON_LIGHT_GRAY  { echo "\[\e[0;30;107m\]$1\[\e[0m\]"; }
+
+# White on Background Color
+function W_ON_RED         { echo "\[\e[0;97;101m\]$1\[\e[0m\]"; }
+function W_ON_DARK_RED    { echo "\[\e[0;97;41m\]$1\[\e[0m\]"; }
+function W_ON_YELLOW      { echo "\[\e[0;97;103m\]$1\[\e[0m\]"; }
+function W_ON_DARK_YELLOW { echo "\[\e[0;97;43m\]$1\[\e[0m\]"; }
+function W_ON_GREEN       { echo "\[\e[0;97;102m\]$1\[\e[0m\]"; }
+function W_ON_DARK_GREEN  { echo "\[\e[0;97;42m\]$1\[\e[0m\]"; }
+function W_ON_CYAN        { echo "\[\e[0;97;106m\]$1\[\e[0m\]"; }
+function W_ON_DARK_CYAN   { echo "\[\e[0;97;46m\]$1\[\e[0m\]"; }
+function W_ON_BLUE        { echo "\[\e[0;97;104m\]$1\[\e[0m\]"; }
+function W_ON_DARK_BLUE   { echo "\[\e[0;97;44m\]$1\[\e[0m\]"; }
+function W_ON_MAGENTA     { echo "\[\e[0;97;105m\]$1\[\e[0m\]"; }
+function W_ON_PURPLE      { echo "\[\e[0;97;45m\]$1\[\e[0m\]"; }
+function W_ON_BLACK       { echo "\[\e[0;97;40m\]$1\[\e[0m\]"; }
+function W_ON_DARK_GRAY   { echo "\[\e[0;97;100m\]$1\[\e[0m\]"; }
+function W_ON_GRAY        { echo "\[\e[0;97;47m\]$1\[\e[0m\]"; }
+function W_ON_LIGHT_GRAY  { echo "\[\e[0;97;107m\]$1\[\e[0m\]"; }
+
+# https://gist.github.com/joemaller/4527475
+#
+# A simple bash function for coloring the current git branch.
+# - Red: Tree is dirty
+# - Yellow: All modified files are staged
+# - Green: Tree is clean
+#
+# This uses the color functions from https://gist.github.com/4503986
+
+function git_branch() {
+  is_git=$(git status --porcelain 2> /dev/null ) || return
+  branch=$(git symbolic-ref --short HEAD 2> /dev/null)
+  if [ -z "$branch" ]; then
+    branch=$(git status | sed -n 1p )
+  fi
+  is_dirty=$(git update-index --refresh 2> /dev/null)
+  is_staged=$(git diff-index --cached HEAD 2> /dev/null)
+  if [ -n "$is_dirty" ]; then
+    echo $(DARK_RED "[$branch]")
+  elif [ -n "$is_staged" ]; then
+    echo $(DARK_YELLOW "[$branch]")
+  else
+    echo $(DARK_GREEN "[$branch]")
+  fi
+}
+
+# Variable definitions:
+# \u  current user's name
+# \h  hostname to first dot
+# \w  current working directory
+
+function set_ps1() {
+    PS1="\[{{ terminal_emoji }}\] $(GRAY \\u) $(GRAY @) $(GRAY \\h) $(DARK_CYAN \\w) $(git_branch)$(CYAN \\$) "
+}
+
+PROMPT_COMMAND="set_ps1; $PROMPT_COMMAND"

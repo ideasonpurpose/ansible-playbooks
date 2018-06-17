@@ -47,8 +47,9 @@
     - { role: finder, tags: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, tags: dock, when: user_lib is defined and user_lib_prefs is defined }
     - { role: safari, tags: safari, when: user_lib is defined and user_lib_prefs is defined }
-    - { role: homebrew, tags: [homebrew], apps: "{{ homebrew_apps }}" }
-    - { role: homebrew_cask, tags: [homebrew, cask], apps: "{{ cask_apps }}" }
+    - { role: terminal, tags: [terminal], become: no }
+    - { role: homebrew, apps: "{{ homebrew_apps }}", become: no }
+    - { role: homebrew_cask, apps: "{{ cask_apps }}", become: no }
     - { role: node.js }
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: sublime-text }
@@ -172,7 +173,9 @@
         recurse=yes
       become: yes
 
-  post_tasks:
+
+
+  # post_tasks:
     # - name: Install virtualenvwrapper
     #   pip: name=virtualenvwrapper
     #   environment:
@@ -180,19 +183,19 @@
     #   become: yes
     #   tags: pip
 
-    - name: Copy terminal settings file
-      copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
-      tags: terminal
+    # - name: Copy terminal settings file
+    #   copy: src=files/smoke.terminal dest=/tmp/smoke.terminal
+    #   tags: terminal
 
-    - name: Set terminal to Smoke theme
-      command: open /tmp/smoke.terminal
-      ignore_errors: yes
-      tags: terminal
+    # - name: Set terminal to Smoke theme
+    #   command: open /tmp/smoke.terminal
+    #   ignore_errors: yes
+    #   tags: terminal
 
-    - name: 'Terminal: Set startup window'
-      shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Startup Window Settings" -string smoke'
-      tags: terminal
+    # - name: 'Terminal: Set startup window'
+    #   shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Startup Window Settings" -string smoke'
+    #   tags: terminal
 
-    - name: 'Terminal: Set default window'
-      shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
-      tags: terminal
+    # - name: 'Terminal: Set default window'
+    #   shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
+    #   tags: terminal

@@ -1,0 +1,38 @@
+---
+
+# - name: Check that Terminal preferences file exists
+#   stat: 
+#     path: '{{ user_lib_prefs }}/com.apple.Terminal.plist'
+#   register: terminal_prefs
+
+- name: Copy terminal settings file
+  copy: 
+    src: files/smoke.terminal
+    dest: /tmp/smoke.terminal
+  # become: yes
+  # become_user: '{{ username }}'
+
+- name: Use Smoke theme
+  command: open /tmp/smoke.terminal
+  ignore_errors: yes
+  become: yes
+  become_user: '{{ username }}'
+  
+# - name: Check that Terminal preferences file exists
+#   copy: 
+#     dest: '{{ user_lib_prefs }}/com.apple.Terminal.plist'
+#     content: '{}'
+#     owner: '{{ username }}'
+#     group: staff
+#     mode: 0600
+#   when: not terminal_prefs.stat.exists
+
+- name: 'Terminal: Set startup window'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Startup Window Settings" -string smoke'
+  # become: yes
+  # become_user: '{{ username }}'
+
+- name: 'Terminal: Set default window'
+  shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
+  # become: yes
+  # become_user: '{{ username }}'

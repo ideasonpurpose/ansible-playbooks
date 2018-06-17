@@ -16,12 +16,42 @@
 - name: Remove the newuser script
   file: path={{ newuser_script.stdout }} state=absent
 
-- name: Prepend /usr/local/bin to $PATH in .profile
-  lineinfile:
-    dest=/Users/{{ username }}/.profile
-    state=present
-    regexp="^export\s+PATH=/usr/local/bin:\\$PATH"
-    insertafter=EOF
-    line="export
-    PATH=/usr/local/bin:$PATH"
-    create=yes
+# - name: Prepend /usr/local/bin to $PATH in .bashrc
+#   lineinfile:
+#     dest: /Users/{{ username }}/.bashrc
+#     state: present
+#     regexp: '^export\s+PATH=/usr/local/bin:\\$PATH'
+#     insertafter: EOF
+#     line: 'export PATH=/usr/local/bin:$PATH\n'
+#     create: yes
+
+# - set_fact:
+#     terminal_emoji: "{{ lookup('template', 'roles/new-user/files/terminal_emojis.txt').split() | random }}"
+
+# - set_fact: 
+#     bashrc_prompt: "{{ lookup('template', 'templates/bashrc.j2') }}"
+
+# - name: Prepend /usr/local/bin to $PATH in .bashrc
+#   lineinfile:
+#     dest: /Users/{{ username }}/.bashrc
+#     state: present
+#     regexp: '^export\s+PATH=/usr/local/bin:\$PATH'
+#     insertafter: EOF
+#     line: 'export PATH=/usr/local/bin:$PATH'
+#     create: yes
+
+# - name: Append custom prompt to .bashrc
+#   blockinfile:
+#     dest: /Users/{{ username }}/.bashrc
+#     block: '{{ lookup("template", "roles/new-user/templates/bashrc.j2") }}'
+#     create: yes
+#     insertafter: EOF
+#     state: present
+
+# - name: Normalize spacing around ANSIBLE MANAGED BLOCK blocks
+#   replace:
+#     path: /Users/{{ username }}/.bashrc
+#     regexp: '\s*(# (?:BEGIN|END) ANSIBLE MANAGED BLOCK)\s*'
+#     replace: '\n\n\1\n'
+
+

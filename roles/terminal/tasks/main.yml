@@ -1,0 +1,4 @@
+---
+
+- import_tasks: theme.yml
+- import_tasks: bash.yml
