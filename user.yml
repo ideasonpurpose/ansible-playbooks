@@ -147,12 +147,14 @@
 
   tasks:
     - name: Generate Welcome message on controller
-      template: src={{ item }} dest=./Welcome-{{ username }}.html
+      template: 
+        src: '{{ item }}'
+        dest: ./Welcome-{{ username }}.html
       tags: ['welcome', 'template']
       with_first_found:
         - templates/welcome.html.j2
         - templates/welcome_sample.html.j2
 
     - name: Open generated HTML template
-      shell: open ./Welcome-{{ username }}.html
+      shell: open ./Welcome-{{ username }}.html -a Safari
       tags: ['welcome', 'template']
