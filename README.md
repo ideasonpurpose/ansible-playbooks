@@ -47,17 +47,13 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 
 The controller is the computer the playbooks are run from (eg. *your* computer). This should be every step necessary to set up a clean macOS system to run the playbooks. This should only need to be done once.
 
-1. Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal**
-2. Install [Homebrew][]
-3. `brew install pandoc ssh-copy-id`
-4. Install [Ansible from source](http://docs.ansible.com/ansible/intro_installation.html)
-    * clone `git clone https://github.com/ansible/ansible.git`
-    * `git submodule update --init --recursive`
-    * `source hacking/env-setup`
-6. Clone this repository: 
-    *  `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
-7. `cd ansible-playbooks`
-8. Install from the `requirements.txt` file: `pip install -r requirements.txt`
+1.  Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal**
+2.  Install [Homebrew][], then install [Ansible](http://docs.ansible.com/ansible) and ssh-copy-id
+3.  `brew install ssh-copy-id ansible`
+4.  Clone this repository:
+    - `git clone https://github.com/ideasonpurpose/ansible-playbooks.git`
+5.  `cd ansible-playbooks`
+6.  Install from the `requirements.txt` file: `pip install -r requirements.txt`
 
 ### Running the playbooks
 
