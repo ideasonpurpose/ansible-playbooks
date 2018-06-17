@@ -37,6 +37,9 @@
       - npm
 
   pre_tasks:
+    - name: Stay awake for 20 minutes
+      shell: caffeinate -t 900 &
+
     - name: Check if user exists
       stat: path=/Users/{{ username }}
       register: check_user

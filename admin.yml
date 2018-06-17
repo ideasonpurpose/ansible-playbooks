@@ -62,6 +62,9 @@
     - set_fact: user_lib_prefs={{ user_lib }}/Preferences
       tags: always
 
+    - name: Stay awake for 20 minutes
+      shell: caffeinate -t 900 &
+
     - command: scutil --get ComputerName
       register: computer_name
 
