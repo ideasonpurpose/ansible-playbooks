@@ -23,7 +23,6 @@
       - qlstephen
       - quicklook-json
       - slack
-      - sublime-text
       - vagrant
       - virtualbox
       - visual-studio-code
@@ -31,11 +30,9 @@
     username: '{{ ansible_user_id }}'
     dock_apps:
       - /Applications/Slack.app
-      - /Applications/Safari.app
       - /Applications/Google Chrome.app
       - /Applications/Kaleidoscope.app
-      - /Applications/Sublime Text.app
-      - /Applications/GitKraken.app
+      - /Applications/Visual Studio Code.app
       - /Applications/Utilities/Terminal.app
     dock_others:
     - {path: "/tmp", type: directory, arrange: 2}
@@ -55,7 +52,6 @@
     - { role: homebrew_cask, apps: "{{ cask_apps }}", become: no }
     - { role: node.js }
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
-    - { role: sublime-text }
     - { role: vscode }
 
   pre_tasks: 

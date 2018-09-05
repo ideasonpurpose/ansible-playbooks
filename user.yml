@@ -26,7 +26,6 @@
       - quicklook-json
       - sketch
       - slack
-      - sublime-text
       - transmit
       - vagrant
       - virtualbox
@@ -95,7 +94,6 @@
     - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: mail, tags: [mail] }
     - { role: sketchapp }
-    - { role: sublime-text }
     - { role: vscode }
     - { role: git }
 

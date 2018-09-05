@@ -6,9 +6,10 @@
     state: present
     regexp: '^export\s+PATH=.*/Visual Studio Code.app/.*:\$PATH'
     insertafter: EOF
-    line: 'export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"'
+    line: 'export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"'
     create: yes
 
 - name: Install Visual Studio Code extensions
   command: code --install-extension {{ item }}
-    with_items: '{{ vscode_extensions }}'
+  with_items: '{{ vscode_extensions }}'
+  ignore_errors: yes
