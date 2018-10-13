@@ -4,6 +4,8 @@
   file: 
     path: '{{ user_lib }}/QuickLook' 
     state: directory
+    owner: '{{ username }}'
+    group: staff
     mode: 0755
 
 - name: Manually install BetterZipQL QuickLook plugin
