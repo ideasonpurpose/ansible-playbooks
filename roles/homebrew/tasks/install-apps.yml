@@ -2,8 +2,10 @@
 - name: Install applications
   environment:
     PATH: /usr/local/bin:{{ ansible_env["PATH"] }}
-  homebrew: name={{ item }} state=latest
-  with_items: '{{ apps }}'
+  homebrew:
+    name: '{{ apps }}'
+    state: latest
+  # with_items: '{{ apps }}'
   become: no
   notify:
   - restart dock

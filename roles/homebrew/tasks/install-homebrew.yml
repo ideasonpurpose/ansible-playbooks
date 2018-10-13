@@ -16,7 +16,8 @@
     dest: /tmp/install
 
 - name: Install Homebrew
-  shell: /usr/bin/ruby /tmp/install
+  shell: /usr/bin/ruby /tmp/install < /dev/null
+# 🎉 https://stackoverflow.com/a/39864317/503463
 
 
 # - name: Download Homebrew
