@@ -19,5 +19,5 @@ apps:
   - sublime-text
   - transmit
   - vagrant
-  - virtualbox
+  # - virtualbox
   - visual-studio-code

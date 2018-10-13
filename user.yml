@@ -28,7 +28,7 @@
       - slack
       - transmit
       - vagrant
-      - virtualbox
+      # - virtualbox
       - visual-studio-code
     node_global_packages:
       - browser-sync

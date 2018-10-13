@@ -24,7 +24,7 @@
       - quicklook-json
       - slack
       - vagrant
-      - virtualbox
+      # - virtualbox
       - visual-studio-code
       
     username: '{{ ansible_user_id }}'
