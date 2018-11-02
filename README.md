@@ -40,7 +40,7 @@ Pre-run steps are annoying. I've tried mightily to get around these, but it seem
 #### Target computer pre-run setup
 
 1.  Setup a plain administrator account, Ansible will configure other accounts through this one. The `admin.yml` playbook will flesh out this account.
-2.  Set the computer's name in **System Preferences** > **Sharing**. Make a note of the local hostname, a computer named "iMac 3" will probably have the local hostname `imac-3.local`. Ansible will find the target computer by its local hostname or IP address.
+2.  Set the computer's name in **System Preferences** > **Sharing**. Make a note of the local hostname, a computer named "iMac 3" will probably have the local hostname `imac-3.local`. Ansible will find the target computer by its local hostname or IP address. Recently hostnames haven't been sticking in the terminal, run this on the target to set the local hostname: `sudo scutil –-set HostName new_hostname`
 3.  Turn on **Remote Login** in **System Preferences** > **Sharing** to enable SSH connections.
 4.  Install **Command Line Tools for Xcode** by running `xcode-select --install` in **Terminal** and following the prompts.
 
