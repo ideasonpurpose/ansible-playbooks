@@ -1,13 +1,13 @@
 ---
 
-- name: Make sure Homebrew directory exists
+- name: Make sure Homebrew directories exists
   file: 
-    path=/usr/local/*
-    state=directory
-    mode=0775
-    owner=root
-    group=wheel
-    recurse=yes
+    path: /usr/local/*
+    state: directory
+    mode: 0775
+    owner: root
+    group: wheel
+    recurse: yes
   become: yes
 
 - name: Download Homebrew installation script
