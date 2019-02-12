@@ -206,3 +206,5 @@
     # - name: 'Sketch: Set color profile to sRGB'
     # - shell: 'defaults write {{ user_lib_prefs }}/com.bohemiancoding.sketch3 defaultColorSpace 1'
     
+    # - name: 'Sketch: Set jpeg export quality to 100 percent'
+    # - shell: 'defaults write {{ user_lib_prefs }}com.bohemiancoding.sketch3 JPGQuality -string "1.0"'
