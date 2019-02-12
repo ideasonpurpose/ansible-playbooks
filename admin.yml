@@ -203,6 +203,6 @@
     #   shell: 'defaults write {{ user_lib_prefs }}/com.apple.Terminal "Default Window Settings" -string smoke'
     #   tags: terminal
 
-    # - name: 'Sketch: Set color profile to sRGB
-    # - shell: 'defaults write {{ user_lib_prefs }}/com.bohemiancoding.sketch3 defaultColorSpace 1
+    # - name: 'Sketch: Set color profile to sRGB'
+    # - shell: 'defaults write {{ user_lib_prefs }}/com.bohemiancoding.sketch3 defaultColorSpace 1'
     
