@@ -1,0 +1,9 @@
+version: "3.5"
+
+services: 
+  ansible:
+    build: .
+    volumes:
+      - "~/.ssh/id_rsa_deploy:/root/.ssh/id_rsa_deploy"
+      - "./:/usr/app"
+
