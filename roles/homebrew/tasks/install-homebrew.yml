@@ -33,14 +33,14 @@
 #   # delegate_to: "{{ inventory_hostname }}"
 #   become: yes
 
-- name: Set permissions for multiple users
+- name: Set permissions for /usr/local/* #multiple users
   file: 
-    path={{ item }}
-    mode=0775
-    owner=root
-    group=admin
-    recurse=yes
-    state=directory
+    path: '{{ item }}'
+    mode: '0775'
+    owner: '{{ username }}'
+    group: wheel
+    recurse: yes
+    state: directory
   become: yes
   with_items: '{{ homebrew_paths }}'
   ignore_errors: yes
