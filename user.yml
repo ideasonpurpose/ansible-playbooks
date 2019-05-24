@@ -14,7 +14,6 @@
       - adobe-creative-cloud
       - colorpicker-skalacolor
       - github
-      - gitkraken
       - google-chrome
       - harvest
       - kaleidoscope
@@ -27,8 +26,6 @@
       - sketch
       - slack
       - transmit
-      - vagrant
-      # - virtualbox
       - visual-studio-code
     node_global_packages:
       - browser-sync
@@ -91,7 +88,7 @@
     - { role: safari, when: user_lib is defined and user_lib_prefs is defined }
     - { role: finder, when: user_lib is defined and user_lib_prefs is defined }
     - { role: dock, when: user_lib is defined and user_lib_prefs is defined }
-    - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
+    # - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: mail, tags: [mail] }
     - { role: sketchapp }
     - { role: vscode }

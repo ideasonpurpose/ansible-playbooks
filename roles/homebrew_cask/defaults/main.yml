@@ -8,6 +8,7 @@ apps:
   - adobe-creative-cloud
   - betterzipql
   - colorpicker-skalacolor
+  - docker
   - github
   - gitkraken
   - google-chrome
@@ -16,8 +17,5 @@ apps:
   - qlstephen
   - sketch
   - slack
-  - sublime-text
   - transmit
-  - vagrant
-  # - virtualbox
   - visual-studio-code

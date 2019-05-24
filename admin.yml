@@ -10,11 +10,9 @@
     homebrew_apps:
       - git
       - node
-      - python
-      - yarn
     cask_apps:
+      - docker
       - github
-      - gitkraken
       - google-chrome
       - kaleidoscope
       - qlcolorcode
@@ -23,8 +21,6 @@
       - qlstephen
       - quicklook-json
       - slack
-      - vagrant
-      # - virtualbox
       - visual-studio-code
       
     username: '{{ ansible_user_id }}'
@@ -51,7 +47,7 @@
     - { role: homebrew, apps: "{{ homebrew_apps }}", become: no }
     - { role: homebrew_cask, apps: "{{ cask_apps }}", become: no }
     - { role: node.js }
-    - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
+    # - { role: vagrant, vagrant_user: "{{ username }}", tags: [vagrant] }
     - { role: vscode }
 
   pre_tasks: 
