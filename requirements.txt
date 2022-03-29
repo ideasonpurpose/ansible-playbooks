@@ -2,5 +2,5 @@ Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.11
 ecdsa==0.13
-paramiko==2.0.2
+paramiko==2.10.1
 pycrypto==2.6.1
